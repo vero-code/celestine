@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.css';
+import SpaceMap from "./components/SpaceMap.jsx";
 
 function App() {
   return (
@@ -14,11 +15,7 @@ function App() {
       <div className="main-content">
         <h1>Google Maps for Space</h1>
         <div id="map-container" className="map-placeholder">
-          {/* Text will be visible until the map loads. */}
-          <p>
-            Imagine Google Maps Platform API here,
-            displaying cosmic space with planets and constellations.
-          </p>
+          <SpaceMap />
         </div>
       </div>
 
