@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAppStore } from '../stores/useAppStore';
-import './GalacticNavigator.css';
+import './css/GalacticNavigator.css';
 
 const celestialBodies = [
   { name: 'Sun', position: { top: '50%', left: '50%' } },

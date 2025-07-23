@@ -6,17 +6,22 @@ The project is being developed to participate in the [Google Maps Platform Award
 
 ## Features
 
-- Interactive 3D map
+- Space map
+- 3D map of the Earth
 - Chat with AI
 
 ## Technologies
 
 - React + Vite
 - Python + FastAPI
-- Google Maps JavaScript API
+- Google Maps Platform API
 - Gemini 2.5 Flash
 
 Tools: PyCharm 2025.1.3.1
+
+### Using the Google Maps
+
+- Google Maps JavaScript API - view 3D map of Earth
 
 ### Backend setup
 

@@ -1,16 +1,14 @@
 import React, { useState } from 'react';
 import './App.css';
+import './components/css/SpaceChat.css';
 import './css/map-toggle-buttons.css';
 import SpaceMap from "./components/SpaceMap.jsx";
-import EarthMap from './components/EarthMap.jsx';
-import SpaceChat from "./components/SpaceChat.jsx";
-import ExplorationScene from "./components/ExplorationScene.jsx";
+import EarthMap from './components/earth/EarthMap.jsx';
+import SpaceChat from "./components/chat/SpaceChat.jsx";
 import GalacticNavigator from "./components/GalacticNavigator.jsx";
 
 function App() {
   const [currentMap, setCurrentMap] = useState('space');
-
-  const MapComponent = currentMap === 'space' ? SpaceMap : EarthMap;
 
   return (
     <div className="app-container">
@@ -40,7 +38,7 @@ function App() {
         <div id="map-container">
           {currentMap === 'space' ? (
             <>
-              <ExplorationScene />
+              <SpaceMap />
               <GalacticNavigator />
             </>
           ) : (
