@@ -4,49 +4,11 @@ import { OrbitControls, Text, Html } from '@react-three/drei';
 import { useAppStore } from '../stores/useAppStore';
 import * as THREE from 'three';
 import './css/InfoBox.css';
-
-const planetData = [
-  {
-    name: 'Sun',
-    position: new THREE.Vector3(0, 0, 0),
-    radius: 2,
-    color: '#FFDAB9',
-    emissive: true,
-    info: 'The center of the Solar System. Hot stuff!',
-  },
-  {
-    name: 'Mercury',
-    position: new THREE.Vector3(5, 0, 0),
-    radius: 0.5,
-    color: 'gray',
-    info: 'Smallest and fastest planet in the Solar System.',
-  },
-  {
-    name: 'Venus',
-    position: new THREE.Vector3(10, 0, 0),
-    radius: 0.8,
-    color: 'orange',
-    info: 'Venus has a thick atmosphere and is very hot.',
-  },
-  {
-    name: 'Earth',
-    position: new THREE.Vector3(15, 0, 0),
-    radius: 1,
-    color: 'deepskyblue',
-    info: 'Our home planet with life and oceans.',
-  },
-  {
-    name: 'Mars',
-    position: new THREE.Vector3(20, 0, 0),
-    radius: 0.7,
-    color: 'orangered',
-    info: 'The Red Planet — possible future colony.',
-  },
-];
+import { planetData } from "../data/planetData.js";
 
 function CameraRig() {
   const target = useAppStore((state) => state.target);
-  const controlsEnabled = useAppStore((state) => !state.target);
+  const isUserControlling = useAppStore((state) => state.isUserControlling);
 
   const targetPosition = useMemo(() => {
     if (!target) return new THREE.Vector3(0, 5, 40);
@@ -59,10 +21,10 @@ function CameraRig() {
   }, [target]);
 
   useFrame((state, delta) => {
-    state.camera.position.lerp(targetPosition, 0.5 * delta);
-    if (!controlsEnabled && target) {
-      const lookAtTarget = planetData.find((p) => p.name === target)?.position;
-      if (lookAtTarget) state.camera.lookAt(lookAtTarget);
+    if (!isUserControlling && target) {
+       state.camera.position.lerp(targetPosition, 0.5 * delta);
+       const lookAtTarget = planetData.find((p) => p.name === target)?.position;
+       if (lookAtTarget) state.camera.lookAt(lookAtTarget);
     }
   });
 
@@ -79,6 +41,7 @@ const OrbitRing = ({ radius }) => (
 const SpaceMap = () => {
   const setTarget = useAppStore((state) => state.setTarget);
   const currentTarget = useAppStore((state) => state.target);
+  const setUserControlling = useAppStore((state) => state.setUserControlling);
 
   return (
     <Canvas
@@ -102,7 +65,7 @@ const SpaceMap = () => {
           key={planet.name}
           position={planet.position}
           onClick={(e) => {
-            e.stopPropagation(); // Чтобы не срабатывал onPointerMissed
+            e.stopPropagation();
             setTarget(planet.name);
           }}
         >
@@ -137,7 +100,11 @@ const SpaceMap = () => {
       ))}
 
       {/* OrbitControls for manual camera control */}
-      <OrbitControls enabled={!currentTarget} />
+      <OrbitControls
+        enabled={!currentTarget}
+        onStart={() => setUserControlling(true)}
+        onEnd={() => setUserControlling(false)}
+      />
 
       <CameraRig />
     </Canvas>
