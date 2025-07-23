@@ -23,34 +23,14 @@ const SpaceMap = () => {
 
     const initMap = async () => {
       try {
-        const { Map3DElement, MapMode, Polygon3DElement } = await window.google.maps.importLibrary("maps3d");
+        const { Map3DElement, MapMode } = await window.google.maps.importLibrary("maps3d");
 
         const map3DElement = new Map3DElement({
           center: { lat: 43.6425, lng: -79.3871, altitude: 400 },
           range: 1000,
           tilt: 60,
-          mode: MapMode.SATELLITE,
+          mode: MapMode.HYBRID,
         });
-
-        const polygonOptions = {
-          strokeColor: "#EA433580",
-          strokeWidth: 4,
-          fillColor: "#0000FF80",
-          altitudeMode: "ABSOLUTE",
-          extruded: true,
-          drawsOccludedSegments: true,
-        };
-
-        const towerPolygon = new Polygon3DElement(polygonOptions);
-
-        towerPolygon.outerCoordinates = [
-          { lat: 43.6427196, lng: -79.3876802, altitude: 600 },
-          { lat: 43.6421742, lng: -79.3869184, altitude: 600 },
-          { lat: 43.643001, lng: -79.3866475, altitude: 600 },
-          { lat: 43.6427196, lng: -79.3876802, altitude: 600 }
-        ];
-
-        map3DElement.append(towerPolygon);
 
         if (containerRef.current) {
           containerRef.current.innerHTML = '';
