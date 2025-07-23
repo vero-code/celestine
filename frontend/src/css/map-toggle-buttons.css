@@ -1,0 +1,19 @@
+.map-toggle-buttons button {
+  display: block;
+  margin: 8px 0;
+  padding: 8px 12px;
+  background-color: #222;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.map-toggle-buttons button.active {
+  background-color: #0077ff;
+}
+
+.map-toggle-buttons button:hover {
+  opacity: 0.85;
+}

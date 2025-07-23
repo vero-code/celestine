@@ -1,63 +1,69 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from "react";
 
 const SpaceMap = () => {
-  const containerRef = useRef(null);
+  const mapRef = useRef(null);
 
   useEffect(() => {
-    const loadGoogleMapsScript = () => {
-      const existingScript = document.querySelector("script[data-maps-3d]");
-      if (existingScript) return;
+    const initializeMap = async () => {
+      if (!window.google || !window.google.maps) return;
 
-      const script = document.createElement("script");
+      const { Map } = await window.google.maps.importLibrary('maps');
+
+      const map = new Map(mapRef.current, {
+        center: { lat: 0, lng: 0 },
+        zoom: 2,
+        mapId: 'DEMO_MAP_ID',
+        disableDefaultUI: true,
+      });
+
+      const markerData = [
+        { lat: 10, lng: 20, name: 'Lunar Base Alpha' },
+        { lat: -30, lng: 60, name: 'Mars Outpost' },
+        { lat: 45, lng: -90, name: 'Titan Relay' },
+      ];
+
+      markerData.forEach(({ lat, lng, name }) => {
+        new window.google.maps.Marker({
+          position: { lat, lng },
+          map,
+          title: name,
+        });
+      });
+    };
+
+    const loadGoogleMapsScript = () => {
+      if (window.google?.maps?.importLibrary) {
+        initializeMap();
+        return;
+      }
+
+      const script = document.createElement('script');
       const params = new URLSearchParams({
         key: import.meta.env.VITE_GOOGLE_MAPS_API_KEY,
-        v: "alpha",
+        v: 'alpha',
       });
 
       script.src = `https://maps.googleapis.com/maps/api/js?${params.toString()}`;
       script.async = true;
       script.defer = true;
-      script.setAttribute("data-maps-3d", "true");
+      script.onload = () => initializeMap();
+      script.onerror = () => console.error('Google Maps JS API failed to load');
       document.head.appendChild(script);
     };
 
-    const initMap = async () => {
-      try {
-        const { Map3DElement, MapMode } = await window.google.maps.importLibrary("maps3d");
-
-        const map3DElement = new Map3DElement({
-          center: { lat: 43.6425, lng: -79.3871, altitude: 400 },
-          range: 1000,
-          tilt: 60,
-          mode: MapMode.HYBRID,
-        });
-
-        if (containerRef.current) {
-          containerRef.current.innerHTML = '';
-          containerRef.current.append(map3DElement);
-        }
-      } catch (error) {
-        console.error("3D Maps init failed:", error);
-      }
-    };
-
     loadGoogleMapsScript();
-    const timer = setTimeout(() => {
-      if (window.google?.maps?.importLibrary) {
-        initMap();
-      } else {
-        console.warn("Waiting for Google Maps to load...");
-      }
-    }, 1000);
-
-    return () => clearTimeout(timer);
   }, []);
 
   return (
     <div
-      ref={containerRef}
-      style={{ width: "100%", height: "100%", backgroundColor: "black" }}
-    />
+      ref={mapRef}
+      style={{
+        width: '100%',
+        height: '100%',
+        backgroundColor: '#000',
+      }}
+    >
+    </div>
   );
 };
 

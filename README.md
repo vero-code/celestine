@@ -1,24 +1,22 @@
 # Celestine
-## React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Intelligent navigator of the Universe. The name of the project Celestine symbolizes an intelligent agent (AI), which, like a celestial guide, helps navigate the unknown data of the space landscape 🧑‍🚀.
 
-Currently, two official plugins are available:
+The project is being developed to participate in the [Google Maps Platform Awards](https://devpost.com/software/celestine-rg16km) hackathon.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
 
-### Expanding the ESLint configuration
+- Interactive 3D map
+- Chat with AI
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Technologies
 
-## Backend (Python + FastAPI + Google ADK)
+- React + Vite
+- Python + FastAPI
+- Google Maps JavaScript API
+- Gemini 2.5 Flash
 
-This project also includes a backend implemented in **Python** using:
-
-- [FastAPI](https://fastapi.tiangolo.com/) – modern async web framework
-- [Google Agent Development Kit (ADK)](https://google.github.io/adk-docs/) – for building AI agents
-- [Google Generative AI SDK](https://pypi.org/project/google-generativeai/) – integration with Gemini
+Tools: PyCharm 2025.1.3.1
 
 ### Backend setup
 
