@@ -19,3 +19,18 @@
   font-size: 12px;
   line-height: 1.4;
 }
+
+.info-box button {
+  margin-top: 8px;
+  padding: 5px 8px;
+  font-size: 0.9em;
+  border: none;
+  background: #0077ff;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.info-box button:hover {
+  background: #005ed1;
+}

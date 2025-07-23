@@ -6,9 +6,12 @@ import SpaceMap from "./components/SpaceMap.jsx";
 import EarthMap from './components/earth/EarthMap.jsx';
 import SpaceChat from "./components/chat/SpaceChat.jsx";
 import GalacticNavigator from "./components/GalacticNavigator.jsx";
+import {useAppStore} from "./stores/useAppStore.js";
+import PlanetMap from "./components/PlanetMap.jsx";
 
 function App() {
   const [currentMap, setCurrentMap] = useState('space');
+  const selectedPlanet = useAppStore((state) => state.target);
 
   return (
     <div className="app-container">
@@ -41,7 +44,15 @@ function App() {
       <div className="main-content">
         <h1>Celestine: A Google Maps for Space</h1>
         <div id="map-container">
-          {currentMap === 'space' ? <SpaceMap /> : <EarthMap />}
+          {currentMap === 'space' ? (
+            <>
+              <SpaceMap onLand={() => setCurrentMap('planet')} />
+            </>
+          ) : currentMap === 'planet' ? (
+            <PlanetMap planet={selectedPlanet} />
+          ) : (
+            <EarthMap />
+          )}
         </div>
       </div>
 
