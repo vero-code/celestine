@@ -4,6 +4,8 @@ import './css/map-toggle-buttons.css';
 import SpaceMap from "./components/SpaceMap.jsx";
 import EarthMap from './components/EarthMap.jsx';
 import SpaceChat from "./components/SpaceChat.jsx";
+import ExplorationScene from "./components/ExplorationScene.jsx";
+import GalacticNavigator from "./components/GalacticNavigator.jsx";
 
 function App() {
   const [currentMap, setCurrentMap] = useState('space');
@@ -32,11 +34,18 @@ function App() {
         <p>Use the buttons above to switch between space and Earth.</p>
       </div>
 
-      {/* Central Area - "Space Map" */}
+      {/* Central Area - Map Content */}
       <div className="main-content">
-        <h1>Google Maps for Space</h1>
+        <h1>Celestine: A Google Maps for Space</h1>
         <div id="map-container">
-          <MapComponent />
+          {currentMap === 'space' ? (
+            <>
+              <ExplorationScene />
+              <GalacticNavigator />
+            </>
+          ) : (
+            <EarthMap />
+          )}
         </div>
       </div>
 

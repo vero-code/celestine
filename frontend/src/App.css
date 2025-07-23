@@ -64,6 +64,13 @@
   font-size: 1.2em;
 }
 
+/* Stop movement of the space map to the right */
+#map-container canvas {
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
+}
+
 /* Additional styles for the chat */
 .chat-placeholder {
   flex-grow: 1;
