@@ -1,0 +1,21 @@
+.info-box {
+  background: rgba(0, 0, 0, 0.75);
+  padding: 10px 14px;
+  border-radius: 8px;
+  color: white;
+  font-size: 13px;
+  max-width: 180px;
+  box-shadow: 0 0 8px #000;
+}
+
+.info-box h4 {
+  margin: 0 0 4px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.info-box p {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.4;
+}

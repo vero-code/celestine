@@ -30,20 +30,18 @@ function App() {
           </button>
         </div>
         <p>Use the buttons above to switch between space and Earth.</p>
+
+        {/* Navigation panel for planets (only in space mode) */}
+        {currentMap === 'space' && (
+          <GalacticNavigator />
+        )}
       </div>
 
       {/* Central Area - Map Content */}
       <div className="main-content">
         <h1>Celestine: A Google Maps for Space</h1>
         <div id="map-container">
-          {currentMap === 'space' ? (
-            <>
-              <SpaceMap />
-              <GalacticNavigator />
-            </>
-          ) : (
-            <EarthMap />
-          )}
+          {currentMap === 'space' ? <SpaceMap /> : <EarthMap />}
         </div>
       </div>
 

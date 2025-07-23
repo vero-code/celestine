@@ -1,16 +1,48 @@
 import React, { useMemo } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { OrbitControls, Text } from '@react-three/drei';
+import { OrbitControls, Text, Html } from '@react-three/drei';
 import { useAppStore } from '../stores/useAppStore';
 import * as THREE from 'three';
+import './css/InfoBox.css';
 
-const planetPositions = {
-  Sun: new THREE.Vector3(0, 0, 0),
-  Mercury: new THREE.Vector3(5, 0, 0),
-  Venus: new THREE.Vector3(10, 0, 0),
-  Earth: new THREE.Vector3(15, 0, 0),
-  Mars: new THREE.Vector3(20, 0, 0),
-};
+const planetData = [
+  {
+    name: 'Sun',
+    position: new THREE.Vector3(0, 0, 0),
+    radius: 2,
+    color: '#FFDAB9',
+    emissive: true,
+    info: 'The center of the Solar System. Hot stuff!',
+  },
+  {
+    name: 'Mercury',
+    position: new THREE.Vector3(5, 0, 0),
+    radius: 0.5,
+    color: 'gray',
+    info: 'Smallest and fastest planet in the Solar System.',
+  },
+  {
+    name: 'Venus',
+    position: new THREE.Vector3(10, 0, 0),
+    radius: 0.8,
+    color: 'orange',
+    info: 'Venus has a thick atmosphere and is very hot.',
+  },
+  {
+    name: 'Earth',
+    position: new THREE.Vector3(15, 0, 0),
+    radius: 1,
+    color: 'deepskyblue',
+    info: 'Our home planet with life and oceans.',
+  },
+  {
+    name: 'Mars',
+    position: new THREE.Vector3(20, 0, 0),
+    radius: 0.7,
+    color: 'orangered',
+    info: 'The Red Planet — possible future colony.',
+  },
+];
 
 function CameraRig() {
   const target = useAppStore((state) => state.target);
@@ -18,17 +50,19 @@ function CameraRig() {
 
   const targetPosition = useMemo(() => {
     if (!target) return new THREE.Vector3(0, 5, 40);
-    const planetPos = planetPositions[target];
+    const planet = planetData.find((p) => p.name === target);
+    if (!planet) return new THREE.Vector3(0, 5, 40);
 
-    return new THREE.Vector3(planetPos.x, planetPos.y + 2, planetPos.z + 10);
+    // The displacement depends on the size of the planet
+    const zoomFactor = Math.max(planet.radius * 5, 6);
+    return new THREE.Vector3(planet.position.x, planet.position.y + 2, planet.position.z + zoomFactor);
   }, [target]);
 
   useFrame((state, delta) => {
     state.camera.position.lerp(targetPosition, 0.5 * delta);
-
-    if (!controlsEnabled) {
-      const lookAtTarget = planetPositions[target];
-      state.camera.lookAt(lookAtTarget);
+    if (!controlsEnabled && target) {
+      const lookAtTarget = planetData.find((p) => p.name === target)?.position;
+      if (lookAtTarget) state.camera.lookAt(lookAtTarget);
     }
   });
 
@@ -43,8 +77,14 @@ const OrbitRing = ({ radius }) => (
 );
 
 const SpaceMap = () => {
+  const setTarget = useAppStore((state) => state.setTarget);
+  const currentTarget = useAppStore((state) => state.target);
+
   return (
-    <Canvas camera={{ fov: 75, position: [0, 5, 40] }}>
+    <Canvas
+      camera={{ fov: 75, position: [0, 5, 40] }}
+      onPointerMissed={() => setTarget(null)}
+    >
       <color attach="background" args={['#000010']} />
       <ambientLight intensity={0.2} />
 
@@ -52,84 +92,52 @@ const SpaceMap = () => {
       <pointLight position={[0, 0, 0]} intensity={100} color="#FFDAB9" />
 
       {/* Orbit rings */}
-      <OrbitRing radius={5} />
-      <OrbitRing radius={10} />
-      <OrbitRing radius={15} />
-      <OrbitRing radius={20} />
+      {planetData.map((planet) => (
+        <OrbitRing key={planet.name} radius={planet.position.x} />
+      ))}
 
       {/* Render of planets */}
-      <mesh position={planetPositions.Sun}>
-        <sphereGeometry args={[2, 32, 32]} />
-        <meshStandardMaterial color="#FFDAB9" emissive="#FFDAB9" emissiveIntensity={2} />
-        <Text
-          position={[0, 1, 0]}
-          fontSize={0.4}
-          color="white"
-          anchorX="center"
-          anchorY="middle"
+      {planetData.map((planet) => (
+        <mesh
+          key={planet.name}
+          position={planet.position}
+          onClick={(e) => {
+            e.stopPropagation(); // Чтобы не срабатывал onPointerMissed
+            setTarget(planet.name);
+          }}
         >
-          Sun
-        </Text>
-      </mesh>
+          <sphereGeometry args={[planet.radius, 32, 32]} />
+          <meshStandardMaterial
+            color={planet.color}
+            emissive={planet.emissive ? planet.color : '#000'}
+            emissiveIntensity={planet.emissive ? 2 : 0}
+          />
 
-      <mesh position={planetPositions.Mercury}>
-        <sphereGeometry args={[0.5, 32, 32]} />
-        <meshStandardMaterial color="gray" />
-        <Text
-          position={[0, 1, 0]}
-          fontSize={0.4}
-          color="white"
-          anchorX="center"
-          anchorY="middle"
-        >
-          Mercury
-        </Text>
-      </mesh>
+          {/* Label */}
+          <Text
+            position={[0, planet.radius + 0.8, 0]}
+            fontSize={0.4}
+            color="white"
+            anchorX="center"
+            anchorY="middle"
+          >
+            {planet.name}
+          </Text>
 
-      <mesh position={planetPositions.Venus}>
-        <sphereGeometry args={[0.8, 32, 32]} />
-        <meshStandardMaterial color="orange" />
-        <Text
-          position={[0, 1, 0]}
-          fontSize={0.4}
-          color="white"
-          anchorX="center"
-          anchorY="middle"
-        >
-          Venus
-        </Text>
-      </mesh>
-
-      <mesh position={planetPositions.Earth}>
-        <sphereGeometry args={[1, 32, 32]} />
-        <meshStandardMaterial color="deepskyblue" />
-        <Text
-          position={[0, 1, 0]}
-          fontSize={0.4}
-          color="white"
-          anchorX="center"
-          anchorY="middle"
-        >
-          Earth
-        </Text>
-      </mesh>
-
-      <mesh position={planetPositions.Mars}>
-        <sphereGeometry args={[0.7, 32, 32]} />
-        <meshStandardMaterial color="orangered" />
-        <Text
-          position={[0, 1, 0]}
-          fontSize={0.4}
-          color="white"
-          anchorX="center"
-          anchorY="middle"
-        >
-          Mars
-        </Text>
-      </mesh>
+          {/* Info box */}
+          {currentTarget === planet.name && (
+            <Html position={[0, planet.radius + 2, 0]} distanceFactor={10}>
+              <div className="info-box">
+                <h4>{planet.name}</h4>
+                <p>{planet.info}</p>
+              </div>
+            </Html>
+          )}
+        </mesh>
+      ))}
 
       {/* OrbitControls for manual camera control */}
-      <OrbitControls enabled={!useAppStore.getState().target} />
+      <OrbitControls enabled={!currentTarget} />
 
       <CameraRig />
     </Canvas>
