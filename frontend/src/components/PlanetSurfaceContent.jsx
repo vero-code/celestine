@@ -3,8 +3,11 @@ import { Html, useTexture } from '@react-three/drei';
 import * as THREE from 'three';
 import { useMemo } from 'react';
 import { useThree } from '@react-three/fiber';
+import { planetPois } from '../data/planetPois.js';
+import { latLonToXY } from "../utils/coordinates.js";
+import "./css/PlanetSurfaceContent.css";
 
-export function PlanetSurfaceContent({ planet, pois }) {
+export function PlanetSurfaceContent({ planet }) {
   const texturePath = `/textures/${planet.toLowerCase()}_equirect.jpg`;
   const texture = useTexture(texturePath);
 
@@ -21,6 +24,7 @@ export function PlanetSurfaceContent({ planet, pois }) {
   }, [texture]);
 
   const textureAspect = height / width;
+  const pois = planetPois[planet] || [];
 
   let planeWidth, planeHeight;
 
@@ -54,7 +58,27 @@ export function PlanetSurfaceContent({ planet, pois }) {
         />
       </mesh>
 
-      {/* TODO: Add POI */}
+      {pois.map((poi, i) => {
+        const [x, y] = latLonToXY(poi.lat, poi.lon, planeWidth, planeHeight);
+        return (
+          <Html
+            key={i}
+            position={[x, y, 0.1]}
+            center
+            style={{ pointerEvents: 'auto' }}
+          >
+            <button
+              className="poi-pin"
+              onClick={() => {
+                console.log('Clicked POI:', poi.name, 'Search terms:', poi.searchTerms);
+                // TODO: Calling the AI agent and/or Google Maps API
+              }}
+            >
+              📍 {poi.name}
+            </button>
+          </Html>
+        );
+      })}
     </>
   );
 }

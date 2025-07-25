@@ -19,7 +19,7 @@ function CameraSetup() {
   return <OrthographicCamera makeDefault position={[0, 0, 10]} near={0.1} far={1000} />;
 }
 
-export function PlanetSurface2D({ planet, pois }) {
+export function PlanetSurface2D({ planet }) {
   return (
     <Canvas orthographic>
       <color attach="background" args={['#000']} />
@@ -31,7 +31,7 @@ export function PlanetSurface2D({ planet, pois }) {
       <Suspense fallback={
         <Html center style={{ color: '#fff' }}>Loading texture…</Html>
       }>
-        <PlanetSurfaceContent planet={planet} pois={pois} />
+        <PlanetSurfaceContent planet={planet} />
       </Suspense>
 
       <MapControls

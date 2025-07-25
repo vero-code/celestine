@@ -8,6 +8,7 @@ The project is being developed to participate in the [Google Maps Platform Award
 
 - Space map
   - Landing on the planet
+  - Display points of interest
 - 3D map of the Earth
 - Chat with AI
 
@@ -26,7 +27,12 @@ Tools: PyCharm 2025.1.3.1
 
 ### Planet Surface Textures
 
-All planetary surface textures are courtesy of NASA and available through their public science image galleries. This project utilizes:
+All planetary surface textures are courtesy of NASA and available through their public science image galleries.
+
+> Note on Terminology: For code simplification, the term "planet" is used broadly to refer to all celestial bodies.
+This is for implementation convenience, acknowledging the Sun is a star.
+
+This project utilizes:
 
 - [NASA Science Image Gallery](https://science.nasa.gov/gallery)
   - [Sun](https://science.nasa.gov/image-detail/amf-gsfc_20171208_archive_e001435/)
