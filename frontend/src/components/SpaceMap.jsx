@@ -38,10 +38,11 @@ const OrbitRing = ({ radius }) => (
   </mesh>
 );
 
-const SpaceMap = ({ onLand }) => {
+const SpaceMap = () => {
   const setTarget = useAppStore((state) => state.setTarget);
   const currentTarget = useAppStore((state) => state.target);
   const setUserControlling = useAppStore((state) => state.setUserControlling);
+  const landOnPlanet = useAppStore((s) => s.landOnPlanet);
 
   return (
     <Canvas
@@ -91,9 +92,7 @@ const SpaceMap = ({ onLand }) => {
           {currentTarget === planet.name && (
             <Html position={[0, planet.radius + 2, 0]} distanceFactor={10}>
               <div className="info-box">
-                <h4>{planet.name}</h4>
-                <p>{planet.info}</p>
-                <button onClick={() => onLand(planet.name)}>
+                <button onClick={() => landOnPlanet(planet.name)}>
                   Land on Planet 🚀
                 </button>
               </div>

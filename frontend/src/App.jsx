@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './App.css';
 import './components/css/SpaceChat.css';
 import './css/map-toggle-buttons.css';
@@ -8,9 +8,12 @@ import SpaceChat from "./components/chat/SpaceChat.jsx";
 import GalacticNavigator from "./components/GalacticNavigator.jsx";
 import {useAppStore} from "./stores/useAppStore.js";
 import PlanetMap from "./components/PlanetMap.jsx";
+import { PlanetSurface2D } from './components/PlanetSurface2D.jsx';
+import { mercuryPois } from './data/mercuryPois.js';
 
 function App() {
-  const [currentMap, setCurrentMap] = useState('space');
+  const currentMap = useAppStore((state) => state.currentMap);
+  const setCurrentMap = useAppStore((state) => state.setCurrentMap);
   const selectedPlanet = useAppStore((state) => state.target);
 
   return (
@@ -46,10 +49,14 @@ function App() {
         <div id="map-container">
           {currentMap === 'space' ? (
             <>
-              <SpaceMap onLand={() => setCurrentMap('planet')} />
+              <SpaceMap />
             </>
           ) : currentMap === 'planet' ? (
-            <PlanetMap planet={selectedPlanet} />
+            selectedPlanet === 'Mercury' ? (
+              <PlanetSurface2D planet="Mercury" pois={mercuryPois} />
+            ) : (
+              <PlanetMap planet={selectedPlanet} />
+            )
           ) : (
             <EarthMap />
           )}

@@ -7,6 +7,7 @@ The project is being developed to participate in the [Google Maps Platform Award
 ## Features
 
 - Space map
+  - Landing on the planet
 - 3D map of the Earth
 - Chat with AI
 
@@ -23,17 +24,43 @@ Tools: PyCharm 2025.1.3.1
 
 - Google Maps JavaScript API - view 3D map of Earth
 
+### Planet Surface Textures
+
+All planetary surface textures are courtesy of NASA and available through their public science image galleries. This project utilizes:
+
+- [NASA Science Image Gallery](https://science.nasa.gov/gallery)
+    - [Mercury](https://science.nasa.gov/image-detail/pia19422-mercury/)
+
+## Installation
+
+### Frontend setup
+
+1. Navigate to the `frontend` folder:
+    ```bash  
+    cd frontend
+    ```
+
+2. Install dependencies:
+    ```bash
+    npm install
+    ```
+
+3. Run the Node.js server:
+    ```bash
+    npm run dev
+    ```
+
 ### Backend setup
 
 1. Navigate to the `backend` folder:
-```bash  
-  cd backend
-  ```
+    ```bash  
+    cd backend
+    ```
 
 2. Create a virtual environment:
-```bash  
-   python -m venv .venv 
-  ```
+    ```bash  
+    python -m venv .venv 
+    ```
 
 3. Activate the virtual environment:
 - PowerShell:
