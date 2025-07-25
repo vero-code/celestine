@@ -8,11 +8,14 @@ import SpaceChat from "./components/chat/SpaceChat.jsx";
 import GalacticNavigator from "./components/GalacticNavigator.jsx";
 import {useAppStore} from "./stores/useAppStore.js";
 import { PlanetSurface2D } from './components/PlanetSurface2D.jsx';
+import { planetPois } from './data/planetPois.js';
 
 function App() {
   const currentMap = useAppStore((state) => state.currentMap);
   const setCurrentMap = useAppStore((state) => state.setCurrentMap);
   const selectedPlanet = useAppStore((state) => state.target);
+
+  const currentPlanetPois = planetPois[selectedPlanet] || [];
 
   return (
     <div className="app-container">
@@ -38,6 +41,31 @@ function App() {
         {/* Navigation panel for planets (only in space mode) */}
         {currentMap === 'space' && (
           <GalacticNavigator />
+        )}
+
+        {/* Navigation panel for current planet and its POIs (only in planet mode) */}
+        {currentMap === 'planet' && selectedPlanet && (
+          <div className="planet-poi-navigator mt-4">
+            <h3>{selectedPlanet} POIs</h3>
+            {currentPlanetPois.length > 0 ? (
+              <div className="poi-list">
+                {currentPlanetPois.map((poi, index) => (
+                  <button
+                    key={index}
+                    className="poi-nav-button"
+                    onClick={() => {
+                      console.log(`Clicked POI in sidebar: ${poi.name} on ${selectedPlanet}`);
+                      // TODO: Implement centering on POI or triggering AI agent
+                    }}
+                  >
+                    📍 {poi.name}
+                  </button>
+                ))}
+              </div>
+            ) : (
+              <p>There are no POIs available for {selectedPlanet}.</p>
+            )}
+          </div>
         )}
       </div>
 
