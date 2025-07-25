@@ -29,7 +29,10 @@ Tools: PyCharm 2025.1.3.1
 All planetary surface textures are courtesy of NASA and available through their public science image galleries. This project utilizes:
 
 - [NASA Science Image Gallery](https://science.nasa.gov/gallery)
-    - [Mercury](https://science.nasa.gov/image-detail/pia19422-mercury/)
+  - [Sun](https://science.nasa.gov/image-detail/amf-gsfc_20171208_archive_e001435/)
+  - [Mercury](https://science.nasa.gov/image-detail/pia19422-mercury/)
+  - [Venus](https://science.nasa.gov/image-detail/amf-ba0639bb-149b-4e6a-91c7-be0b928c7897/)
+  - [Mars](https://science.nasa.gov/image-detail/amf-pia02653/)
 
 ## Installation
 

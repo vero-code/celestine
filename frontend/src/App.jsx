@@ -7,9 +7,7 @@ import EarthMap from './components/earth/EarthMap.jsx';
 import SpaceChat from "./components/chat/SpaceChat.jsx";
 import GalacticNavigator from "./components/GalacticNavigator.jsx";
 import {useAppStore} from "./stores/useAppStore.js";
-import PlanetMap from "./components/PlanetMap.jsx";
 import { PlanetSurface2D } from './components/PlanetSurface2D.jsx';
-import { mercuryPois } from './data/mercuryPois.js';
 
 function App() {
   const currentMap = useAppStore((state) => state.currentMap);
@@ -52,10 +50,10 @@ function App() {
               <SpaceMap />
             </>
           ) : currentMap === 'planet' ? (
-            selectedPlanet === 'Mercury' ? (
-              <PlanetSurface2D planet="Mercury" pois={mercuryPois} />
+            selectedPlanet === 'Earth' ? (
+              <EarthMap />
             ) : (
-              <PlanetMap planet={selectedPlanet} />
+              <PlanetSurface2D planet={selectedPlanet} />
             )
           ) : (
             <EarthMap />
