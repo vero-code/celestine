@@ -6,12 +6,14 @@ import { useThree } from '@react-three/fiber';
 import { planetPois } from '../data/planetPois.js';
 import { latLonToXY } from "../utils/coordinates.js";
 import "./css/PlanetSurfaceContent.css";
+import {useAppStore} from "../stores/useAppStore.js";
 
 export function PlanetSurfaceContent({ planet }) {
   const texturePath = `/textures/${planet.toLowerCase()}_equirect.jpg`;
   const texture = useTexture(texturePath);
 
   const { viewport } = useThree();
+  const sendPoiPromptToChat = useAppStore((state) => state.sendPoiPromptToChat);
 
   const { width, height } = useMemo(() => {
     const img =
@@ -36,10 +38,6 @@ export function PlanetSurfaceContent({ planet }) {
     planeHeight = planeWidth * textureAspect;
   }
 
-  console.log('Texture dimensions:', { width, height, textureAspect, texturePath });
-  console.log('Viewport dimensions:', { vw: viewport.width, vh: viewport.height });
-  console.log('Calculated Plane dimensions:', { planeWidth, planeHeight });
-
   if (!width || !height || !isFinite(planeHeight) || !isFinite(planeWidth)) {
     return (
       <Html center style={{ color: 'red', background: '#111', padding: 8 }}>
@@ -47,6 +45,22 @@ export function PlanetSurfaceContent({ planet }) {
       </Html>
     );
   }
+
+  const handlePoiClick = (poi) => {
+    console.log('Clicked POI:', poi.name, 'Search terms:', poi.searchTerms);
+
+    // 1. Open Google Maps in a new tab
+    const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(poi.searchTerms.join(' '))}`;
+    window.open(googleMapsUrl, '_blank');
+
+    // 2. Sending a prompt to an AI agent (custom prompt)
+    // Send the message as if the user entered it
+    if (poi.aiPrompt) {
+      sendPoiPromptToChat(poi.aiPrompt);
+    } else {
+      sendPoiPromptToChat(`Tell me about "${poi.name}" and its analogues on Earth.`);
+    }
+  };
 
   return (
     <>
@@ -69,10 +83,7 @@ export function PlanetSurfaceContent({ planet }) {
           >
             <button
               className="poi-pin"
-              onClick={() => {
-                console.log('Clicked POI:', poi.name, 'Search terms:', poi.searchTerms);
-                // TODO: Calling the AI agent and/or Google Maps API
-              }}
+              onClick={() => handlePoiClick(poi)}
             >
               📍 {poi.name}
             </button>

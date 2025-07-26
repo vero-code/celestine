@@ -1,67 +1,60 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import { useAppStore } from '../../stores/useAppStore';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 
 const SpaceChat = () => {
-  const [messages, setMessages] = useState([
-    { sender: 'agent', text: 'Hello! Where would you like to go today?' },
-  ]);
+  const messages = useAppStore((state) => state.messages);
+  const addAgentMessage = useAppStore((state) => state.addAgentMessage);
+  const sendMessageToChat = useAppStore((state) => state.sendMessageToChat);
+
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
 
-  const BACKEND_API_URL = import.meta.env.VITE_API_URL;
-  if (!BACKEND_API_URL) {
-    console.error('BACKEND_API_URL is required');
-  }
+  const messagesEndRef = useRef(null);
+  const hasInitializedChat = useRef(false);
+
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
+
+  useEffect(() => {
+    if (!hasInitializedChat.current && messages.length === 0) {
+      addAgentMessage('Hello! Where would you like to go today?');
+      hasInitializedChat.current = true;
+    }
+  }, [messages.length, addAgentMessage]);
 
   const handleSend = async () => {
     if (!input.trim()) return;
 
-    const newMessages = [...messages, { sender: 'user', text: input }];
-    setMessages(newMessages);
+    const userMessage = input;
     setInput('');
     setLoading(true);
 
     try {
-      const url = `${BACKEND_API_URL}/chat`;
-      const body = JSON.stringify({ message: input });
-
-      console.log('[SpaceChat] Sending request to:', url);
-      console.log('[SpaceChat] Request body:', body);
-
-      const response = await fetch(url, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body,
-      });
-
-      console.log('[SpaceChat] Response status:', response.status);
-
-      const data = await response.json();
-
-      console.log('[SpaceChat] Response JSON:', data);
-
-      if (data.reply) {
-        setMessages((prev) => [...prev, { sender: 'agent', text: data.reply }]);
-      } else if (data.error) {
-        setMessages((prev) => [...prev, { sender: 'agent', text: `Gemini error: ${data.error}` }]);
-      } else {
-        setMessages((prev) => [...prev, { sender: 'agent', text: 'Error from Gemini (no reply)' }]);
-      }
+      await sendMessageToChat(userMessage);
     } catch (error) {
-      console.error('[SpaceChat] Fetch error:', error);
-      setMessages((prev) => [...prev, { sender: 'agent', text: 'Failed to connect to backend' }]);
+      console.error('[SpaceChat] Error during message sending process:', error);
+    } finally {
+      setLoading(false);
     }
-
-    setLoading(false);
   };
 
   return (
     <div className="chat-placeholder">
       <div className="chat-messages">
         {messages.map((msg, idx) => (
-          <p key={idx} style={{ backgroundColor: msg.sender === 'agent' ? '#3b3b55' : '#555577' }}>
-            <strong>{msg.sender === 'agent' ? 'Agent' : 'You'}:</strong> {msg.text}
-          </p>
+          <div key={idx} style={{ backgroundColor: msg.sender === 'agent' ? '#3b3b55' : '#555577', padding: '10px', borderRadius: '8px', marginBottom: '8px' }}>
+            <strong>{msg.sender === 'agent' ? 'Agent' : 'You'}:</strong>
+            {msg.sender === 'agent' ? (
+              <ReactMarkdown remarkPlugins={[remarkGfm]}>{msg.text}</ReactMarkdown>
+            ) : (
+              <span>{msg.text}</span>
+            )}
+          </div>
         ))}
+        <div ref={messagesEndRef} />
       </div>
       <input
         type="text"
