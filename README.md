@@ -1,5 +1,11 @@
 # Celestine
 
+![React](https://img.shields.io/badge/frontend-React-61DAFB?logo=react&logoColor=white)
+![Python](https://img.shields.io/badge/backend-Python-3776AB?logo=python&logoColor=white)
+![Google Maps](https://img.shields.io/badge/API-Google%20Maps%20Platform-4285F4?logo=googlemaps&logoColor=white)
+![Gemini](https://img.shields.io/badge/AI-Gemini%202.5%20Flash-673AB7?logo=google&logoColor=white)
+![ADK](https://img.shields.io/badge/Agent%20Development%20Kit-ADK-34A853?logo=googlecloud&logoColor=white)
+
 Intelligent navigator of the Universe. The name of the project Celestine symbolizes an intelligent agent (AI), which, like a celestial guide, helps navigate the unknown data of the space landscape 🧑‍🚀.
 
 The project is being developed to participate in the [Google Maps Platform Awards](https://devpost.com/software/celestine-rg16km) hackathon.
@@ -19,6 +25,7 @@ The project is being developed to participate in the [Google Maps Platform Award
 - Python + FastAPI
 - Google Maps Platform API
 - Gemini 2.5 Flash
+- Agent Development Kit (ADK)
 
 Tools: PyCharm 2025.1.3.1
 
@@ -41,6 +48,10 @@ This project utilizes:
   - [Mercury](https://science.nasa.gov/image-detail/pia19422-mercury/)
   - [Venus](https://science.nasa.gov/image-detail/amf-ba0639bb-149b-4e6a-91c7-be0b928c7897/)
   - [Mars](https://science.nasa.gov/image-detail/amf-pia02653/)
+
+## Architecture
+
+Simple agent example by [Create Agent Project](https://google.github.io/adk-docs/get-started/quickstart/#create-agent-project) tutorial: `backend/multi_tool_agent`.
 
 ## Installation
 
