@@ -63,7 +63,7 @@ function App() {
                 ))}
               </div>
             ) : (
-              <p>There are no POIs available for {selectedPlanet}.</p>
+              <p>No POIs available for {selectedPlanet}.</p>
             )}
           </div>
         )}
@@ -71,7 +71,7 @@ function App() {
 
       {/* Central Area - Map Content */}
       <div className="main-content">
-        <h1>Celestine: A Google Maps for Space</h1>
+        <h1>Celestine: Google Maps for Space</h1>
         <div id="map-container">
           {currentMap === 'space' ? (
             <>

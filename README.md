@@ -9,6 +9,7 @@ The project is being developed to participate in the [Google Maps Platform Award
 - Space map
   - Landing on the planet
   - Display points of interest
+  - Search for analogues on Earth
 - 3D map of the Earth
 - Chat with AI
 
@@ -24,6 +25,7 @@ Tools: PyCharm 2025.1.3.1
 ### Using the Google Maps
 
 - Google Maps JavaScript API - view 3D map of Earth
+- [Places API Web Service](https://developers.google.com/maps/documentation/places/web-service)
 
 ### Planet Surface Textures
 

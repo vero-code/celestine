@@ -6,7 +6,8 @@ import { useThree } from '@react-three/fiber';
 import { planetPois } from '../data/planetPois.js';
 import { latLonToXY } from "../utils/coordinates.js";
 import "./css/PlanetSurfaceContent.css";
-import {useAppStore} from "../stores/useAppStore.js";
+import { useAppStore } from "../stores/useAppStore.js";
+import { usePlacesStore } from '../stores/usePlacesStore.js';
 
 export function PlanetSurfaceContent({ planet }) {
   const texturePath = `/textures/${planet.toLowerCase()}_equirect.jpg`;
@@ -14,6 +15,7 @@ export function PlanetSurfaceContent({ planet }) {
 
   const { viewport } = useThree();
   const sendPoiPromptToChat = useAppStore((state) => state.sendPoiPromptToChat);
+  const searchPlaces = usePlacesStore((state) => state.searchPlaces);
 
   const { width, height } = useMemo(() => {
     const img =
@@ -46,19 +48,29 @@ export function PlanetSurfaceContent({ planet }) {
     );
   }
 
-  const handlePoiClick = (poi) => {
+  const handlePoiClick = async (poi) => {
     console.log('Clicked POI:', poi.name, 'Search terms:', poi.searchTerms);
 
-    // 1. Open Google Maps in a new tab
-    const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(poi.searchTerms.join(' '))}`;
-    window.open(googleMapsUrl, '_blank');
+    // 1. Send a prompt to an AI agent
+    const promptMessage = poi.aiPrompt || `Tell me about "${poi.name}" and its analogues on Earth.`;
+    try {
+      await sendPoiPromptToChat(promptMessage);
+    } catch (error) {
+      console.error("Error sending POI prompt to backend:", error);
+    }
 
-    // 2. Sending a prompt to an AI agent (custom prompt)
-    // Send the message as if the user entered it
-    if (poi.aiPrompt) {
-      sendPoiPromptToChat(poi.aiPrompt);
+    // 2. Call Places API via Backend
+    if (poi.searchTerms && poi.searchTerms.length > 0) {
+      const searchQuery = poi.searchTerms.join(' ');
+      console.log('Searching places for:', searchQuery);
+      try {
+        await searchPlaces(searchQuery);
+        // TODO: Add logic to display results
+      } catch (error) {
+        console.error("Failed to search places:", error);
+      }
     } else {
-      sendPoiPromptToChat(`Tell me about "${poi.name}" and its analogues on Earth.`);
+      console.warn("No search terms defined for this POI.");
     }
   };
 
