@@ -17,7 +17,8 @@ The project is being developed to participate in the [Google Maps Platform Award
   - Display points of interest
   - Search for analogues on Earth
 - 3D map of the Earth
-- Chat with AI
+- Chat with agent system
+  - Greeting & Farewell Agents
 
 ## Technologies
 
