@@ -53,7 +53,7 @@ export const useAppStore = create((set, get) => ({
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ message: messageToSend }),
+        body: JSON.stringify({ query: messageToSend }),
       });
 
       if (!response.ok) {
@@ -62,7 +62,7 @@ export const useAppStore = create((set, get) => ({
       }
 
       const data = await response.json();
-      const agentReply = data.reply;
+      const agentReply = data.response;
 
       // AI agent response to the local state
       set((state) => ({

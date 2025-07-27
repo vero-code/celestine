@@ -38,7 +38,7 @@ app.add_middleware(
 )
 
 class ChatInput(BaseModel):
-    message: str
+    query: str
 
 class PlaceSearchInput(BaseModel):
     query: str
@@ -55,14 +55,17 @@ async def read_root():
 
 @app.post("/chat")
 async def chat(input: ChatInput):
-    logging.info(f"Received message: {input.message}")
+    logging.info(f"Received query: {input.query}")
+    if not model:
+        logging.error("Gemini model is not initialized.")
+        raise HTTPException(status_code=500, detail="Generative model is not available.")
     try:
-        response = model.generate_content(input.message)
+        response = model.generate_content(input.query)
         logging.info(f"Gemini response: {response.text}")
-        return {"reply": response.text}
+        return {"response": response.text}
     except Exception as e:
         logging.exception("Error during Gemini content generation")
-        return {"error": str(e)}
+        raise HTTPException(status_code=500, detail=str(e))
 
 @app.post("/search_places")
 async def search_places(input: PlaceSearchInput):
