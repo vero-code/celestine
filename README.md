@@ -19,6 +19,7 @@ The project is being developed to participate in the [Google Maps Platform Award
 - 3D map of the Earth
 - Chat with agent system
   - Greeting & Farewell Agents
+  - Cosmos Specialist Agent
 
 ## Technologies
 
@@ -106,3 +107,17 @@ Simple agent example by [Create Agent Project](https://google.github.io/adk-docs
  ``` 
 
 > To run Google Agent, enter the `adk web` command.
+
+## Testing
+
+Coordinator analyzes the intent and passes the task to the specialized agent.
+
+### Greeting & Farewell Agent
+
+> Hi, my name is Leo.
+
+> Bye, see you soon.
+
+### Cosmos Specialist Agent
+
+> How are black holes formed?

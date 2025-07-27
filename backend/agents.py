@@ -41,10 +41,28 @@ try:
 except Exception as e:
     print(f"❌ Could not create Farewell agent. Check API Key ({farewell_agent.model}). Error: {e}")
 
+# --- Cosmos Specialist Agent ---
+cosmos_specialist_agent = None
+try:
+    cosmos_specialist_agent = Agent(
+        model=MODEL_GEMINI_PRO,
+        name="CosmosSpecialistAgent",
+        instruction="You are the mission's Science Officer. Your expertise is in astronomy and planetary science. "
+                    "Your task is to answer the user's general questions about space, planets, stars, and celestial phenomena. "
+                    "Provide accurate, clear, and engaging answers suitable for a space enthusiast. "
+                    "Do not handle greetings, farewells, or requests for Earth analogues.",
+        description="Answers general user questions about space, acting as the mission's Science Officer.",
+        tools=[],
+    )
+    print(f"✅ Agent '{cosmos_specialist_agent.name}' created using model '{cosmos_specialist_agent.model}'.")
+except Exception as e:
+    print(f"❌ Could not create Cosmos Specialist agent. Check API Key. Error: {e}")
+
 # List of Sub-Agents
 SUB_AGENTS = [
     greeting_agent,
     farewell_agent,
+    cosmos_specialist_agent,
 ]
 
 # If some agent is not created
