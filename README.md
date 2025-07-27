@@ -20,6 +20,7 @@ The project is being developed to participate in the [Google Maps Platform Award
 - Chat with agent system
   - Greeting & Farewell Agents
   - Cosmos Specialist Agent
+  - Analogues Specialist Agent
 
 ## Technologies
 
@@ -121,3 +122,7 @@ Coordinator analyzes the intent and passes the task to the specialized agent.
 ### Cosmos Specialist Agent
 
 > How are black holes formed?
+
+### Analogues Specialist Agent
+
+> I want to find an Earth analogue of Maat Mons on Venus

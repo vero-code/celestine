@@ -2,7 +2,8 @@
 from google.adk.agents import Agent
 from .tools import (
     say_hello,
-    say_goodbye
+    say_goodbye,
+    find_earth_analogues
 )
 from .config import (
     MODEL_GEMINI_FLASH,
@@ -58,11 +59,28 @@ try:
 except Exception as e:
     print(f"❌ Could not create Cosmos Specialist agent. Check API Key. Error: {e}")
 
+# --- Analogues Specialist Agent ---
+analogues_specialist_agent = None
+try:
+    analogues_specialist_agent = Agent(
+        model=MODEL_GEMINI_PRO,
+        name="AnaloguesSpecialistAgent",
+        instruction="You are the mission's Exogeologist. When a user wants to find an Earth analogue for a specific celestial feature, your task is to help them. "
+                    "Use the 'find_earth_analogues' tool to search for these places based on the context provided. "
+                    "Formulate a response that first acknowledges the celestial feature and then presents the Earth-based examples found by the tool.",
+        description="Finds and describes Earth-based analogues for celestial features using the 'find_earth_analogues' tool.",
+        tools=[find_earth_analogues],
+    )
+    print(f"✅ Agent '{analogues_specialist_agent.name}' created using model '{analogues_specialist_agent.model}'.")
+except Exception as e:
+    print(f"❌ Could not create Analogues Specialist agent. Check API Key. Error: {e}")
+
 # List of Sub-Agents
 SUB_AGENTS = [
     greeting_agent,
     farewell_agent,
     cosmos_specialist_agent,
+    analogues_specialist_agent,
 ]
 
 # If some agent is not created
