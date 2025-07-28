@@ -6,53 +6,74 @@ if (!BACKEND_URL) {
   console.error('BACKEND_API_URL is required');
 }
 
-const playAudioFromStream = async (text) => {
-  const { isSpeechEnabled } = useAppStore.getState();
-  if (!isSpeechEnabled) return;
-
-  const textToSpeak = text.replace(/\*/g, '');
-  try {
-    const response = await fetch(`${BACKEND_URL}/synthesize-speech`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ text: textToSpeak }),
-    });
-
-    if (!response.ok) {
-      throw new Error(`Speech synthesis failed with status ${response.status}`);
-    }
-
-    const blob = await response.blob();
-    const url = URL.createObjectURL(blob);
-    const audio = new Audio(url);
-    audio.play();
-  } catch (error) {
-    console.error("Could not play audio:", error);
-  }
-};
-
 export const useAppStore = create((set, get) => ({
+  // --- STATES ---
   target: null,
-  setTarget: (newTarget) => set({ target: newTarget }),
-
   isUserControlling: false,
-  setUserControlling: (value) => set({ isUserControlling: value }),
-
   currentMap: 'space',
-  setCurrentMap: (map) => set({ currentMap: map }),
-
-  landOnPlanet: (planetName) => set({
-    target: planetName,
-    currentMap: 'planet'
-  }),
-
   messages: [],
   placeResults: [],
   isAgentThinking: false,
-
   isSpeechEnabled: true,
-  toggleSpeech: () => set((state) => ({ isSpeechEnabled: !state.isSpeechEnabled })),
+  currentAudio: null,
 
+  // --- ACTIONS ---
+  setTarget: (newTarget) => set({ target: newTarget }),
+  setUserControlling: (value) => set({ isUserControlling: value }),
+  setCurrentMap: (map) => set({ currentMap: map }),
+  landOnPlanet: (planetName) => set({ target: planetName, currentMap: 'planet' }),
+  addAgentMessage: (message) => set((state) => ({
+    messages: [...state.messages, { sender: 'agent', text: message }]
+  })),
+
+  playAndTrackAudio: async (text) => {
+    const { isSpeechEnabled, currentAudio } = get();
+    if (!isSpeechEnabled) return;
+
+    if (currentAudio) {
+      currentAudio.pause();
+      currentAudio.src = '';
+    }
+
+    const textToSpeak = text.replace(/\*/g, '');
+    try {
+      const response = await fetch(`${BACKEND_URL}/synthesize-speech`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ text: textToSpeak }),
+      });
+
+      if (!response.ok) throw new Error(`Speech synthesis failed with status ${response.status}`);
+
+      const blob = await response.blob();
+      const url = URL.createObjectURL(blob);
+      const audio = new Audio(url);
+
+      set({ currentAudio: audio });
+      void audio.play();
+
+      audio.onended = () => set({ currentAudio: null });
+
+    } catch (error) {
+      console.error("Could not play audio:", error);
+      set({ currentAudio: null });
+    }
+  },
+
+  toggleSpeech: () => {
+    const { isSpeechEnabled, currentAudio } = get();
+    const newSpeechState = !isSpeechEnabled;
+
+    if (!newSpeechState && currentAudio) {
+      currentAudio.pause();
+      currentAudio.src = '';
+      set({ currentAudio: null });
+    }
+
+    set({ isSpeechEnabled: newSpeechState });
+  },
+
+  // --- Message sending functions ---
   sendMessageToChat: async (message) => {
     set((state) => ({
       messages: [...state.messages, { sender: 'user', text: message }]
@@ -103,20 +124,18 @@ export const useAppStore = create((set, get) => ({
 
           set({ placeResults: structuredResponse.places });
 
-          playAudioFromStream(summaryText);
+          void get().playAndTrackAudio(summaryText);
 
-          if (structuredResponse.places.length > 0) {
-            get().setCurrentMap('earth2d');
-          }
+          if (structuredResponse.places.length > 0) { get().setCurrentMap('earth2d'); }
         } else {
           throw new Error("Invalid JSON structure from agent");
         }
       } catch (e) {
-        set((state) => ({
-          messages: [...state.messages, { sender: 'agent', text: agentReply }]
-        }));
+        console.error("Failed to parse agent response as JSON, treating as plain text. Error:", e);
+        set((state) => ({ messages: [...state.messages, { sender: 'agent', text: agentReply }] }));
         set({ placeResults: [] });
-        playAudioFromStream(agentReply);
+
+        void get().playAndTrackAudio(agentReply);
       }
     } catch (error) {
       console.error("Error sending message to backend:", error);
@@ -127,8 +146,4 @@ export const useAppStore = create((set, get) => ({
       set({ isAgentThinking: false });
     }
   },
-
-  addAgentMessage: (message) => set((state) => ({
-    messages: [...state.messages, { sender: 'agent', text: message }]
-  })),
 }));

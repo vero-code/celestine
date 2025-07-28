@@ -21,7 +21,7 @@ const SpaceChat = () => {
 
   useEffect(() => {
     if (!hasInitializedChat.current && messages.length === 0) {
-      addAgentMessage('Hello! Where would you like to go today?');
+      addAgentMessage('Greetings, Explorer! Which world shall we chart today?');
       hasInitializedChat.current = true;
     }
   }, [messages.length, addAgentMessage]);

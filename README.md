@@ -24,6 +24,8 @@ The project is being developed to participate in the [Google Maps Platform Award
     - display results on 2D map of the Earth
 - Voice acting of agent responses in chat
 
+> Note: Voice library may require a few extra seconds to process longer agent responses.
+
 ## Technologies
 
 - React + Vite
@@ -31,7 +33,7 @@ The project is being developed to participate in the [Google Maps Platform Award
 - Google Maps Platform API
 - Gemini 2.5 Flash
 - Agent Development Kit (ADK)
-- ElevenLabs API
+- ElevenLabs API (voice: Quentin)
 
 Tools: PyCharm 2025.1.3.1
 
