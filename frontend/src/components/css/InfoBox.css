@@ -1,36 +1,40 @@
 .info-box {
-  background: rgba(0, 0, 0, 0.75);
-  padding: 10px 14px;
-  border-radius: 8px;
+  background: rgba(0, 0, 20, 0.7);
+  border: 1px solid #444;
+  border-radius: 10px;
+  padding: 10px;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
   color: white;
-  font-size: 13px;
-  max-width: 180px;
-  box-shadow: 0 0 8px #000;
+  min-width: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.info-box h4 {
-  margin: 0 0 4px;
-  font-size: 14px;
-  font-weight: 600;
-}
-
-.info-box p {
-  margin: 0;
-  font-size: 12px;
-  line-height: 1.4;
-}
-
-.info-box button {
-  margin-top: 8px;
-  padding: 5px 8px;
-  font-size: 0.9em;
+.land-button {
+  background: linear-gradient(45deg, #007bff, #00c6ff);
+  color: white;
   border: none;
-  background: #0077ff;
-  color: white;
-  border-radius: 4px;
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
   cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 123, 255, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
 }
 
-.info-box button:hover {
-  background: #005ed1;
+.land-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 123, 255, 0.6);
+}
+
+.land-button:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 15px rgba(0, 123, 255, 0.4);
 }

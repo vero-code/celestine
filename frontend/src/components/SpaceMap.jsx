@@ -1,10 +1,11 @@
 import React, { useMemo } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { OrbitControls, Text, Html } from '@react-three/drei';
+import { OrbitControls, Text, Html, Stars } from '@react-three/drei';
 import { useAppStore } from '../stores/useAppStore';
 import * as THREE from 'three';
 import './css/InfoBox.css';
 import { planetData } from "../data/planetData.js";
+import { BsFillRocketTakeoffFill } from 'react-icons/bs';
 
 function CameraRig() {
   const target = useAppStore((state) => state.target);
@@ -52,6 +53,16 @@ const SpaceMap = () => {
       <color attach="background" args={['#000010']} />
       <ambientLight intensity={0.2} />
 
+      <Stars
+        radius={100}
+        depth={50}
+        count={5000}
+        factor={4}
+        saturation={0}
+        fade
+        speed={2}
+      />
+
       {/* Sun - source of light */}
       <pointLight position={[0, 0, 0]} intensity={100} color="#FFDAB9" />
 
@@ -92,8 +103,11 @@ const SpaceMap = () => {
           {currentTarget === planet.name && (
             <Html position={[0, planet.radius + 2, 0]} distanceFactor={10}>
               <div className="info-box">
-                <button onClick={() => landOnPlanet(planet.name)}>
-                  Land on
+                <button
+                  className="land-button"
+                  onClick={() => landOnPlanet(planet.name)}
+                >
+                  <BsFillRocketTakeoffFill style={{ transform: 'rotate(180deg)' }}/> Land on
                 </button>
               </div>
             </Html>
@@ -103,9 +117,16 @@ const SpaceMap = () => {
 
       {/* OrbitControls for manual camera control */}
       <OrbitControls
+        makeDefault
         enabled={!currentTarget}
         onStart={() => setUserControlling(true)}
         onEnd={() => setUserControlling(false)}
+        zoomToCursor={true}
+        mouseButtons={{
+          LEFT: THREE.MOUSE.ROTATE,
+          MIDDLE: THREE.MOUSE.DOLLY,
+          RIGHT: THREE.MOUSE.PAN,
+        }}
       />
 
       <CameraRig />
