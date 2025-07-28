@@ -131,3 +131,15 @@ In the ADK Web UI:
 > I want to find an Earth analogue of Maat Mons on Venus.
 
 > I'm looking for something on the Moon that's similar to a Van de Graaff generator on Earth.
+
+On the app UI:
+
+Move to "Flight into Space", and click:
+
+- Polar Ice Caps on Mars (many analog POIs)
+- Discovery Rupes on Mercury (one analog POI)
+- Sunspots on Sun (no analog POI)
+
+## LICENSE
+
+Licensed under the MIT License. See the LICENSE file for details.

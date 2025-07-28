@@ -59,7 +59,14 @@ export const useAppStore = create((set, get) => ({
       const agentReply = data.response;
 
       try {
-        const structuredResponse = JSON.parse(agentReply);
+        const jsonMatch = agentReply.match(/\{[\s\S]*\}/);
+        if (!jsonMatch) {
+          throw new Error("No JSON object found in the agent's response.");
+        }
+
+        const jsonString = jsonMatch[0];
+        const structuredResponse = JSON.parse(jsonString);
+
         if (structuredResponse.summary && structuredResponse.places) {
           set((state) => ({
             messages: [...state.messages, { sender: 'agent', text: structuredResponse.summary }]
