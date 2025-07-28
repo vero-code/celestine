@@ -8,15 +8,21 @@ import logging
 import google.generativeai as genai
 import googlemaps
 
-load_dotenv()
+from .agent import root_agent
+from google.adk.runners import Runner
+from google.adk.sessions import InMemorySessionService
+from google.adk.agents.run_config import RunConfig, StreamingMode
+from google.genai.types import Content, Part
+from .state import TEST_USER_ID
 
+load_dotenv()
 logging.basicConfig(level=logging.INFO)
 
-GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
-if not GEMINI_API_KEY:
-    logging.error("GEMINI_API_KEY is not set in environment variables.")
+GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
+if not GOOGLE_API_KEY:
+    logging.error("GOOGLE_API_KEY is not set in environment variables.")
 else:
-    logging.info("Gemini API key loaded.")
+    logging.info("Google API key loaded.")
 
 GOOGLE_MAPS_PLACES_API_KEY = os.getenv("GOOGLE_MAPS_PLACES_API_KEY")
 if not GOOGLE_MAPS_PLACES_API_KEY:
@@ -26,7 +32,7 @@ else:
     logging.info("Google Maps Places API key loaded.")
     gmaps = googlemaps.Client(key=GOOGLE_MAPS_PLACES_API_KEY)
 
-genai.configure(api_key=GEMINI_API_KEY)
+genai.configure(api_key=GOOGLE_API_KEY)
 
 app = FastAPI()
 app.add_middleware(
@@ -37,10 +43,17 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+APP_NAME = "celestine"
+SESSION_ID = "default_session"
+session_service = InMemorySessionService()
+
 class ChatInput(BaseModel):
     query: str
 
 class PlaceSearchInput(BaseModel):
+    query: str
+
+class ChatRequest(BaseModel):
     query: str
 
 try:
@@ -54,18 +67,55 @@ async def read_root():
     return {"Hello": "World"}
 
 @app.post("/chat")
-async def chat(input: ChatInput):
-    logging.info(f"Received query: {input.query}")
-    if not model:
-        logging.error("Gemini model is not initialized.")
-        raise HTTPException(status_code=500, detail="Generative model is not available.")
+async def chat_with_ai(request: ChatRequest):
+    """
+    Accepts the request, initializes the Runner
+    and executes the agent system logic.
+    """
+    logging.info(f"Received request with query: '{request.query}'")
     try:
-        response = model.generate_content(input.query)
-        logging.info(f"Gemini response: {response.text}")
-        return {"response": response.text}
+        runner = Runner(
+            agent=root_agent,
+            app_name=APP_NAME,
+            session_service=session_service
+        )
+        logging.info("Runner created for this request.")
+
+        # Check if the session exists and create it if not.
+        try:
+            await session_service.get_session(APP_NAME, TEST_USER_ID, SESSION_ID)
+        except Exception:
+            logging.info("Session not found, creating a new one...")
+            await session_service.create_session(
+                app_name=APP_NAME, user_id=TEST_USER_ID, session_id=SESSION_ID
+            )
+            logging.info("New session created.")
+
+        # Setup and running the agent
+        run_config = RunConfig(streaming_mode=StreamingMode.NONE, max_llm_calls=100)
+        content = Content(role="user", parts=[Part(text=request.query)])
+
+        logging.info("Calling runner.run_async...")
+        async for event in runner.run_async(
+                user_id=TEST_USER_ID,
+                session_id=SESSION_ID,
+                new_message=content,
+                run_config=run_config
+        ):
+            if event.is_final_response():
+                logging.info("Final response received from agent.")
+                if event.content and event.content.parts:
+                    return {"response": event.content.parts[0].text}
+                else:
+                    logging.error("Final response event has no content or parts.")
+                    raise HTTPException(status_code=500, detail="Agent returned an empty final response.")
+
+        logging.warning("Agent finished run without a final response event.")
+        raise HTTPException(status_code=500, detail="No final response from agent.")
+
     except Exception as e:
-        logging.exception("Error during Gemini content generation")
-        raise HTTPException(status_code=500, detail=str(e))
+        logging.exception(f"An unhandled error occurred in the agent logic: {e}")
+        raise HTTPException(status_code=500, detail="Agent failed to process your query.")
 
 @app.post("/search_places")
 async def search_places(input: PlaceSearchInput):
