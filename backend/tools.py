@@ -3,7 +3,7 @@ import os
 import googlemaps
 import json
 from dotenv import load_dotenv
-from typing import Optional
+from typing import Optional, Literal
 
 load_dotenv()
 
@@ -67,5 +67,23 @@ def find_earth_analogues(query: str) -> str:
         print(f"--- Tool: find_earth_analogues failed: {error_msg} ---")
         return error_msg
 
+def navigate_to_planet(
+        planet_name: Literal[
+            "Sun", "Mercury", "Venus", "Earth", "Mars"
+            # Add other planets here as needed
+        ]
+) -> str:
+    """
+    Instructs the frontend to navigate to a specific planet's surface view.
+    It returns a JSON object that the frontend can understand.
+    """
+    print(f"--- Tool: navigate_to_planet called for: '{planet_name}' ---")
+
+    response_data = {
+        "action": "navigate",
+        "target": planet_name,
+        "summary": f"Initiating landing sequence for {planet_name}. Stand by."
+    }
+    return json.dumps(response_data)
 
 print("All tools defined.")

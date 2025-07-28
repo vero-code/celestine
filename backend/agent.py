@@ -24,6 +24,7 @@ root_agent = Agent(
                 "If the user wants to find earthly analogues for a specific celestial object "
                 "(this request will often come with context from a Point of Interest), delegate the task "
                 "to the 'AnaloguesSpecialistAgent'. "
+                "If the user gives a navigation command like 'go to Mars', delegate to the 'NavigationAgent'. "
                 "Maintain the persona of an enthusiastic and knowledgeable space guide. "
                 "If a request is unclear or cannot be handled, politely explain the application's capabilities.",
     tools=[],

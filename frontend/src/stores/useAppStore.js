@@ -116,16 +116,17 @@ export const useAppStore = create((set, get) => ({
         const jsonString = jsonMatch[0];
         const structuredResponse = JSON.parse(jsonString);
 
-        if (structuredResponse.summary && structuredResponse.places) {
-          const summaryText = structuredResponse.summary;
-          set((state) => ({
-            messages: [...state.messages, { sender: 'agent', text: summaryText }]
-          }));
-
-          set({ placeResults: structuredResponse.places });
-
+        if (structuredResponse.action === 'navigate' && structuredResponse.target) {
+          const summaryText = structuredResponse.summary || `Navigating to ${structuredResponse.target}...`;
+          set((state) => ({ messages: [...state.messages, { sender: 'agent', text: summaryText }] }));
+          get().landOnPlanet(structuredResponse.target);
           void get().playAndTrackAudio(summaryText);
 
+        } else if (structuredResponse.summary && structuredResponse.places) {
+          const summaryText = structuredResponse.summary;
+          set((state) => ({ messages: [...state.messages, { sender: 'agent', text: summaryText }] }));
+          set({ placeResults: structuredResponse.places });
+          void get().playAndTrackAudio(summaryText);
           if (structuredResponse.places.length > 0) { get().setCurrentMap('earth2d'); }
         } else {
           throw new Error("Invalid JSON structure from agent");

@@ -3,7 +3,8 @@ from google.adk.agents import Agent
 from .tools import (
     say_hello,
     say_goodbye,
-    find_earth_analogues
+    find_earth_analogues,
+    navigate_to_planet
 )
 from .config import (
     MODEL_GEMINI_FLASH,
@@ -78,12 +79,32 @@ try:
 except Exception as e:
     print(f"❌ Could not create Analogues Specialist agent. Check API Key. Error: {e}")
 
+# --- Navigation Agent ---
+navigation_agent = None
+try:
+    navigation_agent = Agent(
+        model=MODEL_GEMINI_FLASH,
+        name="NavigationAgent",
+        instruction="You are the ship's Helmsman. Your function is to parse user text for a planet name "
+                    "ignoring case (e.g., 'mars' and 'Mars' are the same),"
+                    "and call the 'navigate_to_planet' tool. "
+                    "After the tool runs and provides a JSON output, your final response must be "
+                    "a brief confirmation message that INCLUDES the raw JSON string from the tool. "
+                    "Example: 'Navigating now. {\"action\": \"navigate\", \"target\": \"Mars\", ...}'",
+        description="Handles user navigation commands and confirms the action.",
+        tools=[navigate_to_planet],
+    )
+    print(f"✅ Agent '{navigation_agent.name}' created using model '{navigation_agent.model}'.")
+except Exception as e:
+    print(f"❌ Could not create Navigation agent. Error: {e}")
+
 # List of Sub-Agents
 SUB_AGENTS = [
     greeting_agent,
     farewell_agent,
     cosmos_specialist_agent,
     analogues_specialist_agent,
+    navigation_agent,
 ]
 
 # If some agent is not created

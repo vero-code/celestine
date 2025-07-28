@@ -22,6 +22,8 @@ The project is being developed to participate in the [Google Maps Platform Award
   - Cosmos Specialist Agent
   - Analogues Specialist Agent:
     - display results on 2D map of the Earth
+  - Navigation Agent:
+    - takes user to the chosen planet
 - Voice acting of agent responses in chat
 
 > Note: Voice library may require a few extra seconds to process longer agent responses.
