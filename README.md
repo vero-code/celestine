@@ -22,6 +22,7 @@ The project is being developed to participate in the [Google Maps Platform Award
   - Cosmos Specialist Agent
   - Analogues Specialist Agent:
     - display results on 2D map of the Earth
+- Voice acting of agent responses in chat
 
 ## Technologies
 
@@ -30,6 +31,7 @@ The project is being developed to participate in the [Google Maps Platform Award
 - Google Maps Platform API
 - Gemini 2.5 Flash
 - Agent Development Kit (ADK)
+- ElevenLabs API
 
 Tools: PyCharm 2025.1.3.1
 

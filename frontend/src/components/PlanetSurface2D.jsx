@@ -35,6 +35,7 @@ export function PlanetSurface2D({ planet }) {
       </Suspense>
 
       <MapControls
+        enablePan={false}
         enableRotate={false}
         target={[0, 0, 0]}
         makeDefault

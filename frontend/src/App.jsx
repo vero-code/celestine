@@ -58,16 +58,12 @@ function App() {
             {currentPlanetPois.length > 0 ? (
               <div className="poi-list">
                 {currentPlanetPois.map((poi, index) => (
-                  <button
+                  <div
                     key={index}
-                    className="poi-nav-button"
-                    onClick={() => {
-                      console.log(`Clicked POI in sidebar: ${poi.name} on ${selectedPlanet}`);
-                      // TODO: Implement centering on POI or triggering AI agent
-                    }}
+                    className="poi-nav-item"
                   >
                     📍 {poi.name}
-                  </button>
+                  </div>
                 ))}
               </div>
             ) : (

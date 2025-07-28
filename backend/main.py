@@ -5,6 +5,8 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from dotenv import load_dotenv
 import logging
+from fastapi.responses import StreamingResponse
+import io
 
 from .agent import root_agent
 from google.adk.runners import Runner
@@ -13,8 +15,18 @@ from google.adk.agents.run_config import RunConfig, StreamingMode
 from google.genai.types import Content, Part
 from .state import TEST_USER_ID
 
+from elevenlabs.client import ElevenLabs
+
 load_dotenv()
 logging.basicConfig(level=logging.INFO)
+
+ELEVENLABS_API_KEY = os.getenv("ELEVENLABS_API_KEY")
+if not ELEVENLABS_API_KEY:
+    logging.warning("ELEVENLABS_API_KEY not found in .env file. Speech synthesis will be disabled.")
+    eleven_client = None
+else:
+    eleven_client = ElevenLabs(api_key=ELEVENLABS_API_KEY)
+    logging.info("ElevenLabs client initialized.")
 
 app = FastAPI()
 app.add_middleware(
@@ -32,6 +44,10 @@ session_service = InMemorySessionService()
 # Model for incoming chat requests
 class ChatRequest(BaseModel):
     query: str
+
+# Model for voiceover request
+class SpeechRequest(BaseModel):
+    text: str
 
 @app.get("/")
 async def read_root():
@@ -87,3 +103,27 @@ async def chat_with_ai(request: ChatRequest):
     except Exception as e:
         logging.exception(f"An unhandled error occurred in the agent logic: {e}")
         raise HTTPException(status_code=500, detail="Agent failed to process your query.")
+
+@app.post("/synthesize-speech")
+async def synthesize_speech(request: SpeechRequest):
+    if not eleven_client:
+        raise HTTPException(status_code=500, detail="ElevenLabs API is not configured on the server.")
+
+    try:
+
+        audio_stream = eleven_client.text_to_speech.stream(
+            text=request.text,
+            voice_id="21m00Tcm4TlvDq8ikWAM",
+            model_id='eleven_multilingual_v2'
+        )
+
+        audio_bytes_io = io.BytesIO()
+        for chunk in audio_stream:
+            audio_bytes_io.write(chunk)
+        audio_bytes_io.seek(0)
+
+        return StreamingResponse(audio_bytes_io, media_type="audio/mpeg")
+
+    except Exception as e:
+        logging.exception(f"Error during ElevenLabs speech synthesis: {e}")
+        raise HTTPException(status_code=500, detail=str(e))

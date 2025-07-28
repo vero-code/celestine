@@ -6,6 +6,28 @@ if (!BACKEND_URL) {
   console.error('BACKEND_API_URL is required');
 }
 
+const playAudioFromStream = async (text) => {
+  const textToSpeak = text.replace(/\*/g, '');
+  try {
+    const response = await fetch(`${BACKEND_URL}/synthesize-speech`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ text: textToSpeak }),
+    });
+
+    if (!response.ok) {
+      throw new Error(`Speech synthesis failed with status ${response.status}`);
+    }
+
+    const blob = await response.blob();
+    const url = URL.createObjectURL(blob);
+    const audio = new Audio(url);
+    audio.play();
+  } catch (error) {
+    console.error("Could not play audio:", error);
+  }
+};
+
 export const useAppStore = create((set, get) => ({
   target: null,
   setTarget: (newTarget) => set({ target: newTarget }),
@@ -68,11 +90,14 @@ export const useAppStore = create((set, get) => ({
         const structuredResponse = JSON.parse(jsonString);
 
         if (structuredResponse.summary && structuredResponse.places) {
+          const summaryText = structuredResponse.summary;
           set((state) => ({
-            messages: [...state.messages, { sender: 'agent', text: structuredResponse.summary }]
+            messages: [...state.messages, { sender: 'agent', text: summaryText }]
           }));
 
           set({ placeResults: structuredResponse.places });
+
+          playAudioFromStream(summaryText);
 
           if (structuredResponse.places.length > 0) {
             get().setCurrentMap('earth2d');
@@ -85,6 +110,7 @@ export const useAppStore = create((set, get) => ({
           messages: [...state.messages, { sender: 'agent', text: agentReply }]
         }));
         set({ placeResults: [] });
+        playAudioFromStream(agentReply);
       }
     } catch (error) {
       console.error("Error sending message to backend:", error);

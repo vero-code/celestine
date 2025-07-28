@@ -93,7 +93,7 @@ const SpaceMap = () => {
             <Html position={[0, planet.radius + 2, 0]} distanceFactor={10}>
               <div className="info-box">
                 <button onClick={() => landOnPlanet(planet.name)}>
-                  Land on Planet 🚀
+                  Land on
                 </button>
               </div>
             </Html>
