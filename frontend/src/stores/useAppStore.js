@@ -23,6 +23,7 @@ export const useAppStore = create((set, get) => ({
 
   messages: [],
   placeResults: [],
+  isAgentThinking: false,
 
   sendMessageToChat: async (message) => {
     set((state) => ({
@@ -39,6 +40,7 @@ export const useAppStore = create((set, get) => ({
   },
 
   _sendToBackendAndAddResponse: async (messageToSend) => {
+    set({ isAgentThinking: true });
     try {
       const response = await fetch(`${BACKEND_URL}/chat`, {
         method: 'POST',
@@ -82,6 +84,8 @@ export const useAppStore = create((set, get) => ({
       set((state) => ({
         messages: [...state.messages, { sender: 'agent', text: `Error: Failed to get response from AI. ${error.message}` }]
       }));
+    } finally {
+      set({ isAgentThinking: false });
     }
   },
 

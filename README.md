@@ -16,11 +16,12 @@ The project is being developed to participate in the [Google Maps Platform Award
   - Landing on the planet
   - Display points of interest
   - Search for analogues on Earth
-- 3D map of the Earth
+- 2D/3D map of the Earth
 - Chat with agent system
   - Greeting & Farewell Agents
   - Cosmos Specialist Agent
-  - Analogues Specialist Agent
+  - Analogues Specialist Agent:
+    - display results on 2D map of the Earth
 
 ## Technologies
 

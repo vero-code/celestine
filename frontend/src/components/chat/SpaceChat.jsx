@@ -2,21 +2,22 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useAppStore } from '../../stores/useAppStore';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+import '../css/SpaceChat.css';
 
 const SpaceChat = () => {
   const messages = useAppStore((state) => state.messages);
   const addAgentMessage = useAppStore((state) => state.addAgentMessage);
   const sendMessageToChat = useAppStore((state) => state.sendMessageToChat);
+  const isAgentThinking = useAppStore((state) => state.isAgentThinking);
 
   const [input, setInput] = useState('');
-  const [loading, setLoading] = useState(false);
 
   const messagesEndRef = useRef(null);
   const hasInitializedChat = useRef(false);
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages]);
+  }, [messages, isAgentThinking]);
 
   useEffect(() => {
     if (!hasInitializedChat.current && messages.length === 0) {
@@ -30,14 +31,11 @@ const SpaceChat = () => {
 
     const userMessage = input;
     setInput('');
-    setLoading(true);
 
     try {
       await sendMessageToChat(userMessage);
     } catch (error) {
       console.error('[SpaceChat] Error during message sending process:', error);
-    } finally {
-      setLoading(false);
     }
   };
 
@@ -45,15 +43,27 @@ const SpaceChat = () => {
     <div className="chat-placeholder">
       <div className="chat-messages">
         {messages.map((msg, idx) => (
-          <div key={idx} style={{ backgroundColor: msg.sender === 'agent' ? '#3b3b55' : '#555577', padding: '10px', borderRadius: '8px', marginBottom: '8px' }}>
+          <div key={idx}>
             <strong>{msg.sender === 'agent' ? 'Agent' : 'You'}:</strong>
             {msg.sender === 'agent' ? (
               <ReactMarkdown remarkPlugins={[remarkGfm]}>{msg.text}</ReactMarkdown>
             ) : (
-              <span>{msg.text}</span>
+              <p>{msg.text}</p>
             )}
           </div>
         ))}
+
+        {isAgentThinking && (
+          <div>
+            <strong>Agent:</strong>
+            <div className="typing-indicator">
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+          </div>
+        )}
+
         <div ref={messagesEndRef} />
       </div>
       <input
@@ -63,10 +73,10 @@ const SpaceChat = () => {
         value={input}
         onChange={(e) => setInput(e.target.value)}
         onKeyDown={(e) => e.key === 'Enter' && handleSend()}
-        disabled={loading}
+        disabled={isAgentThinking}
       />
-      <button className="chat-send-button" onClick={handleSend} disabled={loading}>
-        {loading ? 'Sending...' : 'Send'}
+      <button className="chat-send-button" onClick={handleSend} disabled={isAgentThinking}>
+        {isAgentThinking ? 'Thinking...' : 'Send'}
       </button>
     </div>
   );
