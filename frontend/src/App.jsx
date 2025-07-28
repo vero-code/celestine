@@ -6,8 +6,10 @@ import SpaceMap from "./components/SpaceMap.jsx";
 import EarthMap from './components/earth/EarthMap.jsx';
 import SpaceChat from "./components/chat/SpaceChat.jsx";
 import GalacticNavigator from "./components/GalacticNavigator.jsx";
-import {useAppStore} from "./stores/useAppStore.js";
 import { PlanetSurface2D } from './components/PlanetSurface2D.jsx';
+import EarthMap2D from './components/earth/EarthMap2D.jsx';
+
+import { useAppStore } from "./stores/useAppStore.js";
 import { planetPois } from './data/planetPois.js';
 
 function App() {
@@ -33,7 +35,13 @@ function App() {
             className={currentMap === 'earth' ? 'active' : ''}
             onClick={() => setCurrentMap('earth')}
           >
-            🌍 Return to Earth
+            🌍 Return to Earth (3D)
+          </button>
+          <button
+            className={currentMap === 'earth2d' ? 'active' : ''}
+            onClick={() => setCurrentMap('earth2d')}
+          >
+            🗺️ View 2D map of the Earth
           </button>
         </div>
         <p>Use the buttons above to switch between space and Earth.</p>
@@ -83,6 +91,8 @@ function App() {
             ) : (
               <PlanetSurface2D planet={selectedPlanet} />
             )
+          ) : currentMap === 'earth2d' ? (
+            <EarthMap2D />
           ) : (
             <EarthMap />
           )}
