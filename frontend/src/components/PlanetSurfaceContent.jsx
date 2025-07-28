@@ -47,10 +47,14 @@ export function PlanetSurfaceContent({ planet }) {
   }
 
   const handlePoiClick = async (poi) => {
-    console.log('Clicked POI:', poi.name);
+    console.log('Clicked POI:', poi.name, 'Type:', poi.type);
 
-    // Send a prompt to agent system
-    const promptMessage = poi.aiPrompt || `Tell me about "${poi.name}" and its analogues on Earth.`;
+    // Send a natural, “human” question to agent system
+    const promptMessage = `I'm looking at ${poi.name} on ${planet}. It's a ${poi.type}. 
+    The description says: "${poi.description}". Based on this, what are some of its analogues on Earth?`;
+
+    // console.log('Sending natural prompt to agent:', promptMessage);
+
     try {
       await sendPoiPromptToChat(promptMessage);
     } catch (error) {
@@ -68,7 +72,7 @@ export function PlanetSurfaceContent({ planet }) {
         />
       </mesh>
 
-      {pois.map((poi, i) => {
+      {planetPois[planet]?.map((poi, i) => {
         const [x, y] = latLonToXY(poi.lat, poi.lon, planeWidth, planeHeight);
         return (
           <Html
