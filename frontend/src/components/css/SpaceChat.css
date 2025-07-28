@@ -85,3 +85,28 @@
     transform: scale(1.0);
   }
 }
+
+/* Speech icon settings */
+.chat-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.speech-toggle-button {
+  background: none;
+  border: none;
+  color: #e0e0f0;
+  cursor: pointer;
+  padding: 5px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s ease;
+}
+
+.speech-toggle-button:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}

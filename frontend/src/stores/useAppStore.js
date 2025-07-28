@@ -7,6 +7,9 @@ if (!BACKEND_URL) {
 }
 
 const playAudioFromStream = async (text) => {
+  const { isSpeechEnabled } = useAppStore.getState();
+  if (!isSpeechEnabled) return;
+
   const textToSpeak = text.replace(/\*/g, '');
   try {
     const response = await fetch(`${BACKEND_URL}/synthesize-speech`, {
@@ -46,6 +49,9 @@ export const useAppStore = create((set, get) => ({
   messages: [],
   placeResults: [],
   isAgentThinking: false,
+
+  isSpeechEnabled: true,
+  toggleSpeech: () => set((state) => ({ isSpeechEnabled: !state.isSpeechEnabled })),
 
   sendMessageToChat: async (message) => {
     set((state) => ({
