@@ -57,7 +57,12 @@ This project utilizes:
   - [Sun](https://science.nasa.gov/image-detail/amf-gsfc_20171208_archive_e001435/)
   - [Mercury](https://science.nasa.gov/image-detail/pia19422-mercury/)
   - [Venus](https://science.nasa.gov/image-detail/amf-ba0639bb-149b-4e6a-91c7-be0b928c7897/)
+  - [Moon](https://science.nasa.gov/image-detail/amf-pia00405/)
   - [Mars](https://science.nasa.gov/image-detail/amf-pia02653/)
+  - [Jupiter](https://science.nasa.gov/image-detail/jupiter-exotic-marble/)
+  - [Saturn](https://science.nasa.gov/image-detail/amf-2a11ddc5-3e5b-4516-8a62-5c4b5a801913/)
+  - [Uranus](https://assets.science.nasa.gov/dynamicimage/assets/science/cds/general/images/2024/03/uranus-pia18182-16x9-1.jpg?w=1920&h=1080&fit=clip&crop=faces%2Cfocalpoint)
+  - [Neptune](https://science.nasa.gov/wp-content/uploads/2024/03/pia01492-neptune-full-disk-16x9-1.jpg)
 
 ## Architecture
 

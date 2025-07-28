@@ -3,7 +3,8 @@ import React from 'react';
 import { useAppStore } from '../stores/useAppStore';
 import './css/GalacticNavigator.css';
 
-const planets = ['Sun', 'Mercury', 'Venus', 'Earth', 'Mars'];
+const planets = ['Sun', 'Mercury', 'Venus', 'Earth', 'Moon', 'Mars',
+  'Jupiter', 'Saturn', 'Uranus', 'Neptune'];
 
 const GalacticNavigator = () => {
   const setTarget = useAppStore((state) => state.setTarget);

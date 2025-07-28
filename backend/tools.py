@@ -69,8 +69,8 @@ def find_earth_analogues(query: str) -> str:
 
 def navigate_to_planet(
         planet_name: Literal[
-            "Sun", "Mercury", "Venus", "Earth", "Mars"
-            # Add other planets here as needed
+            "Sun", "Mercury", "Venus", "Earth", "Moon", "Mars",
+            "Jupiter", "Saturn", "Uranus", "Neptune"
         ]
 ) -> str:
     """

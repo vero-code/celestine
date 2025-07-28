@@ -1,4 +1,4 @@
-// Example POI structure for each planet
+// data/planetPois.js
 export const planetPois = {
   Sun: [
     {
@@ -48,6 +48,20 @@ export const planetPois = {
       description: "Unique volcanic structures with flat tops and steep sides, formed by viscous lava.",
     },
   ],
+  Moon: [
+    {
+      name: "Sea of Tranquility",
+      lat: 8.5, lon: 31.4,
+      type: "Lunar Mare (Basaltic Plain)",
+      description: "The landing site of Apollo 11, a large, dark plain formed by ancient volcanic eruptions."
+    },
+    {
+      name: "Tycho Crater",
+      lat: 40, lon: 80,
+      type: "Rayed Impact Crater",
+      description: "A relatively young and prominent impact crater with a bright system of rays extending for thousands of kilometers."
+    }
+  ],
   Mars: [
     {
       name: "Olympus Mons",
@@ -67,17 +81,61 @@ export const planetPois = {
       type: "Ancient Lakebed Crater",
       description: "An impact crater with a central mountain, explored by the Curiosity rover, with signs of ancient lakes.",
     },
+  ],
+  Jupiter: [
     {
-      name: "Polar Ice Caps",
-      lat: -65.4, lon: 0,
-      type: "Polar Ice Cap",
-      description: "Ice caps composed of water ice and dry ice, expanding and contracting seasonally.",
+      name: "Great Red Spot",
+      lat: -22, lon: 0,
+      type: "Persistent Anticyclonic Storm",
+      description: "A massive, high-pressure storm, wider than Earth, that has been raging for centuries."
     },
     {
-      name: "Kasei Valles",
-      lat: 55, lon: -25,
-      type: "Outflow Channel System",
-      description: "A massive outflow channel system formed by gigantic floods.",
+      name: "Europa (Moon)",
+      lat: 40, lon: -40,
+      type: "Icy Moon with Subsurface Ocean",
+      description: "An icy moon with a smooth surface, believed to hide a vast liquid water ocean beneath its crust."
     }
   ],
+  Saturn: [
+    {
+      name: "Cassini Division",
+      lat: 0, lon: 60,
+      type: "Gap in Ring System",
+      description: "The largest gap in Saturn's rings, separating the A and B rings, created by the gravitational pull of the moon Mimas."
+    },
+    {
+      name: "Hexagonal Storm",
+      lat: 10, lon: -10,
+      type: "Hexagonal Polar Vortex",
+      description: "A persistent, six-sided jet stream cloud pattern around Saturn's north pole."
+    }
+  ],
+  Uranus: [
+    {
+      name: "Extreme Axial Tilt",
+      lat: -35, lon: -40,
+      type: "Extreme Axial Tilt Region",
+      description: "Uranus is unique for its extreme axial tilt of 98 degrees, causing it to orbit the Sun on its side."
+    },
+    {
+      name: "Miranda (Moon)",
+      lat: 10, lon: 20,
+      type: "Moon with Extreme Topography",
+      description: "A moon with a bizarre and fractured surface, featuring the Verona Rupes, the tallest known cliff in the Solar System."
+    }
+  ],
+  Neptune: [
+    {
+      name: "Great Dark Spot (Historic)",
+      lat: -15, lon: 10,
+      type: "Transient Anticyclonic Storm",
+      description: "A large, Earth-sized storm observed by Voyager 2 in 1989, which has since disappeared."
+    },
+    {
+      name: "Triton (Moon)",
+      lat: 25, lon: -60,
+      type: "Moon with Cryovolcanism",
+      description: "Neptune's largest moon, notable for its retrograde orbit and active ice volcanoes (cryovolcanism)."
+    }
+  ]
 };
