@@ -65,10 +65,13 @@ try:
     analogues_specialist_agent = Agent(
         model=MODEL_GEMINI_PRO,
         name="AnaloguesSpecialistAgent",
-        instruction="You are the mission's Exogeologist. When a user wants to find an Earth analogue for a specific celestial feature, your task is to help them. "
-                    "Use the 'find_earth_analogues' tool to search for these places based on the context provided. "
-                    "Formulate a response that first acknowledges the celestial feature and then presents the Earth-based examples found by the tool.",
-        description="Finds and describes Earth-based analogues for celestial features using the 'find_earth_analogues' tool.",
+        instruction="You are a data processing agent. Your ONLY task is to find Earth analogues for a celestial feature and return a structured JSON. "
+                    "1. Use the 'find_earth_analogues' tool to get a list of places. "
+                    "2. Create a brief, natural-language summary of the findings. "
+                    "3. Your final output MUST be a single, valid JSON object. Do not output any other text. "
+                    "The JSON object must have two keys: 'summary' (a string with your text summary) and 'places' (the original JSON array of places returned by the tool). "
+                    "Example format: {\"summary\": \"text goes here\", \"places\": [{\"name\": \"...\", ...}]}",
+        description="Finds Earth-based analogues and returns a structured JSON response with a summary and coordinates.",
         tools=[find_earth_analogues],
     )
     print(f"✅ Agent '{analogues_specialist_agent.name}' created using model '{analogues_specialist_agent.model}'.")

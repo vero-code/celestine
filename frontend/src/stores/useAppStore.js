@@ -22,30 +22,22 @@ export const useAppStore = create((set, get) => ({
   }),
 
   messages: [],
+  placeResults: [],
 
-  // Function for sending messages from USER (from input field)
   sendMessageToChat: async (message) => {
-    // User message to the local state
     set((state) => ({
       messages: [...state.messages, { sender: 'user', text: message }]
     }));
-
-    // Send a message to the FastAPI backend and process the response
     await get()._sendToBackendAndAddResponse(message);
   },
 
-  // New feature for sending prompts from POI
   sendPoiPromptToChat: async (prompt) => {
-    // 1. Add prompt as a user message to chat
     set((state) => ({
       messages: [...state.messages, { sender: 'user', text: prompt }]
     }));
-
-    // 2. Send a prompt to the FastAPI backend and wait for the AI's response
     await get()._sendToBackendAndAddResponse(prompt);
   },
 
-  // Send to backend and add response
   _sendToBackendAndAddResponse: async (messageToSend) => {
     try {
       const response = await fetch(`${BACKEND_URL}/chat`, {
@@ -64,11 +56,27 @@ export const useAppStore = create((set, get) => ({
       const data = await response.json();
       const agentReply = data.response;
 
-      // AI agent response to the local state
-      set((state) => ({
-        messages: [...state.messages, { sender: 'agent', text: agentReply }]
-      }));
+      try {
+        const structuredResponse = JSON.parse(agentReply);
+        if (structuredResponse.summary && structuredResponse.places) {
+          set((state) => ({
+            messages: [...state.messages, { sender: 'agent', text: structuredResponse.summary }]
+          }));
 
+          set({ placeResults: structuredResponse.places });
+
+          if (structuredResponse.places.length > 0) {
+            get().setCurrentMap('earth2d');
+          }
+        } else {
+          throw new Error("Invalid JSON structure from agent");
+        }
+      } catch (e) {
+        set((state) => ({
+          messages: [...state.messages, { sender: 'agent', text: agentReply }]
+        }));
+        set({ placeResults: [] });
+      }
     } catch (error) {
       console.error("Error sending message to backend:", error);
       set((state) => ({

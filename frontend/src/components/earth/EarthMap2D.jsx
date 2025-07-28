@@ -1,11 +1,18 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import { useAppStore } from "../../stores/useAppStore";
 
 const EarthMap2D = () => {
   const mapRef = useRef(null);
+  const mapInstanceRef = useRef(null);
+  const markersRef = useRef([]);
+  const places = useAppStore((state) => state.placeResults);
+
+  const [isMapReady, setIsMapReady] = useState(false);
 
   useEffect(() => {
     const initializeMap = async () => {
-      if (!window.google || !window.google.maps) return;
+      if (!window.google || !window.google.maps || !mapRef.current) return;
+      if (mapInstanceRef.current) return;
 
       const { Map } = await window.google.maps.importLibrary('maps');
 
@@ -16,19 +23,8 @@ const EarthMap2D = () => {
         disableDefaultUI: true,
       });
 
-      const markerData = [
-        { lat: 10, lng: 20, name: 'Lunar Base Alpha' },
-        { lat: -30, lng: 60, name: 'Mars Outpost' },
-        { lat: 45, lng: -90, name: 'Titan Relay' },
-      ];
-
-      markerData.forEach(({ lat, lng, name }) => {
-        new window.google.maps.Marker({
-          position: { lat, lng },
-          map,
-          title: name,
-        });
-      });
+      mapInstanceRef.current = map;
+      setIsMapReady(true);
     };
 
     const loadGoogleMapsScript = () => {
@@ -40,7 +36,8 @@ const EarthMap2D = () => {
       const script = document.createElement('script');
       const params = new URLSearchParams({
         key: import.meta.env.VITE_GOOGLE_MAPS_API_KEY,
-        v: 'alpha',
+        v: 'weekly',
+        libraries: 'marker',
       });
 
       script.src = `https://maps.googleapis.com/maps/api/js?${params.toString()}`;
@@ -53,6 +50,39 @@ const EarthMap2D = () => {
 
     loadGoogleMapsScript();
   }, []);
+
+  useEffect(() => {
+    if (!isMapReady || !places) return;
+
+    const map = mapInstanceRef.current;
+    if (!map) return;
+    if (!places) return;
+
+    markersRef.current.forEach(marker => marker.setMap(null));
+    markersRef.current = [];
+
+    if (places.length === 0) return;
+
+    const bounds = new window.google.maps.LatLngBounds();
+
+    places.forEach((place) => {
+      const position = { lat: place.latitude, lng: place.longitude };
+      const marker = new window.google.maps.Marker({
+        position,
+        map,
+        title: place.name,
+      });
+      markersRef.current.push(marker);
+      bounds.extend(position);
+    });
+
+    map.fitBounds(bounds);
+
+    if (places.length === 1) {
+        map.setZoom(10);
+    }
+
+  }, [places, isMapReady]);
 
   return (
     <div

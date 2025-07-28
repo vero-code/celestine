@@ -43,13 +43,14 @@ def find_earth_analogues(query: str) -> str:
         places_result = gmaps.places(query=query)
 
         if places_result.get('status') == 'OK' and places_result.get('results'):
-            # Top 3 results for brevity
             formatted_results = []
             for place in places_result['results'][:3]:
                 result_info = {
                     "name": place.get('name'),
                     "address": place.get('formatted_address'),
-                    "rating": place.get('rating', 'N/A')
+                    "rating": place.get('rating', 'N/A'),
+                    "latitude": place['geometry']['location']['lat'],
+                    "longitude": place['geometry']['location']['lng']
                 }
                 formatted_results.append(result_info)
 
