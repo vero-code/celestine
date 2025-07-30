@@ -1,10 +1,11 @@
 import React from 'react';
 import './App.css';
-import './components/css/SpaceChat.css';
+import './components/chat/css/SpaceChat.css';
 import './css/map-toggle-buttons.css';
 import SpaceMap from "./components/SpaceMap.jsx";
 import EarthMap from './components/earth/EarthMap.jsx';
 import SpaceChat from "./components/chat/SpaceChat.jsx";
+import TavusChat from "./components/chat/TavusChat.jsx";
 import GalacticNavigator from "./components/GalacticNavigator.jsx";
 import { PlanetSurface2D } from './components/PlanetSurface2D.jsx';
 import EarthMap2D from './components/earth/EarthMap2D.jsx';
@@ -19,13 +20,21 @@ const SoundOffIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line></svg>
 );
 
+const VideoIcon = () => (
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m22 8-6 4 6 4V8Z"></path><rect width="14" height="12" x="2" y="6" rx="2" ry="2"></rect></svg>
+);
+const MessageSquareIcon = () => (
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+);
+
 function App() {
   const currentMap = useAppStore((state) => state.currentMap);
   const setCurrentMap = useAppStore((state) => state.setCurrentMap);
   const selectedPlanet = useAppStore((state) => state.target);
-
   const isSpeechEnabled = useAppStore((state) => state.isSpeechEnabled);
   const toggleSpeech = useAppStore((state) => state.toggleSpeech);
+  const activeChatMode = useAppStore((state) => state.activeChatMode);
+  const setActiveChatMode = useAppStore((state) => state.setActiveChatMode);
 
   const currentPlanetPois = planetPois[selectedPlanet] || [];
 
@@ -108,12 +117,20 @@ function App() {
       {/* Right Sidebar - AI Chat */}
       <div className="sidebar right-sidebar">
         <div className="chat-header">
-          <h2>Chat with Space AI Agent</h2>
-          <button onClick={toggleSpeech} className="speech-toggle-button">
-            {isSpeechEnabled ? <SoundOnIcon /> : <SoundOffIcon />}
-          </button>
+          <h2>Space AI Agent</h2>
+          <div className="chat-controls">
+            <button onClick={() => setActiveChatMode('text')} className={`chat-mode-button ${activeChatMode === 'text' ? 'active' : ''}`} title="Text Chat">
+              <MessageSquareIcon />
+            </button>
+            <button onClick={() => setActiveChatMode('video')} className={`chat-mode-button ${activeChatMode === 'video' ? 'active' : ''}`} title="Video Chat">
+              <VideoIcon />
+            </button>
+            <button onClick={toggleSpeech} className="speech-toggle-button" title={isSpeechEnabled ? "Disable Speech" : "Enable Speech"}>
+              {isSpeechEnabled ? <SoundOnIcon /> : <SoundOffIcon />}
+            </button>
+          </div>
         </div>
-        <SpaceChat />
+        {activeChatMode === 'text' ? <SpaceChat /> : <TavusChat />}
       </div>
     </div>
   );

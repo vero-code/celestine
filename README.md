@@ -5,6 +5,8 @@
 ![Google Maps](https://img.shields.io/badge/API-Google%20Maps%20Platform-4285F4?logo=googlemaps&logoColor=white)
 ![Gemini](https://img.shields.io/badge/AI-Gemini%202.5%20Flash-673AB7?logo=google&logoColor=white)
 ![ADK](https://img.shields.io/badge/Agent%20Development%20Kit-ADK-34A853?logo=googlecloud&logoColor=white)
+[![Voice by ElevenLabs](https://img.shields.io/badge/Voice%20by-ElevenLabs-yellow?logo=elevenlabs&logoColor=black)](https://www.elevenlabs.io/)
+[![Video by Tavus](https://img.shields.io/badge/Video%20by-Tavus-purple?logo=tavus&logoColor=white)](https://www.tavus.io/)
 
 Intelligent navigator of the Universe. The name of the project Celestine symbolizes an intelligent agent (AI), which, like a celestial guide, helps navigate the unknown data of the space landscape 🧑‍🚀.
 
@@ -25,6 +27,7 @@ The project is being developed to participate in the [Google Maps Platform Award
   - Navigation Agent:
     - takes user to the chosen planet
 - Voice acting of agent responses in chat
+- Video conversation with AI space specialist
 
 > Note: Voice library may require a few extra seconds to process longer agent responses.
 
@@ -36,6 +39,7 @@ The project is being developed to participate in the [Google Maps Platform Award
 - Gemini 2.5 Flash
 - Agent Development Kit (ADK)
 - ElevenLabs API (voice: Quentin)
+- Tavus API
 
 Tools: PyCharm 2025.1.3.1
 

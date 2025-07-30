@@ -89,24 +89,36 @@
 /* Speech icon settings */
 .chat-header {
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  gap: 8px;
   margin-bottom: 10px;
 }
 
-.speech-toggle-button {
+.chat-controls {
+  display: flex;
+  gap: 8px;
+}
+
+.chat-mode-button, .speech-toggle-button {
   background: none;
-  border: none;
-  color: #e0e0f0;
+  border: 1px solid transparent;
+  color: #a0a0b0;
   cursor: pointer;
   padding: 5px;
-  border-radius: 50%;
+  border-radius: 6px;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background-color 0.2s ease;
+  transition: all 0.2s ease;
 }
 
-.speech-toggle-button:hover {
+.chat-mode-button:hover, .speech-toggle-button:hover {
   background-color: rgba(255, 255, 255, 0.1);
+  color: #e0e0f0;
+}
+
+.chat-mode-button.active {
+  color: #007bff;
+  background-color: rgba(0, 123, 255, 0.15);
+  border-color: #007bff;
 }

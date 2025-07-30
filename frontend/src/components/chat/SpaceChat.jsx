@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useAppStore } from '../../stores/useAppStore';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
-import '../css/SpaceChat.css';
+import './css/SpaceChat.css';
 
 const SpaceChat = () => {
   const messages = useAppStore((state) => state.messages);

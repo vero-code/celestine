@@ -16,6 +16,7 @@ export const useAppStore = create((set, get) => ({
   isAgentThinking: false,
   isSpeechEnabled: true,
   currentAudio: null,
+  activeChatMode: 'text',
 
   // --- ACTIONS ---
   setTarget: (newTarget) => set({ target: newTarget }),
@@ -25,6 +26,7 @@ export const useAppStore = create((set, get) => ({
   addAgentMessage: (message) => set((state) => ({
     messages: [...state.messages, { sender: 'agent', text: message }]
   })),
+  setActiveChatMode: (mode) => set({ activeChatMode: mode }),
 
   playAndTrackAudio: async (text) => {
     const { isSpeechEnabled, currentAudio } = get();

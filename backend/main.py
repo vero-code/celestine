@@ -5,6 +5,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from dotenv import load_dotenv
 import logging
+import httpx
 from fastapi.responses import StreamingResponse
 import io
 
@@ -27,6 +28,12 @@ if not ELEVENLABS_API_KEY:
 else:
     eleven_client = ElevenLabs(api_key=ELEVENLABS_API_KEY)
     logging.info("ElevenLabs client initialized.")
+
+TAVUS_API_KEY = os.getenv("TAVUS_API_KEY")
+TAVUS_REPLICA_ID = os.getenv("TAVUS_REPLICA_ID")
+TAVUS_PERSONA_ID = os.getenv("TAVUS_PERSONA_ID")
+if not TAVUS_API_KEY:
+    logging.warning("Tavus API Key not found. Video avatar will be disabled.")
 
 app = FastAPI()
 app.add_middleware(
@@ -113,7 +120,7 @@ async def synthesize_speech(request: SpeechRequest):
 
         audio_stream = eleven_client.text_to_speech.stream(
             text=request.text,
-            voice_id="21m00Tcm4TlvDq8ikWAM",
+            voice_id="Aa6nEBJJMKJwJkCx8VU2",
             model_id='eleven_multilingual_v2'
         )
 
@@ -127,3 +134,55 @@ async def synthesize_speech(request: SpeechRequest):
     except Exception as e:
         logging.exception(f"Error during ElevenLabs speech synthesis: {e}")
         raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/tavus-replica-thumbnail")
+async def get_tavus_replica_thumbnail():
+    if not TAVUS_API_KEY or not TAVUS_REPLICA_ID:
+        raise HTTPException(status_code=500, detail="Tavus is not configured on the server.")
+
+    url = f"https://tavusapi.com/v2/replicas/{TAVUS_REPLICA_ID}"
+    headers = {"x-api-key": TAVUS_API_KEY}
+
+    async with httpx.AsyncClient() as client:
+        try:
+            response = await client.get(url, headers=headers)
+            response.raise_for_status()
+            data = response.json()
+            return {"thumbnail_url": data.get("thumbnail_video_url")}
+        except httpx.HTTPStatusError as e:
+            logging.error(f"Tavus API returned an error: {e.response.text}")
+            raise HTTPException(status_code=e.response.status_code, detail="Error from Tavus API.")
+        except Exception as e:
+            logging.error(f"Failed to fetch Tavus replica thumbnail: {e}")
+            raise HTTPException(status_code=500, detail="Failed to fetch replica thumbnail.")
+
+
+@app.post("/create-tavus-conversation")
+async def create_tavus_conversation():
+    if not all([TAVUS_API_KEY, TAVUS_REPLICA_ID, TAVUS_PERSONA_ID]):
+        raise HTTPException(status_code=500, detail="Tavus is not configured on the server.")
+
+    url = "https://tavusapi.com/v2/conversations"
+    headers = {"x-api-key": TAVUS_API_KEY, "Content-Type": "application/json"}
+    payload = {
+        "replica_id": TAVUS_REPLICA_ID,
+        "persona_id": TAVUS_PERSONA_ID,
+        "conversation_name": "Celestine Space Agent Session",
+        "custom_greeting": "Greetings, Explorer! I am ready to assist you. What is on your mind?",
+    }
+
+    async with httpx.AsyncClient() as client:
+        try:
+            response = await client.post(url, headers=headers, json=payload)
+            response.raise_for_status()
+            data = response.json()
+            return {
+                "conversation_url": data.get("conversation_url"),
+                "conversation_id": data.get("conversation_id")
+            }
+        except httpx.HTTPStatusError as e:
+            logging.error(f"Tavus API returned an error creating conversation: {e.response.text}")
+            raise HTTPException(status_code=e.response.status_code, detail="Error from Tavus API.")
+        except Exception as e:
+            logging.error(f"Failed to create Tavus conversation: {e}")
+            raise HTTPException(status_code=500, detail="Failed to create conversation.")
