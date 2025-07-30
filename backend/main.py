@@ -1,6 +1,6 @@
 # backend/main.py
 import os
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Path
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from dotenv import load_dotenv
@@ -186,3 +186,24 @@ async def create_tavus_conversation():
         except Exception as e:
             logging.error(f"Failed to create Tavus conversation: {e}")
             raise HTTPException(status_code=500, detail="Failed to create conversation.")
+
+@app.delete("/end-tavus-conversation/{conversation_id}")
+async def end_tavus_conversation(conversation_id: str = Path(..., title="The ID of the conversation to end")):
+    if not TAVUS_API_KEY:
+        raise HTTPException(status_code=500, detail="Tavus is not configured on the server.")
+
+    url = f"https://tavusapi.com/v2/conversations/{conversation_id}"
+    headers = {"x-api-key": TAVUS_API_KEY}
+
+    async with httpx.AsyncClient() as client:
+        try:
+            response = await client.delete(url, headers=headers)
+            response.raise_for_status()
+            logging.info(f"Successfully ended Tavus conversation: {conversation_id}")
+            return {"status": "success", "message": "Conversation ended."}
+        except httpx.HTTPStatusError as e:
+            logging.error(f"Tavus API returned an error ending conversation: {e.response.text}")
+            raise HTTPException(status_code=e.response.status_code, detail="Error from Tavus API.")
+        except Exception as e:
+            logging.error(f"Failed to end Tavus conversation: {e}")
+            raise HTTPException(status_code=500, detail="Failed to end conversation.")

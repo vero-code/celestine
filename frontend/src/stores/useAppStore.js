@@ -17,6 +17,7 @@ export const useAppStore = create((set, get) => ({
   isSpeechEnabled: true,
   currentAudio: null,
   activeChatMode: 'text',
+  activeConversationId: null,
 
   // --- ACTIONS ---
   setTarget: (newTarget) => set({ target: newTarget }),
@@ -27,6 +28,7 @@ export const useAppStore = create((set, get) => ({
     messages: [...state.messages, { sender: 'agent', text: message }]
   })),
   setActiveChatMode: (mode) => set({ activeChatMode: mode }),
+  setActiveConversationId: (id) => set({ activeConversationId: id }),
 
   playAndTrackAudio: async (text) => {
     const { isSpeechEnabled, currentAudio } = get();
@@ -73,6 +75,22 @@ export const useAppStore = create((set, get) => ({
     }
 
     set({ isSpeechEnabled: newSpeechState });
+  },
+
+  endActiveConversation: async () => {
+    const { activeConversationId } = get();
+    if (!activeConversationId) return;
+
+    try {
+      await fetch(`${BACKEND_URL}/end-tavus-conversation/${activeConversationId}`, {
+        method: 'DELETE',
+      });
+      console.log(`Ended conversation: ${activeConversationId}`);
+    } catch (error) {
+      console.error("Failed to end conversation:", error);
+    } finally {
+      set({ activeConversationId: null });
+    }
   },
 
   // --- Message sending functions ---

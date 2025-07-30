@@ -5,7 +5,7 @@ import './css/map-toggle-buttons.css';
 import SpaceMap from "./components/SpaceMap.jsx";
 import EarthMap from './components/earth/EarthMap.jsx';
 import SpaceChat from "./components/chat/SpaceChat.jsx";
-import TavusChat from "./components/chat/TavusChat.jsx";
+import TavusModal from "./components/chat/TavusModal.jsx";
 import GalacticNavigator from "./components/GalacticNavigator.jsx";
 import { PlanetSurface2D } from './components/PlanetSurface2D.jsx';
 import EarthMap2D from './components/earth/EarthMap2D.jsx';
@@ -130,8 +130,9 @@ function App() {
             </button>
           </div>
         </div>
-        {activeChatMode === 'text' ? <SpaceChat /> : <TavusChat />}
+        <SpaceChat />
       </div>
+      {activeChatMode === 'video' && <TavusModal />}
     </div>
   );
 }
