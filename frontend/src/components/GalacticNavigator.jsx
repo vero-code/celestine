@@ -1,30 +1,30 @@
-// components/GalacticNavigator.jsx
 import React from 'react';
 import { useAppStore } from '../stores/useAppStore';
+import { planetData } from '../data/planetData';
 import './css/GalacticNavigator.css';
-
-const planets = ['Sun', 'Mercury', 'Venus', 'Earth', 'Moon', 'Mars',
-  'Jupiter', 'Saturn', 'Uranus', 'Neptune'];
 
 const GalacticNavigator = () => {
   const setTarget = useAppStore((state) => state.setTarget);
   const currentTarget = useAppStore((state) => state.target);
 
   return (
-    <div className="planet-sidebar">
+    <div className="galactic-navigator">
       <h3>📡 Navigate to:</h3>
       <ul>
-        {planets.map((planet) => (
+        {planetData.map((planet) => (
           <li
-            key={planet}
-            className={currentTarget === planet ? 'active' : ''}
-            onClick={() => setTarget(planet)}
+            key={planet.name}
+            className={currentTarget === planet.name ? 'active' : ''}
+            onClick={() => setTarget(planet.name)}
           >
-            {planet}
+            {planet.name}
           </li>
         ))}
-        <li className="free-roam" onClick={() => setTarget(null)}>
-          🛰 Free Roam
+        <li
+          className={`free-roam ${!currentTarget ? 'active' : ''}`}
+          onClick={() => setTarget(null)}
+        >
+          🛰️ Free Roam
         </li>
       </ul>
     </div>

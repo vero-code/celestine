@@ -43,6 +43,32 @@ function App() {
       {/* Left Sidebar - Controls */}
       <div className="sidebar left-sidebar">
         <h2>Navigation</h2>
+
+        {/* Navigation panel for planets (only in space mode) */}
+        {currentMap === 'space' && (
+          <GalacticNavigator />
+        )}
+
+        {/* Navigation panel for current planet and its POIs (only in planet mode) */}
+        {currentMap === 'planet' && selectedPlanet && (
+          <div className="planet-poi-navigator mt-4">
+            <h3>{selectedPlanet} POIs</h3>
+            {currentPlanetPois.length > 0 ? (
+              <div className="poi-list">
+                {currentPlanetPois.map((poi, index) => (
+                  <div key={index} className="poi-nav-item">
+                    📍 {poi.name}
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <p>No POIs available for {selectedPlanet}.</p>
+            )}
+          </div>
+        )}
+
+        <p>Use the buttons above to switch between space and Earth.</p>
+
         <div className="map-toggle-buttons">
           <button
             className={currentMap === 'space' ? 'active' : ''}
@@ -63,33 +89,6 @@ function App() {
             🗺️ View 2D map of the Earth
           </button>
         </div>
-        <p>Use the buttons above to switch between space and Earth.</p>
-
-        {/* Navigation panel for planets (only in space mode) */}
-        {currentMap === 'space' && (
-          <GalacticNavigator />
-        )}
-
-        {/* Navigation panel for current planet and its POIs (only in planet mode) */}
-        {currentMap === 'planet' && selectedPlanet && (
-          <div className="planet-poi-navigator mt-4">
-            <h3>{selectedPlanet} POIs</h3>
-            {currentPlanetPois.length > 0 ? (
-              <div className="poi-list">
-                {currentPlanetPois.map((poi, index) => (
-                  <div
-                    key={index}
-                    className="poi-nav-item"
-                  >
-                    📍 {poi.name}
-                  </div>
-                ))}
-              </div>
-            ) : (
-              <p>No POIs available for {selectedPlanet}.</p>
-            )}
-          </div>
-        )}
       </div>
 
       {/* Central Area - Map Content */}
@@ -122,11 +121,11 @@ function App() {
             <button onClick={() => setActiveChatMode('text')} className={`chat-mode-button ${activeChatMode === 'text' ? 'active' : ''}`} title="Text Chat">
               <MessageSquareIcon />
             </button>
-            <button onClick={() => setActiveChatMode('video')} className={`chat-mode-button ${activeChatMode === 'video' ? 'active' : ''}`} title="Video Chat">
-              <VideoIcon />
-            </button>
             <button onClick={toggleSpeech} className="speech-toggle-button" title={isSpeechEnabled ? "Disable Speech" : "Enable Speech"}>
               {isSpeechEnabled ? <SoundOnIcon /> : <SoundOffIcon />}
+            </button>
+            <button onClick={() => setActiveChatMode('video')} className={`chat-mode-button ${activeChatMode === 'video' ? 'active' : ''}`} title="Video Chat">
+              <VideoIcon />
             </button>
           </div>
         </div>

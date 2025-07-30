@@ -1,41 +1,42 @@
-.planet-sidebar {
+.galactic-navigator {
   margin-top: 20px;
-  background: rgba(0, 0, 0, 0.3);
-  padding: 10px 15px;
-  border-radius: 8px;
   color: white;
-  font-family: sans-serif;
 }
 
-.planet-sidebar h3 {
+.galactic-navigator h3 {
   margin-bottom: 8px;
-  font-size: 16px;
+  font-size: 1.1rem;
+  color: #a0a0b0;
 }
 
-.planet-sidebar ul {
+.galactic-navigator ul {
   list-style: none;
   padding: 0;
   margin: 0;
 }
 
-.planet-sidebar li {
+.galactic-navigator li {
+  padding: 8px 12px;
+  margin: 4px -12px;
+  border-radius: 6px;
   cursor: pointer;
-  margin: 6px 0;
-  padding: 5px 8px;
-  border-radius: 4px;
-  transition: background 0.2s;
+  transition: background-color 0.2s ease, color 0.2s ease;
+  font-size: 0.95rem;
 }
 
-.planet-sidebar li:hover {
-  background-color: #1a1a1a;
+.galactic-navigator li:hover {
+  background-color: rgba(0, 123, 255, 0.15);
 }
 
-.planet-sidebar li.active {
-  background-color: #0077ff;
+.galactic-navigator li.active {
+  background-color: #007bff;
+  color: white;
+  font-weight: bold;
 }
 
-.planet-sidebar .free-roam {
-  margin-top: 10px;
+.galactic-navigator .free-roam {
+  margin-top: 15px;
   color: #aaa;
   font-style: italic;
+  font-size: 0.9rem;
 }
