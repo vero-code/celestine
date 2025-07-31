@@ -1,167 +1,136 @@
-# Celestine
+# Celestine: An Intelligent Navigator for the Universe 🚀 
 
-![React](https://img.shields.io/badge/frontend-React-61DAFB?logo=react&logoColor=white)
-![Python](https://img.shields.io/badge/backend-Python-3776AB?logo=python&logoColor=white)
-![Google Maps](https://img.shields.io/badge/API-Google%20Maps%20Platform-4285F4?logo=googlemaps&logoColor=white)
-![Gemini](https://img.shields.io/badge/AI-Gemini%202.5%20Flash-673AB7?logo=google&logoColor=white)
-![ADK](https://img.shields.io/badge/Agent%20Development%20Kit-ADK-34A853?logo=googlecloud&logoColor=white)
-[![Voice by ElevenLabs](https://img.shields.io/badge/Voice%20by-ElevenLabs-yellow?logo=elevenlabs&logoColor=black)](https://www.elevenlabs.io/)
-[![Video by Tavus](https://img.shields.io/badge/Video%20by-Tavus-purple?logo=tavus&logoColor=white)](https://www.tavus.io/)
+![React](https://img.shields.io/badge/frontend-React-61DAFB?logo=react&logoColor=white) ![Python](https://img.shields.io/badge/backend-Python-3776AB?logo=python&logoColor=white) ![Google Maps](https://img.shields.io/badge/API-Google%20Maps%20Platform-4285F4?logo=googlemaps&logoColor=white) ![Gemini](https://img.shields.io/badge/AI-Gemini%202.5-673AB7?logo=google&logoColor=white) ![ADK](https://img.shields.io/badge/Agent%20Kit-ADK-34A853?logo=googlecloud&logoColor=white) [![Voice by ElevenLabs](https://img.shields.io/badge/Voice%20by-ElevenLabs-yellow?logo=elevenlabs&logoColor=black)](https://www.elevenlabs.io/) [![Video by Tavus](https://img.shields.io/badge/Video%20by-Tavus-purple?logo=tavus&logoColor=white)](https://www.tavus.io/)
 
-Intelligent navigator of the Universe. The name of the project Celestine symbolizes an intelligent agent (AI), which, like a celestial guide, helps navigate the unknown data of the space landscape 🧑‍🚀.
+**Google Maps Platform** mastered the navigation of Earth. But what if we could extend that intuitive experience across the entire Solar System? 
 
-The project is being developed to participate in the [Google Maps Platform Awards](https://devpost.com/software/celestine-rg16km) hackathon.
+Remember Google's "Space Mode"? It was a glimpse into a dream of cosmic exploration. Celestine revives that dream and gives it a mind. This project isn't just a map; it's an intelligent co-pilot designed to guide you through the cosmos, connecting alien worlds back to our own through AI-driven discovery. 
 
+This project was developed for the **[Google Maps Platform Awards](https://devpost.com/software/celestine-rg16km)**.
+
+## Core Innovation
+
+The heart of Celestine is a sophisticated multi-agent system that uses **Google Maps Platform as a tool for reasoning**. 
+
+When you click on a Point of Interest (POI) like the *Caloris Basin* on Mercury, the AI doesn't just recite facts. It understands the geological context ("impact basin"), independently decides to find real-world analogues, and then uses the **Places API** to search for locations like *Meteor Crater, Arizona*. The results, including coordinates, are then used to command the **Maps JavaScript API** to dynamically place markers on an interactive 2D map of Earth. 
+
+This creates a seamless, intelligent loop: from a feature on another world to a real place you can explore on Google Maps. 
+  
 ## Features
 
-- Space map
-  - Landing on the planet
-  - Display points of interest
-  - Search for analogues on Earth
-- 2D/3D map of the Earth
-- Chat with agent system
-  - Greeting & Farewell Agents
-  - Cosmos Specialist Agent
-  - Analogues Specialist Agent:
-    - display results on 2D map of the Earth
-  - Navigation Agent:
-    - takes user to the chosen planet
-- Voice acting of agent responses in chat
-- Video conversation with AI space specialist
-
-> Note: Voice library may require a few extra seconds to process longer agent responses.
+- **3D Solar System Map:** Navigate a beautiful and interactive model of our solar system. 
+- **Planetary Landings:** "Land on" planets to explore high-resolution 2D surface maps. 
+- **Multi-Modal AI Agent:** Engage with your AI guide via: 
+	- **Text Chat:** A sleek, modern chat interface. 
+	- **Voice Synthesis:** Agent responses are voiced by **ElevenLabs**. 
+	- **Video Avatar:** Have a real-time video conversation with a **Tavus** AI replica. 
+- **Intelligent Navigation & Discovery:** 
+	- Command the agent to fly you to any planet (`"Go to Mars"`). 
+	- Discover terrestrial analogues for cosmic features, displayed dynamically on a **2D Google Map**. 
+- **Immersive Visuals:** A stunning starfield background and detailed planet textures from NASA create a captivating experience.
 
 ## Technologies
 
-- React + Vite
-- Python + FastAPI
-- Google Maps Platform API
-- Gemini 2.5 Flash
-- Agent Development Kit (ADK)
-- ElevenLabs API (voice: Quentin)
-- Tavus API
-
-Deploy in Google Cloud:
-- Firebase Hosting
-- Secret Manager
-- Artifact Registry
-- Cloud Run
-- Cloud Build
-
-Tools: PyCharm 2025.1.3.1
-
-### Using the Google Maps
-
-- Google Maps JavaScript API - view 3D map of Earth
-- [Places API Web Service](https://developers.google.com/maps/documentation/places/web-service)
-
-### Planet Surface Textures
-
-All planetary surface textures are courtesy of NASA and available through their public science image galleries.
-
-> Note on Terminology: For code simplification, the term "planet" is used broadly to refer to all celestial bodies.
-This is for implementation convenience, acknowledging the Sun is a star.
-
-This project utilizes:
-
-- [NASA Science Image Gallery](https://science.nasa.gov/gallery)
-  - [Sun](https://science.nasa.gov/image-detail/amf-gsfc_20171208_archive_e001435/)
-  - [Mercury](https://science.nasa.gov/image-detail/pia19422-mercury/)
-  - [Venus](https://science.nasa.gov/image-detail/amf-ba0639bb-149b-4e6a-91c7-be0b928c7897/)
-  - [Moon](https://science.nasa.gov/image-detail/amf-pia00405/)
-  - [Mars](https://science.nasa.gov/image-detail/amf-pia02653/)
-  - [Jupiter](https://science.nasa.gov/image-detail/jupiter-exotic-marble/)
-  - [Saturn](https://science.nasa.gov/image-detail/amf-2a11ddc5-3e5b-4516-8a62-5c4b5a801913/)
-  - [Uranus](https://assets.science.nasa.gov/dynamicimage/assets/science/cds/general/images/2024/03/uranus-pia18182-16x9-1.jpg?w=1920&h=1080&fit=clip&crop=faces%2Cfocalpoint)
-  - [Neptune](https://science.nasa.gov/wp-content/uploads/2024/03/pia01492-neptune-full-disk-16x9-1.jpg)
-
-## Architecture
-
-Simple agent example by [Create Agent Project](https://google.github.io/adk-docs/get-started/quickstart/#create-agent-project) tutorial: `backend/multi_tool_agent`.
+| Area | Technologies |
+|--|--|
+| **Frontend** | `React`, `Vite`, `react-three-fiber`, `drei`, `zustand` |
+| **Backend** | `Python`, `FastAPI`, `Uvicorn` |
+| **AI** | `Google Agent Development Kit (ADK)`, `Gemini 2.5 Pro & Flash`, `ElevenLabs API`, `Tavus API` |
+|**Mapping** | `Google Maps Platform` (`Maps JavaScript API`, [`Places API`](https://developers.google.com/maps/documentation/places/web-service)) |
+| **Cloud & DevOps** | `Firebase Hosting`, `Google Cloud Run`, `Cloud Build`, `Artifact Registry`, `Secret Manager`, `Docker` |
 
 ## Installation
 
-### Frontend setup
+To run the project locally, you'll need to set up both the frontend and backend.
 
-1. Navigate to the `frontend` folder:
-    ```bash  
-    cd frontend
-    ```
+**Prerequisites:** 
+- Node.js and npm 
+- Python 3.11+ and pip 
+- API keys for Google Maps, Gemini, ElevenLabs, and Tavus.
 
-2. Install dependencies:
-    ```bash
-    npm install
-    ```
+**1. Clone the repository:** 
+```bash
+git clone https://github.com/vero-code/celestine.git 
+cd celestine
+```
 
-3. Run the Node.js server:
-    ```bash
-    npm run dev
-    ```
+**2. Backend Setup:**
 
-### Backend setup
+```bash
+cd backend
+python -m venv .venv
+# Activate the virtual environment
+.venv\Scripts\Activate.ps1 # PowerShell
+source .venv/bin/activate  # Bash/Mac
+pip install -r requirements.txt
+# Create a .env file in the root directory and add your API keys
+uvicorn main:app --reload --port 8000  
+```
 
-1. Navigate to the `backend` folder:
-    ```bash  
-    cd backend
-    ```
+> To run Google Agent, enter the `adk web` command for other port (--port 8080).  
 
-2. Create a virtual environment:
-    ```bash  
-    python -m venv .venv 
-    ```
+**3. Frontend Setup:**
 
-3. Activate the virtual environment:
-- PowerShell:
-```bash  
-  .venv\Scripts\Activate.ps1  
- ``` 
-- Bash/Mac:
-```bash  
-  source .venv/bin/activate
-  ```
-
-4. Install dependencies:
-```bash  
-  pip install -r requirements.txt
- ``` 
-
-5. Run the FastAPI server:
-```bash  
-  uvicorn main:app --reload --port 8080
- ``` 
-
-> To run Google Agent, enter the `adk web` command.
+```bash
+cd ../frontend
+npm install
+# Create a .env file and add VITE_API_URL and your Google Maps key
+npm run dev
+```
 
 ## Testing
 
 Coordinator analyzes the intent and passes the task to the specialized agent.
+You can test the full range of the agent's capabilities through the UI.  
 
-### Greeting & Farewell Agent
+### **Via the Chat Interface:**
 
-> Hi, my name is Leo.
+- **Greeting/Farewell:**
 
-> Bye, see you soon.
+>  `Hi, my name is Leo.`
 
-### Cosmos Specialist Agent
+>  `Bye, see you soon!`
 
-> How are black holes formed?
+- **General Knowledge (Cosmos Agent):**
 
-### Analogues Specialist Agent
+>  `How are black holes formed?`
 
-In the ADK Web UI:
+- **Navigation (Navigation Agent):**
 
-> I want to find an Earth analogue of Maat Mons on Venus.
+>  `Go to Moon.`
 
-> I'm looking for something on the Moon that's similar to a Van de Graaff generator on Earth.
+### **Via UI Interaction:**
 
-On the app UI:
+- **Analogue Search (Analogues Agent):**
 
-Move to "Flight into Space", and click:
+1. Navigate to the 3D space map.
 
-- Polar Ice Caps on Mars (many analog POIs)
-- Discovery Rupes on Mercury (one analog POI)
-- Sunspots on Sun (no analog POI)
+2. Click on a planet (e.g., Mars).
 
-## LICENSE
+3. In the info box, click "🚀 Land on".
 
-Licensed under the MIT License. See the LICENSE file for details.
+4. On the 2D surface map, click on a POI pin (e.g., "Olympus Mons").
+
+5. Observe the agent's response and the automatic switch to the 2D Earth map with markers.
+
+- **Video Conversation (Tavus):**
+
+1. In the chat panel, click the video camera icon (📹).
+
+2. A modal window will open to start the video conversation.
+
+## Limitations
+
+- **API Quotas:** The voice synthesis (ElevenLabs) and video avatar (Tavus) features rely on free-tier API plans. They may stop working if usage limits are exceeded.
+
+- **Voice Latency:** Generating voice for longer agent responses may take a few extra seconds.
+
+## Data Sources
+
+All planetary surface textures are courtesy of [NASA](https://science.nasa.gov) and available through their public science image galleries.  
+
+>  **Note on Terminology:** For code simplification, the term "planet" is used broadly to refer to all celestial bodies (including the Sun and Moon) for implementation convenience.
+
+## License
+  
+This project is licensed under the MIT License. See the `LICENSE` file for details.
