@@ -47,7 +47,7 @@ export function PlanetSurfaceContent({ planet }) {
   }
 
   const handlePoiClick = async (poi) => {
-    console.log('Clicked POI:', poi.name, 'Type:', poi.type);
+    // console.log('Clicked POI:', poi.name, 'Type:', poi.type);
 
     // Send a natural, “human” question to agent system
     const promptMessage = `I'm looking at ${poi.name} on ${planet}. It's a ${poi.type}. 

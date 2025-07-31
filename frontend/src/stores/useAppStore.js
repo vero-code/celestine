@@ -152,7 +152,7 @@ export const useAppStore = create((set, get) => ({
           throw new Error("Invalid JSON structure from agent");
         }
       } catch (e) {
-        console.error("Failed to parse agent response as JSON, treating as plain text. Error:", e);
+        console.log("Agent response is plain text, not JSON. This is expected for simple conversations.");
         set((state) => ({ messages: [...state.messages, { sender: 'agent', text: agentReply }] }));
         set({ placeResults: [] });
 

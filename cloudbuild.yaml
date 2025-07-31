@@ -1,0 +1,36 @@
+steps:
+# 1. Building a Docker Image
+- name: 'gcr.io/cloud-builders/docker'
+  args:
+    - 'build'
+    - '-t'
+    - 'us-central1-docker.pkg.dev/serious-courage-466707-e0/celestine-images/celestine-backend:latest'
+    - '.'
+  id: 'Build'
+
+# 2. Submit an image to Artifact Registry
+- name: 'gcr.io/cloud-builders/docker'
+  args:
+    - 'push'
+    - 'us-central1-docker.pkg.dev/serious-courage-466707-e0/celestine-images/celestine-backend:latest'
+  id: 'Push'
+
+# 3. Deploy the image to Cloud Run
+- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+  entrypoint: 'gcloud'
+  args:
+    - 'run'
+    - 'deploy'
+    - 'celestine-backend'
+    - '--image=us-central1-docker.pkg.dev/serious-courage-466707-e0/celestine-images/celestine-backend:latest'
+    - '--region=us-central1'
+    - '--platform=managed'
+    - '--allow-unauthenticated'
+    - '--port=8000'
+    - '--set-secrets=GOOGLE_GENAI_USE_VERTEXAI=GOOGLE_GENAI_USE_VERTEXAI:latest,GOOGLE_API_KEY=GOOGLE_API_KEY:latest,GOOGLE_MAPS_PLACES_API_KEY=GOOGLE_MAPS_PLACES_API_KEY:latest,FRONTEND_URL=FRONTEND_URL:latest,ELEVENLABS_API_KEY=ELEVENLABS_API_KEY:latest,TAVUS_API_KEY=TAVUS_API_KEY:latest,TAVUS_REPLICA_ID=TAVUS_REPLICA_ID:latest,TAVUS_PERSONA_ID=TAVUS_PERSONA_ID:latest'
+  id: 'Deploy'
+
+images:
+- 'us-central1-docker.pkg.dev/serious-courage-466707-e0/celestine-images/celestine-backend:latest'
+
+timeout: '1200s'

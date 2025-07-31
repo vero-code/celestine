@@ -41,6 +41,13 @@ The project is being developed to participate in the [Google Maps Platform Award
 - ElevenLabs API (voice: Quentin)
 - Tavus API
 
+Deploy in Google Cloud:
+- Firebase Hosting
+- Secret Manager
+- Artifact Registry
+- Cloud Run
+- Cloud Build
+
 Tools: PyCharm 2025.1.3.1
 
 ### Using the Google Maps
