@@ -2,6 +2,15 @@
 
 ![React](https://img.shields.io/badge/frontend-React-61DAFB?logo=react&logoColor=white) ![Python](https://img.shields.io/badge/backend-Python-3776AB?logo=python&logoColor=white) ![Google Maps](https://img.shields.io/badge/API-Google%20Maps%20Platform-4285F4?logo=googlemaps&logoColor=white) ![Gemini](https://img.shields.io/badge/AI-Gemini%202.5-673AB7?logo=google&logoColor=white) ![ADK](https://img.shields.io/badge/Agent%20Kit-ADK-34A853?logo=googlecloud&logoColor=white) [![Voice by ElevenLabs](https://img.shields.io/badge/Voice%20by-ElevenLabs-yellow?logo=elevenlabs&logoColor=black)](https://www.elevenlabs.io/) [![Video by Tavus](https://img.shields.io/badge/Video%20by-Tavus-purple?logo=tavus&logoColor=white)](https://www.tavus.io/)
 
+> **🏆 Nominee:** [Google Maps Platform Awards](https://devpost.com/software/celestine-rg16km)
+
+> **🎥 Participant:** [DEV's Worldwide Show and Tell Challenge (Mux)](https://dev.to/vero-code/celestine-ai-navigator-for-the-universe-2acc)
+
+## ⚡ Quick Demo
+![Celestine Demo](./assets/celestine-mux-x.gif)
+
+*(Full video walkthrough is available on [YouTube](https://youtu.be/4FixV3Uy2to))*
+
 **Google Maps Platform** mastered the navigation of Earth. But what if we could extend that intuitive experience across the entire Solar System? 
 
 Remember Google's "Space Mode"? It was a glimpse into a dream of cosmic exploration. Celestine revives that dream and gives it a mind. This project isn't just a map; it's an intelligent co-pilot designed to guide you through the cosmos, connecting alien worlds back to our own through AI-driven discovery. 
