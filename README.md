@@ -25,6 +25,12 @@ When you click on a Point of Interest (POI) like the *Caloris Basin* on Mercury,
 
 This creates a seamless, intelligent loop: from a feature on another world to a real place you can explore on Google Maps. 
   
+## 🏗️ Architecture
+
+Below is the high-level architecture showing how the Multi-Agent System orchestrates Gemini, Google Maps, and the frontend.
+
+![Architecture Diagram](./assets/architecture.png)
+
 ## Features
 
 - **3D Solar System Map:** Navigate a beautiful and interactive model of our solar system. 
