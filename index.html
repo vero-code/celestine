@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Celestine | Intelligent Navigator for the Universe</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #050505;
+            --text-color: #ffffff;
+            --accent-color: #7c4dff; /* Gemini Purple */
+            --secondary-text: #a0a0a0;
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --card-border: rgba(255, 255, 255, 0.08);
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Starry Background */
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 1.5rem;
+            background: linear-gradient(90deg, #fff, #a0a0a0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .social-links a {
+            color: var(--secondary-text);
+            margin-left: 20px;
+            font-size: 1.4rem;
+            transition: color 0.3s;
+        }
+        .social-links a:hover { color: #fff; }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 80px 20px 40px;
+        }
+
+        .badge-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 24px;
+        }
+
+        .badge {
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .badge-award {
+            background: rgba(255, 215, 0, 0.1);
+            color: #ffd700;
+            border: 1px solid rgba(255, 215, 0, 0.2);
+        }
+
+        .badge-tech {
+            background: rgba(124, 77, 255, 0.1);
+            color: #b388ff;
+            border: 1px solid rgba(124, 77, 255, 0.2);
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            line-height: 1.1;
+            margin-bottom: 24px;
+            background: linear-gradient(180deg, #ffffff 0%, #b0b0b0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--secondary-text);
+            max-width: 700px;
+            margin: 0 auto 40px;
+        }
+
+        /* Buttons */
+        .btn-group {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            margin-bottom: 60px;
+        }
+
+        .btn {
+            padding: 14px 32px;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-primary {
+            background: white;
+            color: black;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .btn-secondary:hover { background: rgba(255, 255, 255, 0.15); }
+
+        /* Tech Stack Section (New) */
+        .tech-stack {
+            text-align: center;
+            margin-bottom: 80px;
+            padding: 40px;
+            background: rgba(0,0,0,0.3);
+            border-radius: 16px;
+            border: 1px solid var(--card-border);
+        }
+        
+        .tech-stack h2 { font-size: 1.5rem; margin-bottom: 30px; color: #fff; }
+
+        .tech-grid {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .tech-tag {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            color: #d0d0d0;
+            font-family: monospace;
+        }
+
+        /* Features Grid */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            margin-bottom: 80px;
+        }
+
+        .feature-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            padding: 30px;
+            border-radius: 12px;
+            transition: transform 0.2s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(124, 77, 255, 0.3);
+        }
+
+        .feature-icon {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: var(--accent-color);
+        }
+
+        .feature-card h3 { margin: 0 0 10px 0; font-size: 1.3rem; }
+        .feature-card p { margin: 0; color: var(--secondary-text); font-size: 0.95rem; }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--card-border);
+            padding: 40px 0;
+            text-align: center;
+            color: var(--secondary-text);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            .btn-group { flex-direction: column; }
+            .btn { width: 100%; justify-content: center; box-sizing: border-box; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="stars"></div>
+
+    <div class="container">
+        <header>
+            <div class="logo">Celestine</div>
+            <div class="social-links">
+                <a href="https://github.com/vero-code"><i class="fab fa-github"></i></a>
+                <a href="https://x.com/veron_code"><i class="fab fa-twitter"></i></a>
+            </div>
+        </header>
+
+        <section class="hero">
+            <div class="badge-container">
+                <div class="badge badge-award"><i class="fas fa-trophy"></i> Nominee: Google Maps Platform Awards</div>
+                <div class="badge badge-tech"><i class="fas fa-bolt"></i> Powered by Gemini 2.5</div>
+            </div>
+            
+            <h1>Intelligent Navigator<br>for the Universe</h1>
+            
+            <p>
+                An intelligent co-pilot designed to guide you through the cosmos. 
+                Celestine connects alien worlds back to Earth through a sophisticated Multi-Agent System.
+            </p>
+
+            <div class="btn-group">
+                <a href="https://dev.to/vero-code/celestine-ai-navigator-for-the-universe-2acc" class="btn btn-primary">
+                    <i class="fas fa-book-open"></i> Read Case Study
+                </a>
+                <a href="https://github.com/vero-code/celestine" class="btn btn-secondary">
+                    <i class="fab fa-github"></i> View Code
+                </a>
+            </div>
+        </section>
+
+        <section class="tech-stack">
+            <h2>Built With</h2>
+            <div class="tech-grid">
+                <span class="tech-tag">React / Vite</span>
+                <span class="tech-tag">Three.js / R3F</span>
+                <span class="tech-tag">Python / FastAPI</span>
+                <span class="tech-tag" style="color: #b388ff; border-color: #b388ff;">Google Agent Dev Kit (ADK)</span>
+                <span class="tech-tag" style="color: #b388ff; border-color: #b388ff;">Gemini 2.5 Pro</span>
+                <span class="tech-tag">Google Maps Platform</span>
+                <span class="tech-tag">Tavus API</span>
+                <span class="tech-tag">ElevenLabs</span>
+                <span class="tech-tag">Cloud Run</span>
+                <span class="tech-tag">Firebase</span>
+            </div>
+        </section>
+
+        <section class="features">
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-robot"></i></div>
+                <h3>Multi-Agent System</h3>
+                <p>Orchestrates Gemini 2.5 to reason about geological context on planets like Mercury and find real-world analogues.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-map-marked-alt"></i></div>
+                <h3>Planetary Analogues</h3>
+                <p>Dynamically connects cosmic features to Earth locations using Google Places API and interactive 2D maps.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-video"></i></div>
+                <h3>Tavus Video Avatar</h3>
+                <p>Real-time, face-to-face video conversation with an AI replica, creating a truly immersive human-like guide.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-globe"></i></div>
+                <h3>3D Solar System</h3>
+                <p>Interactive navigation with high-res textures from NASA and seamless landing on planetary surfaces.</p>
+            </div>
+        </section>
+
+        <footer>
+            <p>&copy; 2026 Celestine Project by Veronika Kashtanova. <br>Built for the Future.</p>
+        </footer>
+    </div>
+
+</body>
+</html>
