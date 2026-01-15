@@ -27,7 +27,7 @@ class CelestineHeader extends HTMLElement {
             }
             .cel-social-link {
                 color: var(--secondary-text, #a0a0a0);
-                margin-left: 10px;
+                margin-left: 15px;
                 font-size: 1.2rem;
                 text-decoration: none;
                 transition: color 0.3s;
@@ -35,10 +35,16 @@ class CelestineHeader extends HTMLElement {
             .cel-social-link:hover {
                 color: #fff;
             }
+            .cel-social-link.github:hover {
+                color: #fff; 
+            }
+            .cel-social-link.twitter:hover {
+                color: #1da1f2;
+            }
             
             @media (max-width: 768px) {
                 .cel-nav-link { font-size: 0.9rem; margin-right: 10px; }
-                .cel-social-link { display: none; } /* Hide social on mobile to save space if needed, or keep small */
+                .cel-social-link { display: none; }
             }
         </style>
         <header>
@@ -50,8 +56,8 @@ class CelestineHeader extends HTMLElement {
                 <a href="${rootPath}/about.html" class="cel-nav-link ${activePage === 'about' ? 'active' : ''}">About Us</a>
                 <a href="${rootPath}/contact.html" class="cel-nav-link ${activePage === 'contact' ? 'active' : ''}">Contact Us</a>
                 
-                <a href="https://github.com/vero-code" class="cel-social-link"><i class="fab fa-github"></i></a>
-                <a href="https://x.com/veron_code" class="cel-social-link"><i class="fab fa-twitter"></i></a>
+                <a href="https://github.com/vero-code/celestine" target="_blank" class="cel-social-link github"><i class="fab fa-github"></i></a>
+                <a href="https://x.com/veron_code" target="_blank" class="cel-social-link twitter"><i class="fab fa-twitter"></i></a>
             </div>
         </header>
         `;
