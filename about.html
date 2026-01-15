@@ -42,6 +42,9 @@
             max-width: 900px;
             margin: 0 auto;
             padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
 
         /* Header */
@@ -62,25 +65,6 @@
             -webkit-text-fill-color: transparent;
             text-decoration: none;
         }
-
-        .social-links a {
-            color: var(--secondary-text);
-            margin-left: 20px;
-            font-size: 1.4rem;
-            transition: color 0.3s;
-            text-decoration: none;
-        }
-        .social-links a:hover { color: #fff; }
-
-        .nav-link {
-            font-size: 1rem;
-            color: var(--secondary-text);
-            text-decoration: none;
-            margin-right: 15px;
-            vertical-align: middle;
-            transition: color 0.3s;
-        }
-        .nav-link:hover { color: #fff; }
 
         /* Content Sections */
         section {
@@ -127,47 +111,106 @@
             font-style: italic;
         }
 
-        .founder-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 30px;
-            margin-top: 40px;
+        /* --- UPDATED FOUNDER CARD --- */
+        .founder-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 40px;
+            border-radius: 20px;
+            display: flex;
+            gap: 40px;
+            align-items: flex-start;
+            flex-wrap: wrap;
         }
 
-        .founder-card {
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            padding: 30px;
-            border-radius: 12px;
-            display: flex;
-            gap: 20px;
-            align-items: center;
+        .founder-image-wrapper {
+            flex: 0 0 250px;
+            max-width: 100%;
         }
 
         .founder-image {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            background: linear-gradient(45deg, var(--accent-color), #3d1b7a);
-            flex-shrink: 0;
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            border: 1px solid rgba(124, 77, 255, 0.3);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            display: block;
+        }
+
+        .founder-location {
+            margin-top: 15px;
             display: flex;
             align-items: center;
+            gap: 8px;
+            color: #a0a0a0;
+            font-size: 0.95rem;
             justify-content: center;
-            font-size: 3rem;
-            color: #fff;
+        }
+
+        .founder-info {
+            flex: 1;
+            min-width: 300px;
         }
 
         .founder-info h3 {
-            margin: 0 0 10px 0;
-            font-size: 1.5rem;
+            margin: 0 0 5px 0;
+            font-size: 2rem;
             color: #fff;
         }
 
-        .founder-info p {
-            margin: 0;
-            font-size: 1rem;
+        .founder-role {
+            color: var(--accent-color);
+            font-weight: 600;
+            margin-bottom: 20px;
+            display: block;
+            font-size: 1.1rem;
         }
 
+        .founder-bio {
+            color: #ccc;
+            line-height: 1.7;
+            margin-bottom: 30px;
+        }
+
+        /* Grid for Education & Certs */
+        .credentials-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 20px;
+        }
+
+        .credential-box h4 {
+            color: #fff;
+            margin-top: 0;
+            margin-bottom: 15px;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .cert-tag {
+            background: rgba(66, 133, 244, 0.1);
+            border: 1px solid rgba(66, 133, 244, 0.2);
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            color: #8ab4f8;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 8px;
+        }
+
+        .cert-tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+
+        /* Stats */
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -202,10 +245,19 @@
             color: var(--secondary-text);
             font-size: 0.9rem;
         }
+        
+        celestine-footer {
+            margin-top: auto;
+            display: block;
+            width: 100%;
+        }
 
         @media (max-width: 768px) {
             h1 { font-size: 2.5rem; }
-            .founder-card { flex-direction: column; text-align: center; }
+            .founder-card { flex-direction: column; text-align: center; align-items: center; }
+            .founder-image-wrapper { width: 100%; max-width: 300px; }
+            .founder-location { justify-content: center; }
+            .credentials-grid { grid-template-columns: 1fr; text-align: left; }
         }
     </style>
 </head>
@@ -237,25 +289,83 @@
 
         <section>
             <h2>The Founder</h2>
-            <div class="founder-grid">
-                <div class="founder-card">
-                    <div class="founder-image">
-                        <!-- <i class="fas fa-user-astronaut"></i> -->
-                         <img src="assets/me.png" alt="Founder image" class="founder-image">
+            <div class="founder-card">
+                
+                <div class="founder-image-wrapper">
+                    <img src="assets/me.png" alt="Veronika Kashtanova" class="founder-image">
+                    
+                    <div class="founder-location">
+                        <i class="fas fa-map-marker-alt" style="color: #7c4dff;"></i> 
+                        Dnipro, Ukraine
                     </div>
-                    <div class="founder-info">
-                        <h3>
-                            Veronika Kashtanova
-                            <a href="https://github.com/vero-code" target="_blank" style="color: var(--secondary-text); margin-right: 15px; font-size: 1.2rem; transition: color 0.3s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#a0a0a0'">
-                                <i class="fab fa-github"></i>
+                </div>
+
+                <div class="founder-info">
+                    <h3>Veronika Kashtanova</h3>
+                    <span class="founder-role">Founder & Software Engineer</span>
+                    
+                    <p class="founder-bio">
+                        A Software Engineer and AI Specialist focused on building complex, multi-agent systems. 
+                        I combine technical expertise with strategic management to translate ambitious cosmic concepts into precise, scalable architecture using the Google Cloud ecosystem.
+                    </p>
+
+                    <div style="margin-bottom: 25px;">
+                        <a href="https://github.com/vero-code" target="_blank" style="color: var(--secondary-text); margin-right: 20px; font-size: 1.3rem; transition: color 0.3s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#a0a0a0'">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="https://x.com/veron_code" target="_blank" style="color: var(--secondary-text); margin-right: 20px; font-size: 1.3rem; transition: color 0.3s;" onmouseover="this.style.color='#1da1f2'" onmouseout="this.style.color='#a0a0a0'">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="https://www.youtube.com/@vero-code" target="_blank" style="color: var(--secondary-text); font-size: 1.3rem; transition: color 0.3s;" onmouseover="this.style.color='#0a66c2'" onmouseout="this.style.color='#a0a0a0'">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+
+                    <div class="credentials-grid">
+                        
+                        <div class="credential-box">
+                            <h4><i class="fas fa-graduation-cap"></i> Education</h4>
+                            <ul style="list-style: none; padding: 0; color: #a0a0a0; font-size: 0.9rem;">
+                                <li style="margin-bottom: 15px;">
+                                    <strong style="color: #fff; display: block; line-height: 1.3; margin-bottom: 4px;">Master’s Degree (Honors)</strong>
+                                    <span style="display: block; color: #7c4dff; font-size: 0.85rem; margin-bottom: 4px;">Management of Organizations</span>
+                                    Ukrainian State University of Chemical Technology
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="credential-box">
+                            <h4 style="color: #fff; margin-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 5px;">
+                                <i class="fab fa-google"></i> Ecosystem Impact
+                            </h4>
+                            
+                            <a href="https://github.com/google/adk-java/pull/189" target="_blank" style="text-decoration: none;">
+                                <div class="cert-tag" style="border-color: rgba(50, 205, 50, 0.3); background: rgba(50, 205, 50, 0.05); color: #88ff88;">
+                                    <i class="fas fa-code-branch"></i> 
+                                    <div>
+                                        <strong style="display: block; font-size: 0.85rem;">Contributor: Google adk-java</strong>
+                                        <span style="font-size: 0.75rem; opacity: 0.8;">PR #189 (Core Optimization)</span>
+                                </div>
+                            </div>
+
+                            <a href="https://github.com/webmachinelearning/proofreader-api/issues/32" target="_blank" style="text-decoration: none;">
+                                <div class="cert-tag" style="border-color: rgba(29, 161, 242, 0.3); background: rgba(29, 161, 242, 0.05); color: #8ab4f8; transition: transform 0.2s; cursor: pointer;">
+                                    <i class="fab fa-chrome"></i>
+                                    <div>
+                                        <strong style="display: block; font-size: 0.85rem;">Chrome Built-in AI EPP <i class="fas fa-external-link-alt" style="font-size: 0.7rem; opacity: 0.7;"></i></strong>
+                                        <span style="font-size: 0.75rem; opacity: 0.8;">Active Feedback Contributor</span>
+                                    </div>
+                                </div>
                             </a>
-                            <a href="https://x.com/veron_code" target="_blank" style="color: var(--secondary-text); margin-right: 15px; font-size: 1.2rem; transition: color 0.3s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#a0a0a0'">
-                                <i class="fab fa-twitter"></i>
+
+                            <a href="https://developers.google.com/profile/u/116919089804845993869" target="_blank" style="text-decoration: none;">
+                                <div class="cert-tag" style="opacity: 0.7;">
+                                    <i class="fas fa-layer-group"></i> 
+                                    <span style="font-size: 0.8rem;">Google Developer Program</span>
+                                </div>
                             </a>
-                        </h3>
-                        <p>
-                            Visionary developer and designer specializing in immersive AI experiences. Veronika leads the Celestine project with a focus on blending advanced technology with intuitive storytelling to create a truly cosmic journey.
-                        </p>
+
+                        </div>
                     </div>
                 </div>
             </div>
