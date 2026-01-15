@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | Celestine</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #050505;
+            --text-color: #ffffff;
+            --accent-color: #7c4dff; /* Gemini Purple */
+            --secondary-text: #a0a0a0;
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --card-border: rgba(255, 255, 255, 0.08);
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Starry Background */
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            margin-bottom: 60px;
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 1.5rem;
+            background: linear-gradient(90deg, #fff, #a0a0a0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+        }
+
+        .social-links a {
+            color: var(--secondary-text);
+            margin-left: 20px;
+            font-size: 1.4rem;
+            transition: color 0.3s;
+            text-decoration: none;
+        }
+        .social-links a:hover { color: #fff; }
+
+        .nav-link {
+            font-size: 1rem;
+            color: var(--secondary-text);
+            text-decoration: none;
+            margin-right: 15px;
+            vertical-align: middle;
+            transition: color 0.3s;
+        }
+        .nav-link:hover { color: #fff; }
+
+        /* Content Sections */
+        section {
+            margin-bottom: 80px;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 24px;
+            background: linear-gradient(180deg, #ffffff 0%, #b0b0b0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #fff;
+            border-bottom: 1px solid var(--card-border);
+            padding-bottom: 10px;
+        }
+
+        p {
+            font-size: 1.1rem;
+            color: var(--secondary-text);
+            margin-bottom: 20px;
+        }
+
+        .mission-box {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            padding: 40px;
+            border-radius: 16px;
+            text-align: center;
+            backdrop-filter: blur(5px);
+        }
+
+        .mission-box p {
+            font-size: 1.4rem;
+            color: #fff;
+            margin: 0;
+            font-style: italic;
+        }
+
+        .founder-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .founder-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            padding: 30px;
+            border-radius: 12px;
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .founder-image {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--accent-color), #3d1b7a);
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: #fff;
+        }
+
+        .founder-info h3 {
+            margin: 0 0 10px 0;
+            font-size: 1.5rem;
+            color: #fff;
+        }
+
+        .founder-info p {
+            margin: 0;
+            font-size: 1rem;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            text-align: center;
+        }
+
+        .stat-item {
+            padding: 20px;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--secondary-text);
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--card-border);
+            padding: 40px 0;
+            text-align: center;
+            color: var(--secondary-text);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            .founder-card { flex-direction: column; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="stars"></div>
+
+    <div class="container">
+        <header>
+            <a href="index.html" class="logo">Celestine</a>
+            <div class="social-links">
+                <a href="about.html" class="nav-link" style="color: #fff;">About Us</a>
+                <a href="contact.html" class="nav-link">Contact Us</a>
+                <a href="https://github.com/vero-code"><i class="fab fa-github"></i></a>
+                <a href="https://x.com/veron_code"><i class="fab fa-twitter"></i></a>
+            </div>
+        </header>
+
+        <section>
+            <h1>Guiding Human Curiosity</h1>
+            <div class="mission-box">
+                <p>"Connecting planetary exploration to the human experience through next-generation AI interfaces."</p>
+            </div>
+        </section>
+
+        <section>
+            <h2>Our Mission</h2>
+            <p>
+                Celestine was born from a simple yet profound question: How can we make the vast complexity of space exploration accessible and relatable to everyone? 
+                By leveraging the power of Multi-Agent Systems and Gemini 2.5, we translate the geological and atmospheric data of distant worlds into contexts we understand on Earth.
+            </p>
+            <p>
+                Our goal is to foster a deeper connection between humanity and the universe, providing an intelligent co-pilot for the next era of discovery.
+            </p>
+        </section>
+
+        <section>
+            <h2>The Founder</h2>
+            <div class="founder-grid">
+                <div class="founder-card">
+                    <div class="founder-image">
+                        <!-- <i class="fas fa-user-astronaut"></i> -->
+                         <img src="me.png" alt="Founder image" class="founder-image">
+                    </div>
+                    <div class="founder-info">
+                        <h3>
+                            Veronika Kashtanova
+                            <a href="https://github.com/vero-code" target="_blank" style="color: var(--secondary-text); margin-right: 15px; font-size: 1.2rem; transition: color 0.3s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#a0a0a0'">
+                                <i class="fab fa-github"></i>
+                            </a>
+                            <a href="https://x.com/veron_code" target="_blank" style="color: var(--secondary-text); margin-right: 15px; font-size: 1.2rem; transition: color 0.3s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#a0a0a0'">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                        </h3>
+                        <p>
+                            Visionary developer and designer specializing in immersive AI experiences. Veronika leads the Celestine project with a focus on blending advanced technology with intuitive storytelling to create a truly cosmic journey.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Origins</h2>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <span class="stat-value">July 2025</span>
+                    <span class="stat-label">Project Launch</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value">Gemini 2.5</span>
+                    <span class="stat-label">Core Engine</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value">Infinite</span>
+                    <span class="stat-label">Possibilities</span>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p>&copy; 2026 Celestine Project by Veronika Kashtanova. <br>Built for the Future.</p>
+        </footer>
+    </div>
+
+</body>
+</html>
