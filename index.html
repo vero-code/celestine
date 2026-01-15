@@ -109,11 +109,33 @@
             color: #ffd700;
             border: 1px solid rgba(255, 215, 0, 0.2);
         }
+        .badge-award:hover {
+            transform: translateY(-2px);
+            background: rgba(255, 215, 0, 0.2);
+            box-shadow: 0 4px 12px rgba(255, 215, 0, 0.2);
+        }
 
         .badge-tech {
             background: rgba(124, 77, 255, 0.1);
             color: #b388ff;
             border: 1px solid rgba(124, 77, 255, 0.2);
+        }
+        .badge-tech:hover {
+            transform: translateY(-2px);
+            background: rgba(124, 77, 255, 0.2);
+            box-shadow: 0 4px 12px rgba(124, 77, 255, 0.2);
+        }
+
+        .badge-social {
+            background: rgba(29, 161, 242, 0.1);
+            color: #1da1f2;
+            border: 1px solid rgba(29, 161, 242, 0.2);
+            transition: transform 0.2s;
+        }
+        .badge-social:hover {
+            transform: translateY(-2px);
+            background: rgba(29, 161, 242, 0.2);
+            box-shadow: 0 4px 12px rgba(29, 161, 242, 0.2);
         }
 
         h1 {
@@ -307,7 +329,16 @@
         <section class="hero">
             <div class="hero-content">
                 <div class="badge-container">
-                    <div class="badge badge-award"><i class="fas fa-trophy"></i> Nominee: Google Maps Platform Awards</div>
+                    <a href="https://mapsplatform.google.com/awards/nominees/celestine-rg16km/" target="_blank" style="text-decoration: none;">
+                        <div class="badge badge-award" style="cursor: pointer; transition: transform 0.2s;">
+                            <i class="fas fa-trophy"></i> Nominee: Google Maps Platform Awards
+                        </div>
+                    </a>
+                    <a href="https://x.com/ThePracticalDev/status/2005431823132672504" target="_blank" style="text-decoration: none;">
+                        <div class="badge badge-social" style="cursor: pointer;">
+                            <i class="fab fa-twitter"></i> Featured by DEV Community
+                        </div>
+                    </a>
                     <div class="badge badge-tech"><i class="fas fa-bolt"></i> Powered by Gemini 2.5</div>
                 </div>
                 
@@ -319,7 +350,7 @@
                 </p>
 
                 <div class="btn-group">
-                    <a href="features.html" class="btn btn-primary">
+                    <a href="https://dev.to/vero-code/celestine-ai-navigator-for-the-universe-2acc" target="_blank" class="btn btn-primary">
                         <i class="fas fa-book-open"></i> Read Case Study
                     </a>
                     <a href="https://github.com/vero-code/celestine" class="btn btn-secondary">
