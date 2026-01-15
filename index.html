@@ -70,8 +70,20 @@
 
         /* Hero Section */
         .hero {
-            text-align: center;
-            padding: 80px 20px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 60px;
+            padding: 120px 0 100px;
+            text-align: left;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .hero-content {
+            flex: 1;
+            max-width: 500px;
+            z-index: 2;
         }
 
         .badge-container {
@@ -116,16 +128,15 @@
         .hero p {
             font-size: 1.2rem;
             color: var(--secondary-text);
-            max-width: 700px;
-            margin: 0 auto 40px;
+            margin: 0 0 40px;
         }
 
         /* Buttons */
         .btn-group {
             display: flex;
             gap: 16px;
-            justify-content: center;
-            margin-bottom: 60px;
+            justify-content: flex-start;
+            margin-bottom: 0;
         }
 
         .btn {
@@ -154,6 +165,38 @@
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
         .btn-secondary:hover { background: rgba(255, 255, 255, 0.15); }
+
+        /* Video Section */
+        .video-container {
+            flex: 1;
+            position: relative;
+            padding-bottom: 50%;
+            height: 0;
+            overflow: hidden;
+            background: #000;
+            border-radius: 20px;
+            box-shadow: 
+                0 20px 40px rgba(0, 0, 0, 0.6),
+                0 0 100px rgba(124, 77, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            transform: perspective(1000px) rotateY(-5deg);
+            transition: all 0.5s ease;
+        }
+        
+        .video-container:hover {
+             transform: perspective(1000px) rotateY(0deg) scale(1.02);
+             box-shadow: 
+                0 30px 60px rgba(0, 0, 0, 0.8),
+                0 0 150px rgba(124, 77, 255, 0.4);
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
 
         /* Tech Stack Section (New) */
         .tech-stack {
@@ -224,6 +267,28 @@
             font-size: 0.9rem;
         }
 
+        @media (max-width: 992px) {
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                padding-top: 60px;
+                gap: 40px;
+            }
+            
+            .hero-content {
+                max-width: 100%;
+                margin-bottom: 20px;
+            }
+
+            .video-container {
+                width: 100%;
+                padding-bottom: 56.25%;
+                transform: none;
+            }
+            .video-container:hover { transform: none; scale: 1; }
+            .btn-group { justify-content: center; }
+        }
+
         @media (max-width: 768px) {
             h1 { font-size: 2.5rem; }
             .btn-group { flex-direction: column; }
@@ -240,25 +305,32 @@
         <celestine-header root-path="." active-page="home"></celestine-header>
 
         <section class="hero">
-            <div class="badge-container">
-                <div class="badge badge-award"><i class="fas fa-trophy"></i> Nominee: Google Maps Platform Awards</div>
-                <div class="badge badge-tech"><i class="fas fa-bolt"></i> Powered by Gemini 2.5</div>
-            </div>
-            
-            <h1>Intelligent Navigator<br>for the Universe</h1>
-            
-            <p>
-                An intelligent co-pilot designed to guide you through the cosmos. 
-                Celestine connects alien worlds back to Earth through a sophisticated Multi-Agent System.
-            </p>
+            <div class="hero-content">
+                <div class="badge-container">
+                    <div class="badge badge-award"><i class="fas fa-trophy"></i> Nominee: Google Maps Platform Awards</div>
+                    <div class="badge badge-tech"><i class="fas fa-bolt"></i> Powered by Gemini 2.5</div>
+                </div>
+                
+                <h1>Intelligent Navigator<br>for the Universe</h1>
+                
+                <p>
+                    An intelligent co-pilot designed to guide you through the cosmos. 
+                    Celestine connects alien worlds back to Earth through a sophisticated Multi-Agent System.
+                </p>
 
-            <div class="btn-group">
-                <a href="features.html" class="btn btn-primary">
-                    <i class="fas fa-book-open"></i> Read Case Study
-                </a>
-                <a href="https://github.com/vero-code/celestine" class="btn btn-secondary">
-                    <i class="fab fa-github"></i> View Code
-                </a>
+                <div class="btn-group">
+                    <a href="features.html" class="btn btn-primary">
+                        <i class="fas fa-book-open"></i> Read Case Study
+                    </a>
+                    <a href="https://github.com/vero-code/celestine" class="btn btn-secondary">
+                        <i class="fab fa-github"></i> View Code
+                    </a>
+                </div>
+            </div>
+
+            <!-- Video Demo -->
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/4FixV3Uy2to" title="Celestine Demo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
         </section>
 
