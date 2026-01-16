@@ -33,6 +33,25 @@ body, html {
     max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    box-sizing: border-box;
+}
+
+.container > * {
+    width: 100%;
+}
+
+celestine-header {
+    display: block;
+    width: 100%;
+}
+
+celestine-footer {
+    margin-top: auto;
+    display: block;
+    width: 100%;
 }
 
 /* Header */
