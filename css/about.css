@@ -1,0 +1,173 @@
+.container {
+    max-width: 900px;
+}
+
+/* Content Sections */
+section {
+    margin-bottom: 80px;
+}
+
+h1 {
+    text-align: center;
+}
+
+h2 {
+    border-bottom: 1px solid var(--card-border);
+    padding-bottom: 10px;
+}
+
+.mission-box {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    padding: 40px;
+    border-radius: 16px;
+    text-align: center;
+    backdrop-filter: blur(5px);
+}
+
+.mission-box p {
+    font-size: 1.4rem;
+    color: #fff;
+    margin: 0;
+    font-style: italic;
+}
+
+/* --- UPDATED FOUNDER CARD --- */
+.founder-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 40px;
+    border-radius: 20px;
+    display: flex;
+    gap: 40px;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+
+.founder-image-wrapper {
+    flex: 0 0 250px;
+    max-width: 100%;
+}
+
+.founder-image {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    border: 1px solid rgba(124, 77, 255, 0.3);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    display: block;
+}
+
+.founder-location {
+    margin-top: 15px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #a0a0a0;
+    font-size: 0.95rem;
+    justify-content: center;
+}
+
+.founder-info {
+    flex: 1;
+    min-width: 300px;
+}
+
+.founder-info h3 {
+    margin: 0 0 5px 0;
+    font-size: 2rem;
+    color: #fff;
+}
+
+.founder-role {
+    color: var(--accent-color);
+    font-weight: 600;
+    margin-bottom: 20px;
+    display: block;
+    font-size: 1.1rem;
+}
+
+.founder-bio {
+    color: #ccc;
+    line-height: 1.7;
+    margin-bottom: 30px;
+}
+
+/* Grid for Education & Certs */
+.credentials-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin-top: 30px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding-top: 20px;
+}
+
+.credential-box h4 {
+    color: #fff;
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.cert-tag {
+    background: rgba(66, 133, 244, 0.1);
+    border: 1px solid rgba(66, 133, 244, 0.2);
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    color: #8ab4f8;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+}
+
+.cert-tag:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+/* Stats */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    text-align: center;
+}
+
+.stat-item {
+    padding: 20px;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+}
+
+.stat-value {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--accent-color);
+    display: block;
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    color: var(--secondary-text);
+}
+
+celestine-footer {
+    margin-top: auto;
+    display: block;
+    width: 100%;
+}
+
+@media (max-width: 768px) {
+    h1 { font-size: 2.5rem; }
+    .founder-card { flex-direction: column; text-align: center; align-items: center; }
+    .founder-image-wrapper { width: 100%; max-width: 300px; }
+    .founder-location { justify-content: center; }
+    .credentials-grid { grid-template-columns: 1fr; text-align: left; }
+}
