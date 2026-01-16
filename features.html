@@ -22,6 +22,28 @@
             <p>An immersive Mission Control interface connecting cosmic discoveries to real-world Earth locations.</p>
         </section>
 
+        <section style="margin-bottom: 80px;">
+            <div style="background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.01) 100%); border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; padding: 40px;">
+                <h2 style="margin-top: 0; border-bottom: none;">The Problem We're Solving</h2>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 30px;">
+                    <div>
+                        <h3 style="color: #ff6b6b; font-size: 1.2rem; margin-bottom: 15px;"><i class="fas fa-times-circle"></i> Static Education</h3>
+                        <p style="font-size: 1rem;">
+                            STEM education remains abstract. NASA releases terabytes of data, but there's a disconnect. 
+                            Students see Mars as a distant red sphere, unable to grasp the scale or geological reality of its surface.
+                        </p>
+                    </div>
+                    <div>
+                        <h3 style="color: #ff6b6b; font-size: 1.2rem; margin-bottom: 15px;"><i class="fas fa-times-circle"></i> Engagement Gap</h3>
+                        <p style="font-size: 1rem;">
+                            Existing tools lack interactivity. High-quality simulators are too complex for casual learners, 
+                            creating a gap where the universe feels inaccessible and irrelevant to daily life.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <h2 class="section-title">How It Works</h2>
 
         <!-- Step 1 -->
@@ -44,7 +66,13 @@
             <div class="step-content">
                 <span class="step-number">STEP 02</span>
                 <h3 class="step-title">AI Agentic Reasoning</h3>
-                <p class="step-desc">Powered by Gemini 2.5. When you ask about a feature (e.g., "Olympus Mons"), the AI analyzes geological properties and formulates a search strategy instead of just reciting facts.</p>
+                <p class="step-desc">Powered by Gemini 2.5. When you ask about a feature (e.g., "Olympus Mons"), 
+                the AI doesn't just recite facts—it reasons about geological context, 
+                formulates a search strategy, and autonomously executes a tool call to the 
+                Google Maps Places API to find a terrestrial equivalent (e.g., Mauna Kea, Hawaii).</p>
+                <p style="font-size: 0.9rem; margin-top: 10px; color: #7c4dff;">
+                    <strong>Validation:</strong> Large Language Models can effectively orchestrate geospatial APIs.
+                </p>
             </div>
         </div>
 
