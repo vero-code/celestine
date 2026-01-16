@@ -198,6 +198,47 @@
 .feature-card h3 { margin: 0 0 10px 0; font-size: 1.3rem; }
 .feature-card p { margin: 0; color: var(--secondary-text); font-size: 0.95rem; }
 
+/* Styles for Mission & Impact sections */
+.mission-box {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    padding: 30px;
+    border-radius: 16px;
+    text-align: center;
+    backdrop-filter: blur(5px);
+    margin-top: 20px;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    text-align: center;
+    margin-top: 30px;
+}
+
+.stat-item {
+    padding: 20px;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+}
+
+.stat-value {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--accent-color);
+    display: block;
+    margin-bottom: 10px;
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    color: var(--secondary-text);
+    line-height: 1.4;
+    display: block;
+}
+
 @media (max-width: 992px) {
     .hero {
         flex-direction: column;
