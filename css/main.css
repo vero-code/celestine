@@ -423,6 +423,16 @@ p {
     box-shadow: 0 6px 20px rgba(124, 77, 255, 0.4);
 }
 
+a i.fab, 
+a:visited i.fab {
+    color: #ffffff !important;
+    transition: color 0.3s ease;
+}
+
+a:hover i.fa-youtube { color: #ff0000 !important; }
+a:hover i.fa-twitter { color: #1da1f2 !important; }
+a:hover i.fa-github { color: #6e5494 !important; }
+
 @media (max-width: 600px) {
     .legal-links-container {
         flex-wrap: wrap;
