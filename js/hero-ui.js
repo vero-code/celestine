@@ -106,4 +106,56 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }, 5000);
     }
+    // 6. Mission Console Logic
+    const missionLog = document.getElementById('mission-log');
+    const logs = [
+        '[SEARCH] Scouring Copernicus Crater for terrestrial analogues...',
+        '[ANALYSIS] Cross-referencing mineralogy with Great Basin Desert...',
+        '[AGENT] Agent 04 assigned to geospatial verification.',
+        '[SYSTEM] Optimization complete. Latency: 42ms.',
+        '[UPLINK] Syncing 3D Tiles dataset // Sector 9.',
+        '[GEO] Match found: Mauna Kea detected as volcanic analogue.',
+        '[ADK] Running tool call: places.getNearbyLocations()...',
+        '[AI] Gemini 2.5 Pro reasoning: Thermal inertia confirmed.'
+    ];
+
+    if (missionLog) {
+        let logIndex = 0;
+        const addLog = () => {
+            const entry = document.createElement('div');
+            entry.className = 'log-entry';
+            if (Math.random() > 0.8) entry.className += ' success';
+            entry.textContent = logs[logIndex % logs.length];
+            
+            const cursor = missionLog.querySelector('.log-cursor');
+            missionLog.insertBefore(entry, cursor);
+            
+            // Auto-scroll
+            missionLog.scrollTop = missionLog.scrollHeight;
+            
+            // Keep only last 10 logs
+            const allLogs = missionLog.querySelectorAll('.log-entry');
+            if (allLogs.length > 20) {
+                allLogs[0].remove();
+            }
+            
+            logIndex++;
+            setTimeout(addLog, 2000 + Math.random() * 3000);
+        };
+        setTimeout(addLog, 2000);
+    }
+
+    // 7. FAQ Accordion Logic
+    const faqItems = document.querySelectorAll('.faq-item');
+    faqItems.forEach(item => {
+        const question = item.querySelector('.faq-question');
+        question.addEventListener('click', () => {
+            // Close others
+            faqItems.forEach(i => {
+                if (i !== item) i.classList.remove('active');
+            });
+            // Toggle current
+            item.classList.toggle('active');
+        });
+    });
 });
