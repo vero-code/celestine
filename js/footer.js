@@ -26,7 +26,7 @@ class CelestineFooter extends HTMLElement {
                 &copy; 2026 Celestine by Veronika Kashtanova. <br>Built for the Future.
             </p>
 
-            <div class="flex-center flex-gap-20 nowrap">
+            <div class="flex-center flex-gap-20 legal-links-container">
                 <a href="${rootPath}/legal/privacy.html" class="legal-link">Privacy Policy</a>
                 <span class="legal-sep">|</span>
                 <a href="${rootPath}/legal/terms.html" class="legal-link">Terms of Service</a>

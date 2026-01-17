@@ -422,3 +422,19 @@ p {
     color: var(--accent-color);
     box-shadow: 0 6px 20px rgba(124, 77, 255, 0.4);
 }
+
+@media (max-width: 600px) {
+    .legal-links-container {
+        flex-wrap: wrap;
+        gap: 10px;
+        justify-content: center;
+    }
+    
+    .legal-sep {
+        display: none;
+    }
+
+    .legal-links-container .legal-link {
+        margin: 0 5px;
+    }
+}
