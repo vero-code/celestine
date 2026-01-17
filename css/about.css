@@ -2,7 +2,6 @@
     max-width: 900px;
 }
 
-/* Content Sections */
 section {
     margin-bottom: 80px;
 }
@@ -32,7 +31,6 @@ h2 {
     font-style: italic;
 }
 
-/* --- UPDATED FOUNDER CARD --- */
 .founder-card {
     background: rgba(255, 255, 255, 0.03);
     border: 1px solid rgba(255, 255, 255, 0.1);
@@ -131,6 +129,91 @@ h2 {
     box-shadow: 0 4px 10px rgba(0,0,0,0.3);
 }
 
+.sdg-grid {
+    margin-top: 40px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+.sdg-card {
+    padding: 20px;
+    border-left: 3px solid #7c4dff;
+    background: rgba(255,255,255,0.02);
+}
+
+.sdg-title {
+    color: #fff;
+    display: block;
+    margin-bottom: 10px;
+    font-size: 1.1rem;
+}
+
+.sdg-desc {
+    font-size: 0.95rem;
+    margin: 0;
+    line-height: 1.5;
+}
+
+.cert-tag-google-green { border-color: rgba(50, 205, 50, 0.3); background: rgba(50, 205, 50, 0.05); color: #88ff88; }
+.cert-tag-google-blue { border-color: rgba(29, 161, 242, 0.3); background: rgba(29, 161, 242, 0.05); color: #8ab4f8; transition: transform 0.2s; cursor: pointer; }
+.cert-tag-dim { opacity: 0.7; }
+
+/* Roadmap Section */
+.roadmap-container {
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 16px;
+    padding: 30px;
+}
+
+.roadmap-item {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 30px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    padding-bottom: 20px;
+}
+
+.roadmap-item:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.roadmap-date {
+    min-width: 100px;
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+.roadmap-title {
+    color: #fff;
+    display: block;
+    margin-bottom: 8px;
+    font-size: 1.1rem;
+}
+
+.roadmap-desc {
+    margin: 0;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: #a0a0a0;
+}
+
+.roadmap-list {
+    margin: 0;
+    padding-left: 20px;
+    font-size: 0.9rem;
+    color: #a0a0a0;
+}
+
+.roadmap-list li {
+    margin-bottom: 5px;
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
 /* Stats */
 .stats-grid {
     display: grid;
@@ -140,22 +223,30 @@ h2 {
 }
 
 .stat-item {
+    display: flex;
+    flex-direction: column;
     padding: 20px;
-    background: var(--card-bg);
-    border: 1px solid var(--card-border);
-    border-radius: 12px;
 }
 
 .stat-value {
-    font-size: 2rem;
-    font-weight: 700;
-    color: var(--accent-color);
     display: block;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #b388ff;
+    margin-bottom: 12px;
+    line-height: 1.2; 
 }
 
 .stat-label {
-    font-size: 0.9rem;
-    color: var(--secondary-text);
+    display: block;
+    font-size: 0.95rem;
+    color: #a0a0a0;
+    line-height: 1.5; 
+}
+
+.stat-value i {
+    margin-right: 8px;
+    font-size: 1.1rem;
 }
 
 celestine-footer {

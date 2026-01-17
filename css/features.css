@@ -160,3 +160,63 @@
     .workflow-step { flex-direction: column !important; gap: 30px; }
     .step-image { width: 100%; height: 200px; }
 }
+
+/* Problem Section */
+.problem-section {
+    padding: 40px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.problem-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin-top: 30px;
+}
+
+.problem-item-title {
+    color: #ff6b6b;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.problem-item-desc {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #ccc;
+}
+
+/* Target Market */
+.market-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+}
+
+.market-card-primary {
+    background: rgba(124, 77, 255, 0.1);
+    border: 1px solid rgba(124, 77, 255, 0.3);
+    padding: 30px;
+    border-radius: 16px;
+}
+
+.market-card-secondary {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 30px;
+    border-radius: 16px;
+}
+
+.market-title-primary {
+    color: #b388ff;
+    margin-top: 0;
+}
+
+.market-title-secondary {
+    color: #fff;
+    margin-top: 0;
+}

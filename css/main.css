@@ -1,23 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
+
 :root {
     --bg-color: #050505;
     --text-color: #ffffff;
-    --accent-color: #7c4dff; /* Gemini Purple */
+    --accent-color: #7c4dff;
     --secondary-text: #a0a0a0;
     --card-bg: rgba(255, 255, 255, 0.03);
     --card-border: rgba(255, 255, 255, 0.08);
+    --font-main: 'Plus Jakarta Sans', sans-serif;
 }
 
 body, html {
     margin: 0;
     padding: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-family: var(--font-main);
     background-color: var(--bg-color);
     color: var(--text-color);
     overflow-x: hidden;
-    line-height: 1.6;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
-/* Starry Background */
 .stars {
     position: fixed;
     top: 0;
@@ -54,7 +58,6 @@ celestine-footer {
     width: 100%;
 }
 
-/* Header */
 header {
     display: flex;
     justify-content: space-between;
@@ -70,6 +73,7 @@ header {
     background-clip: text;
     -webkit-text-fill-color: transparent;
     text-decoration: none;
+    letter-spacing: -0.02em;
 }
 
 .social-links a, .nav-links a {
@@ -96,22 +100,33 @@ footer {
 /* Common Components */
 h1 {
     font-size: 3.5rem;
-    line-height: 1.1;
+    line-height: 1.2; 
     margin-bottom: 24px;
     background: linear-gradient(180deg, #ffffff 0%, #b0b0b0 100%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
+    font-weight: 600;
+    letter-spacing: -0.03em;
 }
 
 h2 {
     font-size: 2rem;
+    line-height: 1.3;
     margin-bottom: 20px;
     color: #fff;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+}
+
+h3 {
+    line-height: 1.4;
+    margin-bottom: 15px;
 }
 
 p {
     color: var(--secondary-text);
+    margin-bottom: 1.5rem;
 }
 
 .btn {
@@ -125,6 +140,7 @@ p {
     gap: 8px;
     white-space: nowrap;
     font-size: 0.95rem;
+    line-height: 1.5;
 }
 
 .btn-primary {
@@ -165,4 +181,41 @@ p {
         margin: 0;
         font-size: 0.9rem;
     }
+    
+    h1 {
+        font-size: 2.5rem;
+        line-height: 1.25;
+    }
 }
+
+/* Utilities */
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+.text-white { color: #fff !important; }
+.text-secondary { color: var(--secondary-text) !important; }
+
+.m-0 { margin: 0 !important; }
+.mb-0 { margin-bottom: 0 !important; }
+.mb-10 { margin-bottom: 10px !important; }
+.mb-20 { margin-bottom: 20px !important; }
+.mb-30 { margin-bottom: 30px !important; }
+.mb-40 { margin-bottom: 40px !important; }
+.mb-80 { margin-bottom: 80px !important; }
+.mv-80 { margin-top: 80px !important; margin-bottom: 80px !important; }
+.mv-100 { margin-top: 100px !important; margin-bottom: 100px !important; }
+
+.max-w-800 { max-width: 800px; margin-left: auto; margin-right: auto; }
+.max-w-900 { max-width: 900px; margin-left: auto; margin-right: auto; }
+
+.flex { display: flex; }
+.flex-column { display: flex; flex-direction: column; }
+.flex-center { display: flex; align-items: center; justify-content: center; }
+.flex-gap-10 { gap: 10px; }
+.flex-gap-20 { gap: 20px; }
+.flex-gap-25 { gap: 25px; }
+
+.w-full { width: 100%; }
+.no-underline { text-decoration: none !important; }
+.cursor-pointer { cursor: pointer; }
+.nowrap { white-space: nowrap; }

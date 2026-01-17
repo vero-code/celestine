@@ -115,3 +115,7 @@
         padding-left: 20px;
     }
 }
+
+.text-success { color: #88ff88 !important; }
+.text-info { color: #29b6f6 !important; }
+.text-accent { color: #b388ff !important; }
