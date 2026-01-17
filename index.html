@@ -42,6 +42,24 @@
                     discoveries to real-world Earth locations, guided by your lifelike video co-pilot.
                 </p>
 
+                <!-- Live Data Widgets -->
+                <div class="live-data-container">
+                    <div class="data-widget">
+                        <span class="data-label">ACTIVE AGENTS</span>
+                        <span class="data-value" id="agent-count">08</span>
+                        <div class="data-bar"><div class="data-progress" style="width: 65%;"></div></div>
+                    </div>
+                    <div class="data-widget">
+                        <span class="data-label">SIGNAL STATUS</span>
+                        <span class="data-value" id="signal-status">ENCRYPTED</span>
+                        <div class="data-pulse"></div>
+                    </div>
+                    <div class="data-widget">
+                        <span class="data-label">ORBITAL SYNC</span>
+                        <span class="data-value" id="sync-percent">98.4%</span>
+                    </div>
+                </div>
+
                 <div class="btn-group">
                     <a href="https://dev.to/vero-code/celestine-ai-navigator-for-the-universe-2acc" target="_blank" class="btn btn-primary">
                         <i class="fas fa-book-open"></i> Read Case Study
@@ -56,8 +74,21 @@
             </div>
 
             <!-- Video Demo -->
-            <div class="video-container">
-                <iframe src="https://www.youtube.com/embed/4FixV3Uy2to" title="Celestine Demo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <div class="video-wrapper">
+                <div class="hud-corner top-left"></div>
+                <div class="hud-corner top-right"></div>
+                <div class="hud-corner bottom-left"></div>
+                <div class="hud-corner bottom-right"></div>
+                <div class="scan-line"></div>
+                
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/4FixV3Uy2to" title="Celestine Demo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+
+                <div class="hud-status">
+                    <span class="status-dot"></span>
+                    <span class="status-text">LIVE FEED // SECTOR 7G</span>
+                </div>
             </div>
         </section>
 
@@ -215,6 +246,7 @@
             });
         </script>
 
+        <script src="js/hero-ui.js"></script>
         <script src="js/footer.js"></script>
         <celestine-footer root-path="."></celestine-footer>
     </div>
