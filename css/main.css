@@ -127,33 +127,40 @@ header {
 
 /* Footer */
 footer {
-    border-top: 1px solid var(--card-border);
-    padding: 40px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 60px 20px;
     text-align: center;
     color: var(--secondary-text);
     font-size: 0.9rem;
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    position: relative;
+    z-index: 10;
 }
 
 .social-footer-link {
-    color: var(--secondary-text);
+    color: #aaa;
     font-size: 1.5rem;
-    transition: color 0.3s;
+    transition: all 0.3s ease;
 }
 
 .social-footer-link:hover {
     color: #fff;
+    transform: translateY(-3px);
 }
 
 .copyright-text {
-    color: #666;
-    font-size: 0.9rem;
-    margin-bottom: 15px;
+    color: #999;
+    font-size: 0.95rem;
+    margin-bottom: 20px;
+    font-weight: 500;
 }
 
 .legal-link {
-    color: #666;
+    color: #888;
     text-decoration: none;
-    font-size: 0.8rem;
+    font-size: 0.85rem;
     transition: color 0.3s;
 }
 
@@ -162,7 +169,8 @@ footer {
 }
 
 .legal-sep {
-    color: #333;
+    color: #444;
+    margin: 0 5px;
 }
 
 /* Common Components */
@@ -293,6 +301,17 @@ p {
 .cursor-pointer { cursor: pointer; }
 .nowrap { white-space: nowrap; }
 .pb-10 { padding-bottom: 10px !important; }
+
+/* Glass Panels */
+.glass-panel {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 24px;
+    padding: 60px;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+}
 
 /* Back to Top Button */
 .back-to-top {
