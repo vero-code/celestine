@@ -62,4 +62,48 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }, 7000);
     }
+
+    // 5. Video Fallback Logic
+    const videoIframe = document.getElementById('hero-video');
+    const placeholder = document.getElementById('video-placeholder');
+    const statusText = document.querySelector('.status-text');
+
+    const handleOffline = () => {
+        if (placeholder) placeholder.style.display = 'flex';
+        if (statusText) statusText.textContent = 'SIGNAL LOST // OFFLINE';
+    };
+
+    const handleOnline = () => {
+        // We try to show the iframe again if it was hidden
+        if (videoIframe && videoIframe.getAttribute('src')) {
+            // Check if iframe is actually loaded
+            try {
+                if (placeholder) placeholder.style.display = 'none';
+                if (statusText) statusText.textContent = 'LIVE FEED // RECONNECTED';
+            } catch (e) {
+                // If it fails, keep placeholder
+            }
+        }
+    };
+
+    window.addEventListener('offline', handleOffline);
+    window.addEventListener('online', handleOnline);
+
+    if (!navigator.onLine) {
+        handleOffline();
+    }
+
+    // Hide placeholder when iframe loads
+    if (videoIframe) {
+        videoIframe.onload = () => {
+            if (placeholder) placeholder.style.display = 'none';
+        };
+
+        // Timeout fallback: if video doesn't load in 5 seconds and we aren't online
+        setTimeout(() => {
+            if (placeholder && placeholder.style.display !== 'none' && !navigator.onLine) {
+                handleOffline();
+            }
+        }, 5000);
+    }
 });
