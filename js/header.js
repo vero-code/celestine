@@ -53,8 +53,8 @@ class CelestineHeader extends HTMLElement {
                 <a href="${rootPath}/index.html" class="cel-nav-link ${activePage === 'home' ? 'active' : ''}">Home</a>
                 <a href="${rootPath}/features.html" class="cel-nav-link ${activePage === 'features' ? 'active' : ''}">Features</a>
                 <a href="${rootPath}/pricing.html" class="cel-nav-link ${activePage === 'pricing' ? 'active' : ''}">Pricing</a>
-                <a href="${rootPath}/about.html" class="cel-nav-link ${activePage === 'about' ? 'active' : ''}">About Us</a>
-                <a href="${rootPath}/contact.html" class="cel-nav-link ${activePage === 'contact' ? 'active' : ''}">Contact Us</a>
+                <a href="${rootPath}/about.html" class="cel-nav-link ${activePage === 'about' ? 'active' : ''}">About</a>
+                <a href="${rootPath}/contact.html" class="cel-nav-link ${activePage === 'contact' ? 'active' : ''}">Contact</a>
                 
                 <a href="https://github.com/vero-code/celestine" target="_blank" class="cel-social-link github"><i class="fab fa-github"></i></a>
                 <a href="https://x.com/veron_code" target="_blank" class="cel-social-link twitter"><i class="fab fa-twitter"></i></a>

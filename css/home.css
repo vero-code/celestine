@@ -262,7 +262,35 @@
 }
 
 @media (max-width: 768px) {
-    h1 { font-size: 2.5rem; }
+    h1 {
+        font-size: 2.5rem !important;
+        line-height: 1.2;
+        word-wrap: break-word;
+        hyphens: auto;
+    }
+    celestine-header::part(nav), nav { 
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    .tech-stack {
+        width: 100% !important;
+        box-sizing: border-box;
+        padding: 20px 10px !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        overflow-x: hidden;
+    }
+    
+    .container {
+        overflow-x: hidden;
+        width: 100%;
+        box-sizing: border-box;
+    }
     .btn-group { flex-direction: column; }
     .btn { width: 100%; justify-content: center; box-sizing: border-box; }
 }

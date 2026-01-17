@@ -146,3 +146,23 @@ p {
 .btn-secondary:hover {
     background: rgba(255, 255, 255, 0.15);
 }
+
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        gap: 15px;
+        padding-bottom: 20px;
+        text-align: center;
+    }
+    nav {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+        width: 100%;
+    }
+    nav a {
+        margin: 0;
+        font-size: 0.9rem;
+    }
+}
