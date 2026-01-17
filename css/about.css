@@ -87,7 +87,6 @@ h2 {
 
 .founder-bio {
     color: #ccc;
-    line-height: 1.7;
     margin-bottom: 30px;
 }
 
@@ -152,7 +151,6 @@ h2 {
 .sdg-desc {
     font-size: 0.95rem;
     margin: 0;
-    line-height: 1.5;
 }
 
 .cert-tag-google-green { border-color: rgba(50, 205, 50, 0.3); background: rgba(50, 205, 50, 0.05); color: #88ff88; }
@@ -197,7 +195,6 @@ h2 {
 .roadmap-desc {
     margin: 0;
     font-size: 0.95rem;
-    line-height: 1.5;
     color: #a0a0a0;
 }
 
@@ -211,7 +208,6 @@ h2 {
 .roadmap-list li {
     margin-bottom: 5px;
     font-size: 0.95rem;
-    line-height: 1.5;
 }
 
 /* Stats */
@@ -234,14 +230,12 @@ h2 {
     font-weight: 700;
     color: #b388ff;
     margin-bottom: 12px;
-    line-height: 1.2; 
 }
 
 .stat-label {
     display: block;
     font-size: 0.95rem;
     color: #a0a0a0;
-    line-height: 1.5; 
 }
 
 .stat-value i {

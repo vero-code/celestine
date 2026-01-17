@@ -8,6 +8,9 @@
     --card-bg: rgba(255, 255, 255, 0.03);
     --card-border: rgba(255, 255, 255, 0.08);
     --font-main: 'Plus Jakarta Sans', sans-serif;
+    --lh-body: 1.6;
+    --lh-heading: 1.2;
+    --lh-subheading: 1.4;
 }
 
 body, html {
@@ -17,7 +20,7 @@ body, html {
     background-color: var(--bg-color);
     color: var(--text-color);
     overflow-x: hidden;
-    line-height: 1.7;
+    line-height: var(--lh-body);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
@@ -100,7 +103,7 @@ footer {
 /* Common Components */
 h1 {
     font-size: 3.5rem;
-    line-height: 1.2; 
+    line-height: var(--lh-heading); 
     margin-bottom: 24px;
     background: linear-gradient(180deg, #ffffff 0%, #b0b0b0 100%);
     -webkit-background-clip: text;
@@ -112,7 +115,7 @@ h1 {
 
 h2 {
     font-size: 2rem;
-    line-height: 1.3;
+    line-height: var(--lh-heading);
     margin-bottom: 20px;
     color: #fff;
     font-weight: 600;
@@ -120,8 +123,12 @@ h2 {
 }
 
 h3 {
-    line-height: 1.4;
+    line-height: var(--lh-subheading);
     margin-bottom: 15px;
+}
+
+h4 {
+    line-height: var(--lh-subheading);
 }
 
 p {
@@ -140,7 +147,7 @@ p {
     gap: 8px;
     white-space: nowrap;
     font-size: 0.95rem;
-    line-height: 1.5;
+    line-height: var(--lh-subheading);
 }
 
 .btn-primary {
@@ -219,3 +226,4 @@ p {
 .no-underline { text-decoration: none !important; }
 .cursor-pointer { cursor: pointer; }
 .nowrap { white-space: nowrap; }
+.pb-10 { padding-bottom: 10px !important; }
