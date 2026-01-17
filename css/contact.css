@@ -4,13 +4,6 @@
     --hover-bg: rgba(255, 255, 255, 0.08);
 }
 
-.container {
-    max-width: 1000px;
-    width: 100%;
-    margin: 0 auto;
-    padding: 0 20px;
-    box-sizing: border-box;
-}
 
 .contact-section {
     text-align: center;
