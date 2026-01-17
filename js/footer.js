@@ -14,7 +14,7 @@ class CelestineFooter extends HTMLElement {
                 <a href="https://github.com/vero-code/celestine" target="_blank" aria-label="GitHub" style="color: #a0a0a0; font-size: 1.5rem; transition: color 0.3s;">
                     <i class="fab fa-github"></i>
                 </a>
-                <a href="https://x.com/veron_code" target="_blank" aria-label="X (Twitter)" style="color: #a0a0a0; font-size: 1.5rem; transition: color 0.3s;">
+                <a href="https://x.com/veron_code/status/2005223530691235959" target="_blank" aria-label="X (Twitter)" style="color: #a0a0a0; font-size: 1.5rem; transition: color 0.3s;">
                     <i class="fab fa-twitter"></i>
                 </a>
                 <a href="https://devpost.com/software/celestine-rg16km" target="_blank" aria-label="Devpost" style="color: #a0a0a0; font-size: 1.5rem; transition: color 0.3s;">

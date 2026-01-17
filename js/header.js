@@ -57,7 +57,7 @@ class CelestineHeader extends HTMLElement {
                 <a href="${rootPath}/contact.html" class="cel-nav-link ${activePage === 'contact' ? 'active' : ''}">Contact</a>
                 
                 <a href="https://github.com/vero-code/celestine" target="_blank" class="cel-social-link github"><i class="fab fa-github"></i></a>
-                <a href="https://x.com/veron_code" target="_blank" class="cel-social-link twitter"><i class="fab fa-twitter"></i></a>
+                <a href="https://x.com/veron_code/status/2005223530691235959" target="_blank" class="cel-social-link twitter"><i class="fab fa-twitter"></i></a>
             </div>
         </header>
         `;
