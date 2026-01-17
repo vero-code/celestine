@@ -166,8 +166,31 @@ celestine-footer {
 
 @media (max-width: 768px) {
     h1 { font-size: 2.5rem; }
-    .founder-card { flex-direction: column; text-align: center; align-items: center; }
-    .founder-image-wrapper { width: 100%; max-width: 300px; }
-    .founder-location { justify-content: center; }
-    .credentials-grid { grid-template-columns: 1fr; text-align: left; }
+
+    .founder-card {
+        flex-direction: column;
+        padding: 20px !important;
+        gap: 30px;
+    }
+
+    .founder-image-wrapper {
+        width: 100%;
+        max-width: 280px;
+        margin: 0 auto;
+    }
+
+    .founder-info {
+        text-align: left;
+        width: 100%;
+    }
+
+    .credentials-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .credential-box strong {
+        word-wrap: break-word;
+        hyphens: auto;
+    }
 }

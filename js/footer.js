@@ -23,7 +23,7 @@ class CelestineFooter extends HTMLElement {
             </div>
 
             <p style="color: #666; font-size: 0.9rem; margin-bottom: 15px;">
-                &copy; 2026 Celestine Project by Veronika Kashtanova. <br>Built for the Future.
+                &copy; 2026 Celestine by Veronika Kashtanova. <br>Built for the Future.
             </p>
 
             <div style="display: flex; justify-content: center; gap: 20px; align-items: center; flex-wrap: wrap;">
