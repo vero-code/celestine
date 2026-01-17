@@ -160,6 +160,61 @@
             </p>
         </section>
 
+        <section class="newsletter-section glass-panel mv-100 text-center">
+            <h2 class="text-white">Join the Mission</h2>
+            <p class="text-secondary max-w-800">
+                Be the first to explore the cosmos. Sign up for early access to the <strong>Celestine Public Alpha</strong> and receive updates on our planetary analogue research.
+            </p>
+            <form 
+                id="lead-form"
+                class="lead-form" 
+                action="https://formspree.io/f/xqeeejnd"
+                method="POST"
+            >
+                <input type="email" name="email" placeholder="Enter your email" class="input-glass" required>
+                <button type="submit" id="submit-btn" class="btn-launch">
+                    <span class="btn-text">Launch</span> <i class="fas fa-paper-plane"></i>
+                </button>
+            </form>
+            <div id="form-status" class="mt-20" style="display: none;">
+                <p class="text-success" style="color: #7c4dff;"><i class="fas fa-check-circle"></i> Transmission Received! You are on the waitlist.</p>
+            </div>
+            <p class="mt-20" style="font-size: 0.85rem; opacity: 0.4;">
+                <i class="fas fa-shield-halved"></i> Your data remains within our secure orbital servers.
+            </p>
+        </section>
+
+        <script>
+            const form = document.getElementById('lead-form');
+            const submitBtn = document.getElementById('submit-btn');
+            const statusBox = document.getElementById('form-status');
+
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = 'Sending... <i class="fas fa-spinner fa-spin"></i>';
+
+                try {
+                    const response = await fetch(form.action, {
+                        method: 'POST',
+                        body: new FormData(form),
+                        headers: { 'Accept': 'application/json' }
+                    });
+
+                    if (response.ok) {
+                        form.style.display = 'none';
+                        statusBox.style.display = 'block';
+                    } else {
+                        throw new Error('Transmission failed');
+                    }
+                } catch (error) {
+                    alert('Error: Could not establish communication with orbital servers. Please try again.');
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = 'Launch <i class="fas fa-paper-plane"></i>';
+                }
+            });
+        </script>
+
         <script src="js/footer.js"></script>
         <celestine-footer root-path="."></celestine-footer>
     </div>
