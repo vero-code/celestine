@@ -116,7 +116,7 @@ document.addEventListener('DOMContentLoaded', () => {
         '[UPLINK] Syncing 3D Tiles dataset // Sector 9.',
         '[GEO] Match found: Mauna Kea detected as volcanic analogue.',
         '[ADK] Running tool call: places.getNearbyLocations()...',
-        '[AI] Gemini 2.5 Pro reasoning: Thermal inertia confirmed.'
+        '[AI] Gemini 3 Pro reasoning: Thermal inertia confirmed.'
     ];
 
     if (missionLog) {
