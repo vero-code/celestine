@@ -34,3 +34,5 @@ __pycache__/
 # IDE
 .idea/
 /backend/multi_tool_agent/.env
+
+venv

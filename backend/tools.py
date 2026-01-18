@@ -22,13 +22,7 @@ def say_goodbye() -> str:
 
 def find_earth_analogues(query: str) -> str:
     """
-    Finds celestial objects on Earth using Google Places API.
-
-    Args:
-        query: Search query (eg "shield volcano hawaii" или "large impact crater").
-
-    Returns:
-        JSON string containing a list of found locations or an error message.
+    Finds celestial objects on Earth using Google Places API, filtering for natural/relevant locations.
     """
     print(f"--- Tool: find_earth_analogues called with query: '{query}' ---")
     api_key = os.getenv("GOOGLE_MAPS_API_KEY")
@@ -44,18 +38,48 @@ def find_earth_analogues(query: str) -> str:
 
         if places_result.get('status') == 'OK' and places_result.get('results'):
             formatted_results = []
-            for place in places_result['results'][:3]:
+            
+            excluded_types = {
+                'lodging', 'restaurant', 'food', 'store', 'clothing_store', 
+                'finance', 'health', 'real_estate_agency', 'route', 
+                'gas_station', 'car_dealer', 'supermarket'
+            }
+
+            count = 0
+            for place in places_result['results']:
+                if count >= 3:
+                    break
+
+                place_types = set(place.get('types', []))
+                
+                if not place_types.isdisjoint(excluded_types):
+                    continue
+
+                if 'route' in place_types and 'park' not in place_types and 'natural_feature' not in place_types:
+                    continue
+
                 result_info = {
                     "name": place.get('name'),
                     "address": place.get('formatted_address'),
                     "rating": place.get('rating', 'N/A'),
+                    "types": list(place_types),
                     "latitude": place['geometry']['location']['lat'],
                     "longitude": place['geometry']['location']['lng']
                 }
                 formatted_results.append(result_info)
+                count += 1
+
+            if not formatted_results and places_result['results']:
+                 place = places_result['results'][0]
+                 formatted_results.append({
+                    "name": place.get('name'),
+                    "address": place.get('formatted_address'),
+                    "latitude": place['geometry']['location']['lat'],
+                    "longitude": place['geometry']['location']['lng']
+                 })
 
             result_str = json.dumps(formatted_results, indent=2)
-            print(f"--- Tool: find_earth_analogues found {len(formatted_results)} places. ---")
+            print(f"--- Tool: find_earth_analogues returned {len(formatted_results)} curated places. ---")
             return result_str
         else:
             message = f"No Earth analogues found for the query: '{query}'"
