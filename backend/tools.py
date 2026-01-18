@@ -31,10 +31,10 @@ def find_earth_analogues(query: str) -> str:
         JSON string containing a list of found locations or an error message.
     """
     print(f"--- Tool: find_earth_analogues called with query: '{query}' ---")
-    api_key = os.getenv("GOOGLE_MAPS_PLACES_API_KEY")
+    api_key = os.getenv("GOOGLE_MAPS_API_KEY")
 
     if not api_key:
-        error_msg = "ERROR: GOOGLE_MAPS_PLACES_API_KEY is not set in environment variables."
+        error_msg = "ERROR: GOOGLE_MAPS_API_KEY is not set in environment variables."
         print(f"--- Tool: find_earth_analogues failed: {error_msg} ---")
         return error_msg
 
