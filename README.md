@@ -1,6 +1,6 @@
 # Celestine: An Intelligent Navigator for the Universe 🚀 
 
-![React](https://img.shields.io/badge/frontend-React-61DAFB?logo=react&logoColor=white) ![Python](https://img.shields.io/badge/backend-Python-3776AB?logo=python&logoColor=white) ![Google Maps](https://img.shields.io/badge/API-Google%20Maps%20Platform-4285F4?logo=googlemaps&logoColor=white) ![Gemini](https://img.shields.io/badge/AI-Gemini%202.5-673AB7?logo=google&logoColor=white) ![ADK](https://img.shields.io/badge/Agent%20Kit-ADK-34A853?logo=googlecloud&logoColor=white) [![Voice by ElevenLabs](https://img.shields.io/badge/Voice%20by-ElevenLabs-yellow?logo=elevenlabs&logoColor=black)](https://www.elevenlabs.io/) [![Video by Tavus](https://img.shields.io/badge/Video%20by-Tavus-purple?logo=tavus&logoColor=white)](https://www.tavus.io/)
+![React](https://img.shields.io/badge/frontend-React-61DAFB?logo=react&logoColor=white) ![Python](https://img.shields.io/badge/backend-Python-3776AB?logo=python&logoColor=white) ![Google Maps](https://img.shields.io/badge/API-Google%20Maps%20Platform-4285F4?logo=googlemaps&logoColor=white) ![Gemini](https://img.shields.io/badge/AI-Gemini%203.1-673AB7?logo=google&logoColor=white) ![ADK](https://img.shields.io/badge/Agent%20Kit-ADK-34A853?logo=googlecloud&logoColor=white) [![Voice by ElevenLabs](https://img.shields.io/badge/Voice%20by-ElevenLabs-yellow?logo=elevenlabs&logoColor=black)](https://www.elevenlabs.io/) [![Video by Tavus](https://img.shields.io/badge/Video%20by-Tavus-purple?logo=tavus&logoColor=white)](https://www.tavus.io/)
 
 > **🏆 Nominee:** [Google Maps Platform Awards](https://devpost.com/software/celestine-rg16km)
 
@@ -50,7 +50,7 @@ Below is the high-level architecture showing how the Multi-Agent System orchestr
 |--|--|
 | **Frontend** | `React`, `Vite`, `react-three-fiber`, `drei`, `zustand` |
 | **Backend** | `Python`, `FastAPI`, `Uvicorn` |
-| **AI** | `Google Agent Development Kit (ADK)`, `Gemini 2.5 Pro & Flash`, `ElevenLabs API`, `Tavus API` |
+| **AI** | `Google Agent Development Kit (ADK)`, `Gemini 3.1 Pro & Flash`, `ElevenLabs API`, `Tavus API` |
 |**Mapping** | `Google Maps Platform` (`Maps JavaScript API`, [`Places API`](https://developers.google.com/maps/documentation/places/web-service)) |
 | **Cloud & DevOps** | `Firebase Hosting`, `Google Cloud Run`, `Cloud Build`, `Artifact Registry`, `Secret Manager`, `Docker` |
 
